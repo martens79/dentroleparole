@@ -152,3 +152,7 @@ export const shortStories: PublicationItem[] = [
   cover: "/images/publications/radici_di_sangue.jpg",
 },
 ];
+export const publications = [
+  ...novels,
+  ...shortStories,
+];
