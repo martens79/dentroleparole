@@ -1,0 +1,353 @@
+@import "tailwindcss";
+
+html, body { height: 100%; }
+body { margin: 0; }
+
+/* =========================
+   BACKGROUND FISSO (cielo)
+   ========================= */
+.bg-fixed-sky {
+  position: fixed;
+  inset: 0;
+  z-index: -20;
+  background-image:
+    radial-gradient(1100px 700px at 18% 18%, rgba(214,179,106,0.10), transparent 60%),
+    radial-gradient(900px 600px at 82% 22%, rgba(140,120,255,0.12), transparent 60%),
+    radial-gradient(900px 700px at 55% 80%, rgba(255,255,255,0.07), transparent 65%),
+    linear-gradient(180deg, #0B1020 0%, #111B36 55%, #0B1020 100%);
+}
+
+/* Grain leggero (visibile ma non ammazza) */
+.bg-fixed-sky::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:0.06;
+  mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+/* =========================
+   BACKGROUND FISSO (immagine)
+   =========================
+   ATTENZIONE: file in /public/fantasy-bg.jpg
+*/
+.bg-fixed-fantasy {
+  position: fixed;
+  inset: 0;
+  z-index: -19;
+
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(11,16,32,0.15) 0%,
+      rgba(11,16,32,0.35) 60%,
+      rgba(11,16,32,0.55) 100%
+    ),
+    url("/fantasy-bg.jpg");
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 82% center; /* mobile: sposta verso destra */
+  opacity: 0.85;
+}
+
+/* =========================
+   HEADER / HERO “FERMO SU”
+   ========================= */
+.top-fixed-hero {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: linear-gradient(
+    180deg,
+    rgba(11,16,32,0.85) 0%,
+    rgba(11,16,32,0.55) 65%,
+    rgba(11,16,32,0.00) 100%
+  );
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(214,179,106,0.18);
+}
+
+/* Spazio in alto per respirare sotto lo sticky */
+.hero-spacer {
+  padding-top: 26px;
+}
+/* FORCE: testo avorio elegante ovunque (batte tutto) */
+html, body {
+  color: #E9E6DF !important;
+}
+@keyframes inkReveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.ink-write {
+  display: inline-block;
+  clip-path: inset(0 100% 0 0);
+  animation: inkReveal 1.6s ease-out forwards;
+}
+
+.ink-delay {
+  animation-delay: 0.6s;
+}
+
+/* =========================
+   MEGA CHICCHE (server-safe)
+   ========================= */
+
+/* 1) Shine che scorre (CTA) */
+@keyframes shineSweep {
+  0%   { transform: translateX(-140%) rotate(12deg); opacity: 0; }
+  15%  { opacity: 1; }
+  60%  { transform: translateX(260%) rotate(12deg); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Applica questa classe al bottone CTA */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+/* La “lama” di luce */
+.btn-shine::after{
+  content:"";
+  position:absolute;
+  top:-30%;
+  left:-60%;
+  width:45%;
+  height:160%;
+  background: rgba(255,255,255,0.28);
+  filter: blur(10px);
+  transform: translateX(-140%) rotate(12deg);
+  opacity: 0;
+  pointer-events:none;
+}
+
+/* Parte solo in hover (non loop infinito) */
+.btn-shine:hover::after{
+  animation: shineSweep 0.9s ease-in-out;
+}
+
+/* 2) Glow premium riutilizzabile (cards) */
+.premium-card {
+  transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease;
+}
+
+.premium-card:hover{
+  border-color: rgba(214,179,106,0.55) !important;
+  box-shadow: 0 0 26px rgba(214,179,106,0.18);
+  transform: translateY(-1px);
+}
+
+/* Icona dentro card: leggero zoom */
+.premium-icon {
+  transition: transform 300ms ease, background-color 300ms ease, border-color 300ms ease;
+}
+
+.premium-card:hover .premium-icon{
+  transform: scale(1.08);
+  border-color: rgba(214,179,106,0.45) !important;
+  background-color: rgba(0,0,0,0.22) !important;
+}
+
+/* 3) (BONUS) Parallax lentissimo sul fantasy bg (molto sobrio)
+   Se non ti piace: commenta questo blocco. */
+@keyframes slowDriftMobile {
+  0%   { background-position: 82% 45%; }
+  50%  { background-position: 84% 55%; }
+  100% { background-position: 82% 45%; }
+}
+
+.bg-fixed-fantasy {
+  animation: slowDriftMobile 18s ease-in-out infinite;
+}
+
+/* Accessibilità: se l’utente ha reduce motion, spegni animazioni */
+@media (prefers-reduced-motion: reduce) {
+  .bg-fixed-fantasy{ animation: none; }
+  .btn-shine:hover::after{ animation: none; }
+  .premium-card:hover{ transform: none; }
+  .premium-card, .premium-icon { transition: none; }
+}
+/* =========================
+   NAV LUXURY HOVER
+   ========================= */
+
+.nav-link {
+  position: relative;
+  padding-bottom: 6px;
+  letter-spacing: 0.02em;
+  transition:
+    color 0.3s ease,
+    letter-spacing 0.3s ease,
+    text-shadow 0.3s ease;
+}
+
+/* colore e glow */
+.nav-link:hover {
+  color: #F3E9D2;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 8px rgba(214,179,106,0.35);
+}
+
+/* linea dorata sotto */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 0%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(214,179,106,0),
+    rgba(214,179,106,0.8),
+    rgba(214,179,106,0)
+  );
+  transform: translateX(-50%);
+  transition: width 0.35s ease;
+}
+
+.nav-link:hover::after {
+  width: 120%;
+}
+.glass-card {
+  background: rgba(20, 20, 30, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.glass-input {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #f5f2e8;
+  border-radius: 10px;
+  padding: 12px 14px;
+  width: 100%;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.glass-input:focus {
+  border-color: rgba(255,215,160,0.8);
+  box-shadow: 0 0 10px rgba(255,215,160,0.35);
+}
+
+.glass-button {
+  background: linear-gradient(135deg, #c9a46a, #e2c28a);
+  color: #1a1a1a;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
+@keyframes news-ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-news-ticker {
+  animation: news-ticker 28s linear infinite;
+}
+
+.brand-dentro {
+  font-family: var(--font-cormorant), Georgia, serif;
+  letter-spacing: 0.14em;
+  text-shadow:
+    0 0 1px rgba(243, 233, 210, 0.18),
+    0 0 10px rgba(212, 175, 55, 0.04);
+}
+
+.brand-parole {
+  font-family: var(--font-cinzel-decorative), var(--font-cormorant), Georgia, serif;
+  font-weight: 500;
+  text-shadow:
+    0 0 1px rgba(243, 233, 210, 0.3),
+    0 0 12px rgba(212, 175, 55, 0.06);
+}
+
+.ink-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(8px) scale(0.95);
+  filter: blur(1.8px);
+  animation: inkReveal 0.56s ease-out forwards;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes inkReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+    filter: blur(2px);
+  }
+  55% {
+    opacity: 0.8;
+    transform: translateY(-1px) scale(1.02);
+    filter: blur(0.5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.ink-sheen {
+  position: absolute;
+  top: 10%;
+  left: -18%;
+  width: 34%;
+  height: 78%;
+  pointer-events: none;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.02) 20%,
+    rgba(243, 233, 210, 0.22) 50%,
+    rgba(212, 175, 55, 0.08) 72%,
+    transparent 100%
+  );
+  filter: blur(5px);
+  opacity: 0;
+  animation: inkSheenPass 1.9s ease-out 0.55s forwards;
+}
+
+@keyframes inkSheenPass {
+  0% {
+    left: -18%;
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.95;
+  }
+  72% {
+    opacity: 0.75;
+  }
+  100% {
+    left: 96%;
+    opacity: 0;
+  }
+}
