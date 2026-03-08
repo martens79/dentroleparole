@@ -5,6 +5,10 @@ export type PublicationItem = {
   type: "Romanzo" | "Spin-off" | "Traduzione" | "Antologia" | "Racconto" | "Magazine" | "Premio";
   desc: string;
   cover?: string;
+  role?: string;
+  isbn?: string;
+  highlights?: string[];
+  link?: string;
 };
 
 export const novels: PublicationItem[] = [

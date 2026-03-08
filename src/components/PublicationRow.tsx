@@ -1,4 +1,4 @@
-import type { Publication } from "@/data/publications";
+import type { PublicationItem as Publication } from "@/data/publications";
 
 export default function PublicationRow({ p }: { p: Publication }) {
   return (
