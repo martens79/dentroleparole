@@ -26,7 +26,7 @@ export default function GraziePage() {
             <p>Il tuo messaggio è stato ricevuto correttamente.</p>
 
             <p>
-              Donatella leggerà con attenzione la tua richiesta e ti risponderà
+             Leggerò con attenzione la tua richiesta e ti risponderò
               appena possibile.
             </p>
 
