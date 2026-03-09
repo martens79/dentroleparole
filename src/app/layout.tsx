@@ -17,6 +17,14 @@ const cinzelDecorative = Cinzel_Decorative({
   weight: ["400", "700"],
 });
 
+export const metadata = {
+  title: "Donatella Tamburini – Editing e servizi editoriali",
+  description: "Editing narrativo, correzione di bozze e consulenza per autori. Servizi editoriali professionali.",
+  verification: {
+    google: "EelBok8f350XKkVaRbUlFrd4QyC5ne9Vkn7EY3n8XQg",
+  },
+};
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="it">
@@ -29,7 +37,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main className="pt-24">
           {children}
         </main>
+
         <CookieBanner />
+
       </body>
     </html>
   );
