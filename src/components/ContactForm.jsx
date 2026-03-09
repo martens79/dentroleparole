@@ -130,12 +130,12 @@ export default function ContactForm() {
 
   return (
     <form
-      action="https://formsubmit.co/donatellatamburini@gmail.com"
-      method="POST"
-      encType="multipart/form-data"
-      className="grid gap-3"
-      onSubmit={onSubmit}
-    >
+  action="https://formsubmit.co/contatti@dentroleparole.com"
+  method="POST"
+  encType="multipart/form-data"
+  className="grid gap-3"
+  onSubmit={onSubmit}
+>
       <input
         type="hidden"
         name="_subject"
