@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Cormorant_Garamond, Cinzel_Decorative } from "next/font/google";
+import Script from "next/script";
 import Header from "../components/Header";
 import PromoBanner from "../components/PromoBanner";
 import "./globals.css";
@@ -19,7 +20,8 @@ const cinzelDecorative = Cinzel_Decorative({
 
 export const metadata = {
   title: "Donatella Tamburini – Editing e servizi editoriali",
-  description: "Editing narrativo, correzione di bozze e consulenza per autori. Servizi editoriali professionali.",
+  description:
+    "Editing narrativo, correzione di bozze e consulenza per autori. Servizi editoriali professionali.",
   verification: {
     google: "EelBok8f350XKkVaRbUlFrd4QyC5ne9Vkn7EY3n8XQg",
   },
@@ -29,7 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="it">
       <body className={`${cormorant.variable} ${cinzelDecorative.variable}`}>
-
+        
         <PromoBanner />
 
         <Header />
@@ -39,6 +41,21 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </main>
 
         <CookieBanner />
+
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-Z8PEVWKQVB"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-Z8PEVWKQVB');
+          `}
+        </Script>
 
       </body>
     </html>
