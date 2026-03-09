@@ -93,7 +93,7 @@ export default function PubblicazioniPage() {
 
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ivory/88">
             Una selezione di romanzi, racconti, antologie e pubblicazioni che
-            raccontano il percorso narrativo di Donatella Tamburini tra fantasy,
+            raccontano il mio percorso narrativo tra fantasy,
             distopia, horror e immaginario contemporaneo.
           </p>
         </header>
