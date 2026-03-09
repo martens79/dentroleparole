@@ -137,20 +137,25 @@ export default function ContactForm() {
   onSubmit={onSubmit}
 >
       <input
-        type="hidden"
-        name="_subject"
-        value="Nuova richiesta dal sito Dentro le Parole"
-      />
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_template" value="table" />
+  type="hidden"
+  name="_subject"
+  value="Nuova richiesta dal sito Dentro le Parole"
+/>
+<input type="hidden" name="_captcha" value="false" />
+<input type="hidden" name="_template" value="table" />
+<input
+  type="hidden"
+  name="_next"
+  value="https://www.dentroleparole.com/grazie"
+/>
 
-      <input
-        type="text"
-        name="_honey"
-        tabIndex={-1}
-        autoComplete="off"
-        className="hidden"
-      />
+<input
+  type="text"
+  name="_honey"
+  tabIndex={-1}
+  autoComplete="off"
+  className="hidden"
+/>
 
       {error ? (
         <div className="rounded-2xl border border-red-400/40 bg-red-500/10 px-4 py-3 text-sm text-ivory/90">
