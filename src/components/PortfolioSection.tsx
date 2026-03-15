@@ -36,10 +36,12 @@ export default function PortfolioSection() {
                 </span>
 
                 {item.status ? (
-                  <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-emerald-300 backdrop-blur">
-                    {item.status}
-                  </span>
-                ) : null}
+  <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-emerald-300 backdrop-blur">
+    {item.status === "pubblicato" && "Libro pubblicato"}
+    {item.status === "in corso" && "Editing in corso"}
+    {item.status === "concluso" && "Intervento concluso"}
+  </span>
+) : null}
               </div>
 
               <h3 className="mt-4 font-serif text-2xl leading-tight text-gold">
