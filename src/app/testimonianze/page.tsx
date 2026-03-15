@@ -9,33 +9,35 @@ export const metadata = {
 export default function TestimonianzePage() {
   const testimonials = [
     {
-      quote:
-        "Mi ritengo fortunata ad averti incontrata. Non sei solo un editor brava, attenta e precisa, ma molto di più. Sono orgogliosa del lavoro che abbiamo fatto insieme.",
-      author: "Silvia De Santis",
-      role: "Autrice",
-    },
-    {
-      quote:
-        "Ti ringrazio per la delicatezza con cui ti sei occupata del mio libro e per la bellissima persona che sei.",
-      author: "Olimpia Rausa",
-      role: "Autrice",
-    },
-    {
-      quote:
-        "Il libro ha raggiunto 110 copie vendute e ho ricevuto molti commenti positivi. Grazie per il tuo aiuto.",
-      author: "Simone Squaiella",
+      quote: `Ad oggi 110 copie venute 🙂
+Un sacco di commenti positivi
+Grazie per il tuo aiuto
+A presto`,
+      author: "Simone",
       role: "Autore",
     },
     {
       quote:
-        "Grazie per il supporto sul testo e per aver accompagnato questo libro con grande cura.",
-      author: "Daniele Di Stefano",
+        "Donatella Sono io che ringrazio te per la delicatezza con cui ti sei occupata del mio libro e per la bellissima persona che sei!",
+      author: "Olimpia",
+      role: "Autrice",
+    },
+    {
+      quote:
+        "Cosa dire... mi ritengo fortunata ad averti incontrata! Non sei solo un editor brava, attenta, precisa e impeccabile... sei molto di più e io non avrei potuto avere di meglio. Sono orgogliosa di te e del bellissimo lavoro che abbiamo fatto insieme. Non smetterò mai di ringraziarti ❤️",
+      author: "Silvia",
+      role: "Autrice",
+    },
+    {
+      quote:
+        "Le tue parole mi fanno davvero piacere, Donatella. Grazie per il supporto sul testo e per aver accompagnato questo libro con cura 😊",
+      author: "Daniele",
       role: "Autore",
     },
     {
       quote:
-        "Sono molto soddisfatto del lavoro svolto. Anche questa seconda correzione di bozze è stata precisa e accurata.",
-      author: "Giovanni Neri",
+        "Ciao Donatella, grazie per questa seconda correzione di bozze! Anche questa volta sono soddisfatto del tuo lavoro; poi ti farò sapere quando il romanzo verrà pubblicato. Grazie buona giornata.",
+      author: "Giovanni",
       role: "Autore",
     },
   ];
@@ -92,7 +94,7 @@ export default function TestimonianzePage() {
                 “
               </div>
 
-              <blockquote className="mt-4 leading-relaxed text-ivory/88">
+              <blockquote className="mt-4 leading-relaxed text-ivory/88 whitespace-pre-line">
                 {item.quote}
               </blockquote>
 
