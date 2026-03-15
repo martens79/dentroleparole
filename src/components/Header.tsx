@@ -22,6 +22,8 @@ const navItems: NavItem[] = [
   { label: "Blog", href: "/blog", kind: "page" },
   { label: "FAQ", href: "/#faq", kind: "anchor" },
   { label: "Contatti", href: "/#contatti", kind: "anchor" },
+  { label: "Testimonianze", href: "/testimonianze", kind: "page" },
+  
 ];
 
 const overlayVariants: Variants = {
