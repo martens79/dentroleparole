@@ -1,8 +1,8 @@
 export const updates = [
   {
     date: "Marzo 2026",
-    title: "Correzione di bozze in corso",
-    desc: "Intervento di correzione di bozze su un’opera surrealista e sperimentale, caratterizzata da linguaggio visionario e struttura narrativa non lineare.",
+    title: "Progetto in corso",
+    desc: "Stesura nuovo romanzo fantasy candidato al Premio Arcimago",
     status: "in lavorazione",
   },
   {
