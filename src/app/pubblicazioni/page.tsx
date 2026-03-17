@@ -41,8 +41,12 @@ function PublicationCard({
     : "noopener noreferrer";
 
   return (
-    <article className="rounded-3xl border border-gold/20 bg-midnight/55 p-6 backdrop-blur transition hover:border-gold/40">
-      <div className="flex flex-col gap-5 md:flex-row">
+    <article className="group relative overflow-hidden rounded-3xl border border-gold/20 bg-midnight/55 p-6 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
+      <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100">
+        <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-transparent" />
+      </div>
+
+      <div className="relative flex flex-col gap-5 md:flex-row">
         <div className="w-full shrink-0 md:w-[180px]">
           <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-gold/20 bg-night/30">
             {cover ? (
@@ -50,7 +54,7 @@ function PublicationCard({
                 src={cover}
                 alt={title}
                 fill
-                className="object-cover"
+                className="object-cover transition duration-300 group-hover:scale-[1.03]"
               />
             ) : (
               <div className="flex h-full items-center justify-center px-4 text-center text-sm text-ivory/45">
