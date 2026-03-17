@@ -15,6 +15,8 @@ function PublicationCard({
   type,
   desc,
   cover,
+  amazonUrl,
+  link,
 }: {
   title: string;
   year: string;
@@ -22,11 +24,26 @@ function PublicationCard({
   type: string;
   desc: string;
   cover?: string;
+  amazonUrl?: string;
+  link?: string;
 }) {
+  const ctaLabel = amazonUrl
+    ? "Acquista su Amazon"
+    : link
+      ? link.includes("amazon.")
+        ? "Vedi su Amazon"
+        : "Vai al sito editore"
+      : null;
+
+  const ctaHref = amazonUrl || link;
+  const ctaRel = amazonUrl
+    ? "noopener noreferrer sponsored"
+    : "noopener noreferrer";
+
   return (
     <article className="rounded-3xl border border-gold/20 bg-midnight/55 p-6 backdrop-blur transition hover:border-gold/40">
       <div className="flex flex-col gap-5 md:flex-row">
-        <div className="w-full md:w-[180px] shrink-0">
+        <div className="w-full shrink-0 md:w-[180px]">
           <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-gold/20 bg-night/30">
             {cover ? (
               <Image
@@ -36,7 +53,7 @@ function PublicationCard({
                 className="object-cover"
               />
             ) : (
-              <div className="flex h-full items-center justify-center text-center text-sm text-ivory/45 px-4">
+              <div className="flex h-full items-center justify-center px-4 text-center text-sm text-ivory/45">
                 Copertina in arrivo
               </div>
             )}
@@ -45,7 +62,7 @@ function PublicationCard({
 
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-3">
-            <h2 className="font-serif text-2xl text-gold leading-tight">
+            <h2 className="font-serif text-2xl leading-tight text-gold">
               {title}
             </h2>
 
@@ -61,6 +78,24 @@ function PublicationCard({
           <p className="mt-4 leading-relaxed text-ivory/85">
             {desc}
           </p>
+
+          {ctaHref && ctaLabel ? (
+            <div className="mt-6">
+              <a
+                href={ctaHref}
+                target="_blank"
+                rel={ctaRel}
+                className={
+                  amazonUrl
+                    ? "inline-flex items-center justify-center rounded-2xl border border-gold/40 bg-gold/10 px-5 py-3 text-sm font-medium text-gold transition hover:border-gold/60 hover:bg-gold hover:text-black"
+                    : "inline-flex items-center justify-center rounded-2xl border border-gold/25 bg-night/25 px-5 py-3 text-sm text-ivory/85 transition hover:border-gold/45 hover:text-ivory"
+                }
+                aria-label={`${ctaLabel}: ${title}`}
+              >
+                {ctaLabel}
+              </a>
+            </div>
+          ) : null}
         </div>
       </div>
     </article>
@@ -93,16 +128,17 @@ export default function PubblicazioniPage() {
 
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ivory/88">
             Una selezione di romanzi, racconti, antologie e pubblicazioni che
-            raccontano il mio percorso narrativo tra fantasy,
-            distopia, horror e immaginario contemporaneo.
+            raccontano il mio percorso narrativo tra fantasy, distopia, horror
+            e immaginario contemporaneo.
           </p>
         </header>
 
         <section className="mt-10">
           <div className="mb-6">
             <h2 className="font-serif text-3xl text-gold">Romanzi</h2>
-            <p className="mt-2 text-ivory/78 max-w-2xl">
-              Opere lunghe, serie narrative, spin-off e pubblicazioni collegate all’universo autoriale.
+            <p className="mt-2 max-w-2xl text-ivory/78">
+              Opere lunghe, serie narrative, spin-off e pubblicazioni collegate
+              all’universo autoriale.
             </p>
           </div>
 
@@ -118,8 +154,9 @@ export default function PubblicazioniPage() {
             <h2 className="font-serif text-3xl text-gold">
               Racconti, antologie e magazine
             </h2>
-            <p className="mt-2 text-ivory/78 max-w-2xl">
-              Racconti pubblicati in antologie collettive, magazine e contesti editoriali dedicati.
+            <p className="mt-2 max-w-2xl text-ivory/78">
+              Racconti pubblicati in antologie collettive, magazine e contesti
+              editoriali dedicati.
             </p>
           </div>
 
@@ -130,6 +167,11 @@ export default function PubblicazioniPage() {
           </div>
         </section>
 
+        <p className="mt-8 text-xs leading-relaxed text-ivory/55">
+          In qualità di Affiliato Amazon questo sito riceve un guadagno dagli
+          acquisti idonei.
+        </p>
+
         <section className="mt-12 rounded-[2rem] border border-gold/25 bg-midnight/60 p-8 backdrop-blur md:p-10">
           <h2 className="font-serif text-2xl text-gold md:text-3xl">
             Scrittura e lavoro editoriale
@@ -138,8 +180,8 @@ export default function PubblicazioniPage() {
           <p className="mt-4 max-w-3xl leading-relaxed text-ivory/85">
             L’esperienza diretta come autrice arricchisce il lavoro editoriale:
             conoscere dall’interno le difficoltà della costruzione narrativa,
-            della revisione e della pubblicazione permette di offrire un supporto
-            più concreto, consapevole e mirato agli autori.
+            della revisione e della pubblicazione permette di offrire un
+            supporto più concreto, consapevole e mirato agli autori.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
