@@ -479,7 +479,7 @@ export default function Home() {
 
                 <p className="mt-6 text-center text-sm text-ivory/65">
                   Risposta entro{" "}
-                  <span className="text-ivory/90">24–48 ore</span>.
+                  <span className="text-ivory/90">3-5 giorni</span>.
                 </p>
 
                
