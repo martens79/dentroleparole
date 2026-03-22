@@ -255,7 +255,7 @@ export default function Home() {
 
             <div className="mt-4 flex flex-wrap gap-3 text-sm text-ivory/75">
               <div className="flex items-center gap-2 rounded-2xl border border-gold/15 bg-midnight/35 px-4 py-2">
-                <span className="text-gold">✓</span> Risposta entro 24–48 ore
+                <span className="text-gold">✓</span> Risposta entro 3-5 giorni
               </div>
               <div className="flex items-center gap-2 rounded-2xl border border-gold/15 bg-midnight/35 px-4 py-2">
                 <span className="text-gold">✓</span> Estratto 5–10 pagine
