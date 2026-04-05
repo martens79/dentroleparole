@@ -40,6 +40,12 @@ A presto`,
       author: "Giovanni",
       role: "Autore",
     },
+    {
+      quote:
+        "E lo robadisco! Perchè alla fine, dietro un buon libro c'è sempre una grande editor. ",
+      author: "Loris",
+      role: "Autore",
+    },
   ];
 
   return (

@@ -19,7 +19,7 @@ export default function PromoBanner() {
 
        <p className="truncate text-center text-[13px] text-[#F3E9D2]/92 md:text-[15px]">
   <span className="font-semibold text-[#f4e7c8]">
-    Promo marzo — per i primi 3 autori
+    Promo Aprile — il più veloce avrà una correzione di bozze a prezzo scontato!
   </span>
   {" "}
   valutazione gratuita • sample audiolibro • coaching
