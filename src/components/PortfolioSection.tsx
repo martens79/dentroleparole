@@ -4,14 +4,14 @@ import { portfolioItems } from "@/data/portfolio";
 export default function PortfolioSection() {
   return (
     <div className="grid gap-6">
-      {portfolioItems.map((item) => (
+      {portfolioItems.map((item, index) => (
         <article
-          key={item.title}
+          key={`${item.title}-${index}`}
           className="group overflow-hidden rounded-[2rem] border border-gold/20 bg-midnight/55 backdrop-blur transition hover:border-gold/40"
         >
           <div className="flex flex-col gap-6 p-6 md:flex-row md:items-start md:p-7">
             {/* copertina piccola */}
-            <div className="w-full md:w-[150px] shrink-0">
+            <div className="w-full shrink-0 md:w-[150px]">
               <div className="relative aspect-[2/3] overflow-hidden rounded-2xl border border-gold/15 bg-night/30">
                 {item.cover ? (
                   <Image
@@ -36,12 +36,12 @@ export default function PortfolioSection() {
                 </span>
 
                 {item.status ? (
-  <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-emerald-300 backdrop-blur">
-    {item.status === "pubblicato" && "Libro pubblicato"}
-    {item.status === "in corso" && "Editing in corso"}
-    {item.status === "concluso" && "Intervento concluso"}
-  </span>
-) : null}
+                  <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-emerald-300 backdrop-blur">
+                    {item.status === "pubblicato" && "Libro pubblicato"}
+                    {item.status === "in corso" && "Editing in corso"}
+                    {item.status === "concluso" && "Intervento concluso"}
+                  </span>
+                ) : null}
               </div>
 
               <h3 className="mt-4 font-serif text-2xl leading-tight text-gold">
@@ -60,9 +60,9 @@ export default function PortfolioSection() {
 
               {item.highlights?.length ? (
                 <div className="mt-5 flex flex-wrap gap-2">
-                  {item.highlights.map((h) => (
+                  {item.highlights.map((h, hIndex) => (
                     <span
-                      key={h}
+                      key={`${h}-${hIndex}`}
                       className="rounded-full border border-gold/15 bg-night/20 px-3 py-1.5 text-sm text-ivory/78"
                     >
                       {h}
