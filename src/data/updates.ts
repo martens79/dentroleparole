@@ -8,7 +8,7 @@ export const updates = [
   {
     date: "Aprile 2026",
     title: "Correzione di bozze",
-    desc: "Correzione di bozze di due romanzi Harmony, collana I Grandi Romanzi Storici, in uscita a Maggio 2026",
+    desc: "correzione di bozze 2 romanzi Harmony, serie I Grandi romanzi Storici per conto dello studio editoriale The Bookmakers",
     status: "in lavorazione",
   },
 ];
