@@ -73,19 +73,19 @@ export default function PortfolioSection() {
                 {item.desc}
               </p>
 
-              {/* HIGHLIGHTS */}
-              {item.highlights?.length > 0 && (
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {item.highlights.map((h, hIndex) => (
-                    <span
-                      key={`${h}-${hIndex}`}
-                      className="rounded-full border border-gold/15 bg-night/20 px-3 py-1.5 text-sm text-ivory/78"
-                    >
-                      {h}
-                    </span>
-                  ))}
-                </div>
-              )}
+             {/* HIGHLIGHTS */}
+{item.highlights && item.highlights.length > 0 && (
+  <div className="mt-5 flex flex-wrap gap-2">
+    {item.highlights.map((h, hIndex) => (
+      <span
+        key={`${h}-${hIndex}`}
+        className="rounded-full border border-gold/15 bg-night/20 px-3 py-1.5 text-sm text-ivory/78"
+      >
+        {h}
+      </span>
+    ))}
+  </div>
+)}
 
               {/* LINK */}
               {item.link && (
