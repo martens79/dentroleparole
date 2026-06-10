@@ -200,7 +200,7 @@ export const portfolioItems: PortfolioItem[] = [
     client: "The Bookmakers",
     year: "2026",
     status: "concluso",
-    cover: "/images/portfolio/opera_inedita.png",
+    cover: "/images/portfolio/HArmoni_3.jpg",
     desc: "Correzione di bozze editoriale su romanzo della collana Harmony, serie I Grandi Romanzi Storici. Intervento concluso con revisione di ortografia, punteggiatura, refusi e uniformità tipografica.",
     highlights: [
       "Lavoro concluso",
@@ -217,7 +217,7 @@ export const portfolioItems: PortfolioItem[] = [
     client: "The Bookmakers",
     year: "2026",
     status: "concluso",
-    cover: "/images/portfolio/opera_inedita.png",
+    cover: "/images/portfolio/HArmoni_4.jpg",
     desc: "Correzione di bozze editoriale su secondo romanzo della collana Harmony, serie I Grandi Romanzi Storici. Revisione finale del testo con attenzione a correttezza formale e uniformità editoriale.",
     highlights: [
       "Lavoro concluso",
@@ -283,7 +283,7 @@ export const portfolioItems: PortfolioItem[] = [
     category: "Correzione di bozze",
     client: "The Bookmakers",
     status: "concluso",
-    cover: "/images/portfolio/opera_inedita.png",
+    cover: "/images/portfolio/make_believe_game.jpg",
     desc: "Revisione di correzione di bozze svolta per conto della piattaforma The Bookmakers su un romanzo contemporary romance young adult ambientato nel mondo dell’hockey professionistico (NHL). Il testo presenta dinamiche tipiche dello sport romance e affronta tematiche emotive complesse come lutto, trauma e relazioni familiari, richiedendo particolare attenzione alla coerenza stilistica, al ritmo narrativo e all’uniformità linguistica.",
     highlights: [
       "Correzione di bozze",
