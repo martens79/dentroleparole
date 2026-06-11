@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
-
+export const revalidate = 60;
 import { publicClient } from "@/lib/sanity/publicClient";
 import { urlFor } from "@/lib/sanity/image";
 import { POST_BY_SLUG_QUERY, POST_SEO_BY_SLUG_QUERY } from "@/lib/sanity/queries";

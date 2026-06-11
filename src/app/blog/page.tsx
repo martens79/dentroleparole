@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+export const revalidate = 60;
 import { publicClient } from "@/lib/sanity/publicClient";
 import { POSTS_QUERY } from "@/lib/sanity/queries";
 import { urlFor } from "@/lib/sanity/image";
