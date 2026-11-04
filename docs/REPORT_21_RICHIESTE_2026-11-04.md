@@ -72,7 +72,7 @@ Prove visive in `docs/qa/`: `respiro-desktop.jpg`, `harmony-desktop.jpg`, `portf
 - `docs/`: brief originale, manifest, SHA-256, conferme, report e prove visive.
 - `vercel.json`: disabilitazione dei deploy automatici solo per il branch di lavoro.
 
-Per riprodurre in locale: `npm ci`, `node scripts/verify-editorial-update.mjs`, `npx tsc --noEmit`, `npm run build -- --webpack`, quindi `npm start -- --hostname 127.0.0.1 --port 3104`. Per la build servono le sole variabili pubbliche Sanity già previste dal progetto: `NEXT_PUBLIC_SANITY_PROJECT_ID=odfxsvll`, `NEXT_PUBLIC_SANITY_DATASET=production`. Nessun token di scrittura CMS richiesto.
+Per riprodurre in locale: `npm ci`, `node scripts/verify-editorial-update.mjs`, `npx tsc --noEmit`, `npm run build -- --webpack`, quindi `npm start -- --hostname 127.0.0.1 --port 3104`. Per la build servono le sole variabili pubbliche Sanity già previste dal progetto: `NEXT_PUBLIC_SANITY_PROJECT_ID=odfxsvll`, `NEXT_PUBLIC_SANITY_DATASET=production`. Nessun token di scrittura CMS richiesto. In questo PC `NODE_USE_SYSTEM_CA=1` va mantenuto anche durante `npm start`: senza questa variabile il prefetch del blog Sanity, non modificato, ha registrato errori TLS lato server locale. Homepage e Portfolio hanno comunque risposto 200 e la console browser della verifica finale non ha segnalato errori. Questo limite di certificati locale resta distinto dai controlli editoriali e non è stato risolto cambiando codice o impostazioni del CMS.
 
 ## Consegna e pubblicazione
 
