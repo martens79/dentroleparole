@@ -184,7 +184,7 @@ export default function Header() {
     <span
       className={[
         "flex items-center whitespace-nowrap text-[#F3E9D2] transition-all duration-300",
-        scrolled ? "text-[20px] md:text-[25px]" : "text-[24px] md:text-[30px]",
+        scrolled ? "text-[16px] sm:text-[20px] md:text-[25px]" : "text-[16px] sm:text-[24px] md:text-[30px]",
       ].join(" ")}
     >
       <span className="brand-dentro font-semibold uppercase tracking-[0.12em]">
@@ -223,7 +223,7 @@ export default function Header() {
     <span
       className={[
         "mt-2 h-px bg-[#F3E9D2]/20 transition-all duration-300 group-hover:bg-[#F3E9D2]/50",
-        scrolled ? "w-[205px] md:w-[250px]" : "w-[235px] md:w-[290px]",
+        scrolled ? "w-[180px] sm:w-[205px] md:w-[250px]" : "w-[180px] sm:w-[235px] md:w-[290px]",
       ].join(" ")}
     />
 
