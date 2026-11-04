@@ -6,45 +6,27 @@ import { updates } from "@/data/updates";
 export default function NewsTicker() {
   if (!updates.length) return null;
 
-  const tickerItems = [...updates, ...updates];
-
   return (
-    <div className="relative overflow-hidden border-y border-gold/15 bg-midnight/55 backdrop-blur">
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#070b16] to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#070b16] to-transparent" />
-
-      <div className="whitespace-nowrap py-2">
-        <div className="inline-flex min-w-full animate-news-ticker items-center">
-          {tickerItems.map((item, index) => (
-            <Link
-              href="/news"
-              key={`${item.title}-${index}`}
-              className="mx-5 inline-flex items-center gap-3 text-sm text-ivory/85 transition hover:text-ivory"
-            >
-              <span className="text-gold/80">✦</span>
-
-              <span className="inline-flex items-center gap-3">
-                <span className="font-medium text-ivory">{item.title}</span>
-
-                {item.status ? (
-                  <span className="rounded-full border border-gold/15 bg-gold/10 px-2 py-0.5 text-[10px] uppercase tracking-[0.14em] text-gold">
-                    {item.status}
-                  </span>
-                ) : null}
-
-                <span className="max-w-[520px] truncate text-ivory/65">
-                  — {item.desc}
-                </span>
-              </span>
-            </Link>
+    <div className="news-ticker relative overflow-hidden border-y border-gold/15 bg-midnight/55 backdrop-blur" aria-label="Lavori in corso">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#070b16] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#070b16] to-transparent" />
+      <div className="news-ticker-window whitespace-nowrap py-2">
+        <div className="news-ticker-track inline-flex w-max animate-news-ticker items-center">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="news-ticker-copy inline-flex shrink-0 items-center" aria-hidden={copy === 1 ? true : undefined}>
+              {updates.map((item) => (
+                <Link href="/news" key={item.title} tabIndex={copy === 1 ? -1 : undefined}
+                  className="news-ticker-item mx-5 inline-flex items-center gap-2 text-sm text-ivory/90 transition hover:text-ivory focus-visible:outline focus-visible:outline-gold">
+                  <span className="text-gold">✦</span>
+                  <span>{item.desc}</span>
+                </Link>
+              ))}
+              <Link href="/news" tabIndex={copy === 1 ? -1 : undefined}
+                className="mx-6 inline-flex rounded-full border border-gold/20 bg-gold/10 px-3 py-1 text-xs uppercase tracking-[0.14em] text-gold transition hover:bg-gold/15">
+                Tutte le news
+              </Link>
+            </div>
           ))}
-
-          <Link
-            href="/news"
-            className="ml-6 inline-flex items-center rounded-full border border-gold/20 bg-gold/10 px-3 py-1 text-xs uppercase tracking-[0.14em] text-gold transition hover:bg-gold/15"
-          >
-            Tutte le news
-          </Link>
         </div>
       </div>
     </div>

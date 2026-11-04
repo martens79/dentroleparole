@@ -351,3 +351,16 @@ html, body {
     opacity: 0;
   }
 }
+/* Keep both copies equal for a seamless loop; pause for reading and keyboard focus. */
+.news-ticker:hover .animate-news-ticker,
+.news-ticker:focus-within .animate-news-ticker {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .news-ticker .animate-news-ticker { animation: none; }
+  .news-ticker-track, .news-ticker-copy { display: flex; width: 100%; flex-wrap: wrap; gap: 0.75rem; }
+  .news-ticker-copy[aria-hidden="true"] { display: none; }
+  .news-ticker-window, .news-ticker-item { white-space: normal; }
+  .news-ticker > .pointer-events-none { display: none; }
+}

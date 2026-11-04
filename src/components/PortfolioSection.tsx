@@ -18,17 +18,21 @@ export default function PortfolioSection() {
                 {item.cover ? (
                   <Image
                     src={item.cover}
-                    alt={item.title}
+                    alt={item.coverAlt ?? `Copertina di ${item.title}`}
+                    sizes="(min-width: 768px) 150px, (max-width: 480px) calc(100vw - 100px), 380px"
                     fill
                     className="object-contain transition duration-500 group-hover:scale-[1.02]"
                   />
                 ) : (
-                  <div className="flex h-full items-center justify-center px-3 text-center text-sm text-ivory/40">
-                    Copertina in arrivo
+                  <div className="flex h-full items-center justify-center px-3 text-center text-sm text-ivory/80">
+                    {item.category === "Writing coach" ? "Percorso di scrittura" : "Copertina in arrivo"}
                   </div>
                 )}
 
               </div>
+              {item.coverCaption && (
+                <p className="mt-2 text-center text-sm text-ivory/80">{item.coverCaption}</p>
+              )}
             </div>
 
             {/* 📝 CONTENUTO */}
@@ -43,7 +47,7 @@ export default function PortfolioSection() {
                 {item.status && (
                   <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-emerald-300 backdrop-blur">
                     {item.status === "pubblicato" && "Libro pubblicato"}
-                    {item.status === "in corso" && "Editing in corso"}
+                    {item.status === "in corso" && (item.statusLabel ?? "Editing in corso")}
                     {item.status === "concluso" && "Intervento concluso"}
                   </span>
                 )}
@@ -53,6 +57,23 @@ export default function PortfolioSection() {
               <h3 className="mt-4 font-serif text-2xl leading-tight text-gold">
                 {item.title}
               </h3>
+
+              {item.subtitle && <p className="mt-2 text-lg text-ivory/90">{item.subtitle}</p>}
+              {(item.author || item.publisher || item.genre || item.collection || item.service || item.modality) && (
+                <dl className="mt-3 space-y-1 text-base text-ivory/90">
+                  {([
+                    ["Autore / Autrice", item.author],
+                    ["Editore", item.publisher],
+                    ["Genere", item.genre],
+                    ["Collana", item.collection],
+                    ["Servizio", item.service],
+                    ["Modalità", item.modality],
+                  ] as const).map(([label, value]) => value && (
+                    <div key={label}><dt className="inline font-semibold">{label}: </dt><dd className="inline">{value}</dd></div>
+                  ))}
+                </dl>
+              )}
+              {item.release && <p className="mt-3 text-ivory/90">{item.release}</p>}
 
               {/* CLIENTE */}
               {item.client && (
@@ -69,7 +90,7 @@ export default function PortfolioSection() {
               )}
 
               {/* DESCRIZIONE */}
-              <p className="mt-5 leading-relaxed text-ivory/86">
+              <p className="mt-5 whitespace-pre-line leading-relaxed text-ivory/86">
                 {item.desc}
               </p>
 

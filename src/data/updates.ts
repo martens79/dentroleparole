@@ -1,14 +1,14 @@
 export const updates = [
   {
-    date: "Marzo-Aprile 2026",
-    title: "Progetto in corso",
-    desc: "Stesura nuovo romanzo fantasy candidato al Premio Arcimago",
-    status: "in lavorazione",
+    "date": "Novembre 2026",
+    "title": "Stesura in corso",
+    "desc": "Stesura in corso di un romanzo Dark Fantasy Romance per Just Read Edizioni.",
+    "status": "in lavorazione"
   },
   {
-    date: "Aprile 2026",
-    title: "Correzione di bozze",
-    desc: "correzione di bozze 2 romanzi Harmony, serie I Grandi romanzi Storici per conto dello studio editoriale The Bookmakers",
-    status: "in lavorazione",
-  },
+    "date": "Novembre 2026",
+    "title": "Editing narrativo in corso",
+    "desc": "Editing narrativo in corso su due romanzi, con interventi strutturali, stilistici e di approfondimento dei personaggi.",
+    "status": "in lavorazione"
+  }
 ];
