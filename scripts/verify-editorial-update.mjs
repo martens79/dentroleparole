@@ -19,7 +19,7 @@ const exact = title => {
 };
 const replacements = {
   'Romanzo autobiografico su resilienza e rivincita personale': 'Respiro di un salto invisibile',
-  'Secondo volume di un romanzo surreale': 'Mela glassata deluxe',
+  'Secondo volume di un romanzo surreale': 'Mela Glassata Deluxe',
   'Saggio divulgativo di astrofisica': 'La vita e le stelle',
   'Contemporary Romance Young Adult': 'The Bad Boy’s Love 4',
 };
@@ -66,7 +66,7 @@ assert.equal(respiro.year,undefined);
 assert.equal(respiro.release,'In uscita il 22 gennaio 2027');
 assert.equal(respiro.editorialNote,undefined);
 assert.ok(!/2007/.test(JSON.stringify(respiro)));
-assert.match(exact('Mela glassata deluxe').coverAlt,/dorso/);
+assert.match(exact('Mela Glassata Deluxe').coverAlt,/dorso/);
 assert.match(exact('Sentieri di carta – Racconti senza confini').desc,/del racconto Aurora/);
 const updates = data(fs.readFileSync('src/data/updates.ts','utf8')).updates;
 assert.equal(updates.length,2);
