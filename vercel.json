@@ -3,7 +3,8 @@
   "git": {
     "deploymentEnabled": {
       "work/donatella-21-aggiornamenti-20261104": false,
-      "fix/portfolio-titolo-placeholder-20261105": false
+      "fix/portfolio-titolo-placeholder-20261105": false,
+      "fix/portfolio-ordine-editoriale-20261105": false
     }
   }
 }
