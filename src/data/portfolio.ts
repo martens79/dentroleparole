@@ -159,8 +159,8 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     coverCaption: "Fotografia del dorso del libro.",
-    coverAlt: "Fotografia del dorso di Mela glassata deluxe",
-    title: "Mela glassata deluxe",
+    coverAlt: "Fotografia del dorso di Mela Glassata Deluxe",
+    title: "Mela Glassata Deluxe",
     category: "Correzione di bozze",
     client: "Autore anonimo",
     status: "concluso",

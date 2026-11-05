@@ -15,19 +15,13 @@ export default function PortfolioSection() {
             <div className="w-full shrink-0 md:w-[150px]">
               <div className="relative aspect-[2/3] overflow-hidden rounded-2xl border border-gold/15 bg-night/50 p-2 shadow-inner">
                 
-                {item.cover ? (
-                  <Image
-                    src={item.cover}
-                    alt={item.coverAlt ?? `Copertina di ${item.title}`}
-                    sizes="(min-width: 768px) 150px, (max-width: 480px) calc(100vw - 100px), 380px"
-                    fill
-                    className="object-contain transition duration-500 group-hover:scale-[1.02]"
-                  />
-                ) : (
-                  <div className="flex h-full items-center justify-center px-3 text-center text-sm text-ivory/80">
-                    {item.category === "Writing coach" ? "Percorso di scrittura" : "Copertina in arrivo"}
-                  </div>
-                )}
+                <Image
+                  src={item.cover || "/images/portfolio/opera_inedita.png"}
+                  alt={item.cover ? (item.coverAlt ?? `Copertina di ${item.title}`) : "Opera inedita – Autore anonimo"}
+                  sizes="(min-width: 768px) 150px, (max-width: 480px) calc(100vw - 100px), 380px"
+                  fill
+                  className="object-contain transition duration-500 group-hover:scale-[1.02]"
+                />
 
               </div>
               {item.coverCaption && (

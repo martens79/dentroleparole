@@ -2,7 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "git": {
     "deploymentEnabled": {
-      "work/donatella-21-aggiornamenti-20261104": false
+      "work/donatella-21-aggiornamenti-20261104": false,
+      "fix/portfolio-titolo-placeholder-20261105": false
     }
   }
 }
