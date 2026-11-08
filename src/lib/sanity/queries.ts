@@ -41,6 +41,7 @@ export const POST_SEO_BY_SLUG_QUERY = `
 export const POST_SLUGS_QUERY = `
   *[_type == "post" && defined(slug.current)][]{
     "slug": slug.current,
-    publishedAt
+    publishedAt,
+    "updatedAt": _updatedAt
   }
 `;

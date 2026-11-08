@@ -3,6 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Grazie | Dentro le Parole",
   description: "La tua richiesta è stata inviata correttamente.",
+  robots: { index: false, follow: false },
 };
 
 export default function GraziePage() {

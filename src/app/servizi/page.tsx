@@ -9,12 +9,14 @@ import {
   Search,
   Mic,
 } from "lucide-react";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Servizi editoriali | Dentro le Parole",
   description:
     "Editing narrativo, correzione di bozze, ghostwriting, writing coach, saggistica, revisione tesi e realizzazione audiolibri. Servizi editoriali su misura per autori e professionisti.",
-};
+  path: "/servizi",
+});
 
 const services = [
   {

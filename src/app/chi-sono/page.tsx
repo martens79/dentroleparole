@@ -1,12 +1,14 @@
 import Link from "next/link";
 import PublicationsSection from "@/components/PublicationsSection";
 import Image from "next/image";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Chi sono | Dentro le Parole",
   description:
     "Donatella Tamburini — consulente editoriale specializzata in narrativa. Editing narrativo, metodo chiaro e rispetto della voce dell’autore.",
-};
+  path: "/chi-sono",
+});
 
 export default function ChiSonoPage() {
   return (
@@ -279,7 +281,7 @@ export default function ChiSonoPage() {
 
   <div className="mt-7">
     <Link
-      href="/percorso-autoriale"
+      href="/pubblicazioni"
       className="inline-flex items-center rounded-2xl border border-gold/25 bg-night/20 px-5 py-3 text-sm text-ivory/90 transition hover:border-gold/45 hover:text-ivory"
     >
       Esplora il percorso autoriale

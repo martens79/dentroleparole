@@ -1,10 +1,12 @@
 import type { ReactNode } from "react";
+import type { Metadata } from "next";
 import { Cormorant_Garamond, Cinzel_Decorative } from "next/font/google";
 import Script from "next/script";
 import Header from "../components/Header";
 import PromoBanner from "../components/PromoBanner";
 import "./globals.css";
 import CookieBanner from "@/components/CookieBanner";
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -18,10 +20,15 @@ const cinzelDecorative = Cinzel_Decorative({
   weight: ["400", "700"],
 });
 
-export const metadata = {
-  title: "Donatella Tamburini – Editing e servizi editoriali",
-  description:
-    "Editing narrativo, correzione di bozze e consulenza per autori. Servizi editoriali professionali.",
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: DEFAULT_TITLE,
+  description: DEFAULT_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "it_IT",
+  },
   verification: {
     google: "EelBok8f350XKkVaRbUlFrd4QyC5ne9Vkn7EY3n8XQg",
   },

@@ -2,6 +2,14 @@ import Link from "next/link";
 import Section from "@/components/Section";
 import PremiumBox from "@/components/PremiumBox";
 import { updates } from "@/data/updates";
+import { pageMetadata } from "@/lib/site";
+
+export const metadata = pageMetadata({
+  title: "News e lavori in corso | Dentro le Parole",
+  description:
+    "Novità e progetti editoriali in lavorazione di Donatella Tamburini.",
+  path: "/news",
+});
 
 export default function NewsPage() {
   return (
