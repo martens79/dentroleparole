@@ -1,12 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { novels, shortStories } from "@/data/publications";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Pubblicazioni | Dentro le Parole",
   description:
     "Romanzi, racconti, antologie e pubblicazioni di Donatella Tamburini.",
-};
+  path: "/pubblicazioni",
+});
 
 function PublicationCard({
   title,

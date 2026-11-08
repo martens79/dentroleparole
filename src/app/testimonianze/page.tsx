@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Testimonianze | Dentro le Parole",
   description:
     "Dicono del mio lavoro: parole, messaggi e riscontri di autori e autrici che hanno scelto il mio supporto editoriale.",
-};
+  path: "/testimonianze",
+});
 
 export default function TestimonianzePage() {
   const testimonials = [

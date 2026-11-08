@@ -4,6 +4,14 @@ export const revalidate = 60;
 import { publicClient } from "@/lib/sanity/publicClient";
 import { POSTS_QUERY } from "@/lib/sanity/queries";
 import { urlFor } from "@/lib/sanity/image";
+import { pageMetadata } from "@/lib/site";
+
+export const metadata = pageMetadata({
+  title: "Blog | Dentro le Parole",
+  description:
+    "Scrittura, editing e pubblicazione: risorse pratiche per autori, a cura di Donatella Tamburini.",
+  path: "/blog",
+});
 
 type Post = {
   _id: string;

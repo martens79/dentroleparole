@@ -17,6 +17,13 @@ import ContactForm from "../components/ContactForm";
 import NewsTicker from "@/components/NewsTicker";
 import FaqAccordion from "@/components/FaqAccordion";
 import PromoPopup from "@/components/PromoPopup";
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, pageMetadata } from "@/lib/site";
+
+export const metadata = pageMetadata({
+  title: DEFAULT_TITLE,
+  description: DEFAULT_DESCRIPTION,
+  path: "/",
+});
 
 const services = [
   {

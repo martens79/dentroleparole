@@ -8,8 +8,8 @@ export const revalidate = 60;
 import { publicClient } from "@/lib/sanity/publicClient";
 import { urlFor } from "@/lib/sanity/image";
 import { POST_BY_SLUG_QUERY, POST_SEO_BY_SLUG_QUERY } from "@/lib/sanity/queries";
+import { SITE_NAME, absoluteUrl } from "@/lib/site";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 type Post = {
   title: string;
@@ -92,7 +92,7 @@ export async function generateMetadata({
 
   const title = data?.seo?.metaTitle || data.title;
   const description = data?.seo?.metaDescription || data.excerpt || "";
-  const canonical = `${SITE_URL}/blog/${slug}`;
+  const canonical = absoluteUrl(`/blog/${encodeURIComponent(slug)}`);
 
   const ogSource = data?.seo?.ogImage || data.coverImage;
   const ogImage = ogSource
@@ -105,7 +105,10 @@ export async function generateMetadata({
     alternates: { canonical },
     openGraph: {
       type: "article",
+      siteName: SITE_NAME,
+      locale: "it_IT",
       url: canonical,
+      ...(data.publishedAt ? { publishedTime: data.publishedAt } : {}),
       title,
       description,
       images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : [],

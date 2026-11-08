@@ -1,5 +1,13 @@
 import Section from "@/components/Section";
 import PortfolioSection from "@/components/PortfolioSection";
+import { pageMetadata } from "@/lib/site";
+
+export const metadata = pageMetadata({
+  title: "Portfolio | Dentro le Parole",
+  description:
+    "Una selezione di progetti editoriali seguiti con cura e metodo: romanzi e racconti rivisti da Donatella Tamburini.",
+  path: "/portfolio",
+});
 
 export default function PortfolioPage() {
   return (
