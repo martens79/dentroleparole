@@ -1,8 +1,13 @@
-export const metadata = {
+import Link from "next/link";
+import { pageMetadata } from "@/lib/site";
+import CookiePreferencesButton from "@/components/CookiePreferencesButton";
+
+export const metadata = pageMetadata({
   title: "Cookie Policy | Dentro le Parole",
   description:
     "Informativa cookie del sito Dentro le Parole di Donatella Tamburini.",
-};
+  path: "/cookie-policy",
+});
 
 export default function CookiePolicyPage() {
   return (
@@ -25,7 +30,7 @@ export default function CookiePolicyPage() {
           </h1>
 
           <p className="mt-4 text-sm text-ivory/70">
-            Ultimo aggiornamento: 8 marzo 2026
+            Ultimo aggiornamento: 8 novembre 2026
           </p>
 
           <div className="mt-10 space-y-8 text-ivory/85">
@@ -59,10 +64,7 @@ export default function CookiePolicyPage() {
                     1. Cookie tecnici
                   </h3>
                   <p className="mt-2">
-                    Sono necessari al corretto funzionamento del sito e non
-                    richiedono il consenso dell’utente. Comprendono, ad esempio,
-                    cookie di navigazione, sicurezza, gestione sessione o
-                    preferenze tecniche.
+                    Sono necessari al corretto funzionamento del sito e non richiedono il consenso dell’utente. Il sito memorizza nel browser, per finalità tecniche, la scelta espressa sui cookie (conservata per 180 giorni, poi viene richiesta di nuovo) e un’indicazione di sessione per non ripetere un avviso promozionale già mostrato.
                   </p>
                 </div>
 
@@ -71,11 +73,7 @@ export default function CookiePolicyPage() {
                     2. Cookie analitici
                   </h3>
                   <p className="mt-2">
-                    Il sito potrebbe utilizzare strumenti analitici per
-                    raccogliere dati aggregati o statistiche sull’utilizzo delle
-                    pagine. Se tali strumenti consentono identificazione o
-                    tracciamento non strettamente tecnico, saranno attivati solo
-                    previo consenso, ove richiesto.
+                    Il sito utilizza Google Analytics 4, servizio di analisi di Google, per raccogliere statistiche sull’utilizzo delle pagine. Questo strumento imposta cookie (tra cui “_ga” e “_ga_Z8PEVWKQVB”) e viene caricato solo dopo il consenso espresso dall’utente tramite il banner. Se l’utente rifiuta o revoca il consenso, lo strumento non viene caricato e i cookie analitici vengono rimossi.
                   </p>
                 </div>
 
@@ -84,11 +82,7 @@ export default function CookiePolicyPage() {
                     3. Cookie di profilazione o marketing
                   </h3>
                   <p className="mt-2">
-                    Al momento, il sito{" "}
-                    <strong className="text-ivory">
-                      [indicare se non utilizza / utilizza]
-                    </strong>{" "}
-                    cookie di profilazione o marketing. Qualora venissero
+                    Al momento il sito non utilizza propri cookie di profilazione o marketing. Qualora venissero
                     utilizzati in futuro, essi saranno installati solo previa
                     acquisizione del consenso dell’utente, secondo la normativa
                     applicabile.
@@ -102,10 +96,7 @@ export default function CookiePolicyPage() {
                 Cookie di terze parti
               </h2>
               <p className="mt-2">
-                Il sito potrebbe incorporare contenuti o servizi forniti da terze
-                parti, come mappe, video, font, plugin social o strumenti
-                statistici. Tali soggetti potrebbero installare propri cookie
-                secondo le rispettive policy.
+                Il sito non incorpora mappe, video o plugin social e i font sono serviti dal sito stesso. L’unico servizio di terze parti che installa cookie è Google Analytics, solo previo consenso (vedi sopra). Il sito contiene inoltre collegamenti verso siti esterni (ad esempio negozi online, editori e social network): l’accesso a tali siti è regolato dalle rispettive policy.
               </p>
             </section>
 
@@ -114,10 +105,13 @@ export default function CookiePolicyPage() {
                 Gestione del consenso
               </h2>
               <p className="mt-2">
-                Quando richiesto dalla normativa, il sito raccoglie il consenso
-                dell’utente prima dell’installazione di cookie o strumenti di
-                tracciamento non tecnici.
+                Alla prima visita il sito mostra un banner con due pulsanti di pari evidenza, “Accetta” e “Rifiuta”. Finché l’utente non sceglie, non viene caricato alcuno strumento di tracciamento non tecnico: la semplice navigazione non costituisce consenso. La scelta può essere modificata o revocata in qualsiasi momento con il pulsante qui sotto o con il pulsante “Preferenze cookie” sempre disponibile in basso a sinistra su ogni pagina.
               </p>
+              <div className="mt-4">
+                <CookiePreferencesButton className="rounded-xl border border-gold/50 bg-gold/15 px-4 py-2 text-sm font-semibold text-ivory transition hover:bg-gold/25">
+                  Modifica preferenze cookie
+                </CookiePreferencesButton>
+              </div>
             </section>
 
             <section>
@@ -125,10 +119,7 @@ export default function CookiePolicyPage() {
                 Come gestire o disabilitare i cookie
               </h2>
               <p className="mt-2">
-                L’utente può gestire le preferenze relative ai cookie tramite il
-                banner presente sul sito, se disponibile, oppure attraverso le
-                impostazioni del proprio browser, che consentono di bloccare o
-                cancellare i cookie già installati.
+                L’utente può gestire le preferenze relative ai cookie tramite il pulsante “Preferenze cookie” sempre disponibile in basso a sinistra su ogni pagina, oppure attraverso le impostazioni del proprio browser, che consentono di bloccare o cancellare i cookie già installati. Cancellando i dati del browser viene eliminata anche la scelta memorizzata e il banner verrà mostrato di nuovo.
               </p>
             </section>
 
@@ -159,10 +150,16 @@ export default function CookiePolicyPage() {
                 contattare:
                 <br />
                 <strong className="text-ivory">
-                  [inserire email di contatto]
+                  <a href="mailto:contatti@dentroleparole.com" className="text-gold underline underline-offset-4 hover:opacity-90">contatti@dentroleparole.com</a>
                 </strong>
               </p>
             </section>
+
+            <p className="text-sm text-ivory/70">
+              Vedi anche: <Link href="/privacy-policy" className="text-gold underline underline-offset-4 hover:opacity-90">Privacy Policy</Link>
+              {" · "}
+              <Link href="/termini-di-servizio" className="text-gold underline underline-offset-4 hover:opacity-90">Termini di servizio</Link>
+            </p>
           </div>
         </div>
       </div>

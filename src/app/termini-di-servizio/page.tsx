@@ -1,8 +1,12 @@
-export const metadata = {
+import Link from "next/link";
+import { pageMetadata } from "@/lib/site";
+
+export const metadata = pageMetadata({
   title: "Termini di Servizio | Dentro le Parole",
   description:
     "Termini di utilizzo del sito Dentro le Parole di Donatella Tamburini.",
-};
+  path: "/termini-di-servizio",
+});
 
 export default function TerminiDiServizioPage() {
   return (
@@ -25,7 +29,7 @@ export default function TerminiDiServizioPage() {
           </h1>
 
           <p className="mt-4 text-sm text-ivory/70">
-            Ultimo aggiornamento: 8 marzo 2026
+            Ultimo aggiornamento: 8 novembre 2026
           </p>
 
           <div className="mt-10 space-y-8 text-ivory/85">
@@ -43,7 +47,7 @@ export default function TerminiDiServizioPage() {
                 <br />
                 <strong className="text-ivory">Donatella Tamburini</strong>
                 <br />
-                [inserire email di contatto]
+                <a href="mailto:contatti@dentroleparole.com" className="text-gold underline underline-offset-4 hover:opacity-90">contatti@dentroleparole.com</a>
               </p>
             </section>
 
@@ -161,9 +165,15 @@ export default function TerminiDiServizioPage() {
               <p className="mt-2">
                 Per informazioni relative ai presenti termini è possibile scrivere a:
                 <br />
-                <strong className="text-ivory">[inserire email di contatto]</strong>
+                <strong className="text-ivory"><a href="mailto:contatti@dentroleparole.com" className="text-gold underline underline-offset-4 hover:opacity-90">contatti@dentroleparole.com</a></strong>
               </p>
             </section>
+
+            <p className="text-sm text-ivory/70">
+              Vedi anche: <Link href="/privacy-policy" className="text-gold underline underline-offset-4 hover:opacity-90">Privacy Policy</Link>
+              {" · "}
+              <Link href="/cookie-policy" className="text-gold underline underline-offset-4 hover:opacity-90">Cookie Policy</Link>
+            </p>
           </div>
         </div>
       </div>
