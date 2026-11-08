@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Cinzel_Decorative } from "next/font/google";
-import Script from "next/script";
 import Header from "../components/Header";
 import PromoBanner from "../components/PromoBanner";
 import "./globals.css";
 import CookieBanner from "@/components/CookieBanner";
+import Analytics from "@/components/Analytics";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const cormorant = Cormorant_Garamond({
@@ -49,20 +49,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         <CookieBanner />
 
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-Z8PEVWKQVB"
-          strategy="afterInteractive"
-        />
-
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-Z8PEVWKQVB');
-          `}
-        </Script>
+        {/* Google Analytics: caricato solo dopo consenso esplicito (vedi Analytics.tsx) */}
+        <Analytics />
 
       </body>
     </html>
