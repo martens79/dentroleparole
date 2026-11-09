@@ -45,3 +45,4 @@ next-env.d.ts
 
 # test compilati (npm run test:contact)
 /.test-build/
+/collaudo-files/

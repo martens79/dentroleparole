@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { loadConfig } from "../../src/lib/contact/config";
+import { loadConfig, readRateLimits } from "../../src/lib/contact/config";
 import { createRateLimiter } from "../../src/lib/contact/ratelimit";
 import { issueToken, verifyToken } from "../../src/lib/contact/token";
 import { SUBJECT, buildMailOptions, buildTransportOptions } from "../../src/lib/contact/mail";
@@ -141,4 +141,23 @@ test("limiti: la dimensione del file deriva dal limite della piattaforma, senza 
   assert.equal(MAX_REQUEST_BYTES, PLATFORM_BODY_LIMIT_BYTES);
   assert.ok(MAX_FILE_BYTES < PLATFORM_BODY_LIMIT_BYTES);
   assert.match(formatMaxFileMb(), /^\d+,\d$/);
+});
+
+test("limiti di richieste: predefiniti prudenti, modificabili solo entro intervalli fissi", () => {
+  const d = readRateLimits({});
+  assert.equal(d.perIp.max, 3);
+  assert.equal(d.perIp.windowMs, 600_000);
+  assert.equal(d.perInstance.max, 40);
+
+  const wide = readRateLimits({ CONTACT_RATE_IP_MAX: "50", CONTACT_RATE_IP_WINDOW_SEC: "60", CONTACT_RATE_INSTANCE_MAX: "500" });
+  assert.equal(wide.perIp.max, 50);
+  assert.equal(wide.perIp.windowMs, 60_000);
+  assert.equal(wide.perInstance.max, 500);
+
+  // valori fuori intervallo o non numerici: si torna ai predefiniti, mai a "nessun limite"
+  for (const bad of ["0", "-1", "101", "abc", "1.5", "", "9999999"]) {
+    assert.equal(readRateLimits({ CONTACT_RATE_IP_MAX: bad }).perIp.max, 3, `max=${bad}`);
+  }
+  assert.equal(readRateLimits({ CONTACT_RATE_IP_WINDOW_SEC: "5" }).perIp.windowMs, 600_000);
+  assert.equal(readRateLimits({ CONTACT_RATE_INSTANCE_MAX: "0" }).perInstance.max, 40);
 });

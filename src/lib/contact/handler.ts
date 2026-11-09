@@ -1,5 +1,5 @@
 import { createHmac } from "node:crypto";
-import { loadConfig, type ContactConfig } from "./config";
+import { loadConfig, readRateLimits, type ContactConfig } from "./config";
 import {
   CONTACT_FALLBACK_EMAIL,
   MAX_FILE_BYTES,
@@ -212,11 +212,12 @@ export async function handlePost(request: Request, deps: Deps): Promise<Response
 /** Dipendenze reali: i limiti restano in memoria per tutta la vita dell'istanza. */
 export function createDefaultDeps(): Deps {
   const now = () => Date.now();
+  const limits = readRateLimits(process.env);
   return {
     now,
     env: () => process.env,
     transportFor: createSmtpTransport,
-    ipLimiter: createRateLimiter({ ...RATE_LIMIT.perIp, maxKeys: RATE_LIMIT.maxKeys, now }),
-    instanceLimiter: createRateLimiter({ ...RATE_LIMIT.perInstance, maxKeys: 4, now }),
+    ipLimiter: createRateLimiter({ ...limits.perIp, maxKeys: RATE_LIMIT.maxKeys, now }),
+    instanceLimiter: createRateLimiter({ ...limits.perInstance, maxKeys: 4, now }),
   };
 }

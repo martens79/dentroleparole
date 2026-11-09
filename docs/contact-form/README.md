@@ -2,6 +2,8 @@
 
 > **Stato: bozza in PR Draft. Non in produzione.** Il modulo continua a usare FormSubmit finché l'interruttore `NEXT_PUBLIC_CONTACT_BACKEND` non viene portato a `api`. Nessuna credenziale reale è stata inserita, nessuna email reale è stata inviata, nessuna impostazione globale di Vercel è stata modificata.
 
+**Documenti collegati:** [GUIDA_CONFIGURAZIONE.md](GUIDA_CONFIGURAZIONE.md) (casella Register.it e variabili Vercel, passo per passo), [RICHIESTA_ASSISTENZA_REGISTER.md](RICHIESTA_ASSISTENZA_REGISTER.md) (bozza di messaggio, non inviata), [COLLAUDO.md](COLLAUDO.md) (piano di collaudo e registro).
+
 ## 1. Flusso
 
 ```
@@ -49,6 +51,7 @@ Si impostano su Vercel (Settings > Environment Variables), **mai nel repository*
 | `SMTP_PORT` | facoltativa | predefinito `465` |
 | `CONTACT_TO` | facoltativa | predefinito `contatti@dentroleparole.com` |
 | `CONTACT_FROM` | facoltativa | predefinito = `SMTP_USER` |
+| `CONTACT_RATE_IP_MAX` / `CONTACT_RATE_IP_WINDOW_SEC` / `CONTACT_RATE_INSTANCE_MAX` | facoltative, **solo per il collaudo** | allargano i limiti entro intervalli fissi (1-100, 60-3600 s, 1-1000); fuori intervallo si torna ai predefiniti (3 richieste / 10 minuti per IP, 40 all'ora per istanza). In produzione vanno lasciate assenti |
 | `SMTP_ALLOW_PLAINTEXT_LOOPBACK` | **solo sviluppo locale** | `true` consente il collegamento in chiaro soltanto verso `127.0.0.1`/`localhost` e viene ignorata su Vercel e verso qualunque host reale (coperta da test) |
 
 Ambiti: impostare prima **Preview** (con una casella di prova), poi Production. Senza `SMTP_USER`, `SMTP_PASS` e `CONTACT_FORM_SECRET` l'endpoint risponde 503 e non invia nulla.
@@ -77,8 +80,11 @@ Ambiti: impostare prima **Preview** (con una casella di prova), poi Production. 
 | Dimensione dichiarata dal server | `SIZE 2000000000` (2 GB) | EHLO: non è un limite operativo |
 | Dimensione massima del messaggio | **30 MB, allegati compresi** (non distinta per direzione) | pagina di confronto di Register.it |
 | Destinatari per messaggio | 100 | stessa pagina |
-| Invii giornalieri | **non chiari**: 500 al giorno in alcune pagine, 50 in altre; ogni destinatario conta come un invio | pagine Register.it in contraddizione: **da chiedere al supporto** |
-| Invio da script/sito | non esplicitamente né permesso né vietato | **da chiedere al supporto** |
+| Invii giornalieri | **contraddittori nelle pagine ufficiali**: 500 al giorno per le caselle Personal (articolo *Invii SMTP da client consentiti*) contro 50 per casella (articolo *Aumenta i limiti di invio*, che dice anche che oltre il limite "l'SMTP si blocca"; nessun codice d'errore né orario di ripristino indicati). Ogni destinatario conta come un invio | **da chiedere al supporto** |
+| Limiti per minuto/ora, connessioni, blocco dopo autenticazioni errate | non indicati | da chiedere |
+| Invio da sito/script/applicazione | **non trattato** (né permesso né vietato); le condizioni vietano solo lo spam | da chiedere |
+| Inoltro verso Gmail | **nessuna pagina pubblica** (configurazione, copia nella casella, mittente, conteggio nella quota) | da chiedere (la funzione è già attiva) |
+| SPF / DKIM / DMARC | SPF `v=spf1 include:spf.webapps.net ~all` (già presente); DKIM: Email > Azioni > DKIM > ON (selettore non dichiarato; non dichiarato se la firma sia automatica); DMARC base `v=DMARC1; p=none; pct=100; ri=86400`. Gmail rifiuta i messaggi senza autenticazione (`550-5.7.26`) | pagine di Register.it; da confermare |
 | Rete | nessuna lista di IP consentiti; la porta 25 è bloccata da Vercel ma la 465 è aperta | docs Vercel + prova |
 
 Il certificato ha rinnovi frequenti (scade il 25 gennaio 2027): **non si fa pinning** del certificato, si usa la catena pubblica.
@@ -129,8 +135,9 @@ Nessuna è stata eseguita.
 
 ## 8. Test eseguiti
 
-- **33 test automatici** (`npm run test:contact`, `node:test`, nessuna libreria di test aggiuntiva) con **SMTP simulato**: nessuna email reale. Coprono validatori (email, campi, nomi di file, PDF/DOCX/DOC, macro, zip corrotti), token, rate limiting, configurazione e opzioni del trasporto (TLS verificato, TLS 1.2 minimo, timeout), costruzione del messaggio, e l'intero percorso della richiesta: successo, senza allegato, rifiuti, Content-Length eccessivo, iniezione di intestazioni, antispam, rate limit, origine, guasto SMTP con verifica che **nessun dato personale compaia nei log**; più un server SMTP finto locale per l'autenticazione rifiutata, il server non raggiungibile e l'integrità dell'allegato.
+- **41 test automatici** (`npm run test:contact`, `node:test`, nessuna libreria di test aggiuntiva) con **SMTP simulato**: nessuna email reale. Coprono validatori (email, campi, nomi di file, PDF/DOCX/DOC, macro, zip corrotti), token, rate limiting, configurazione e opzioni del trasporto (TLS verificato, TLS 1.2 minimo, timeout), costruzione del messaggio, e l'intero percorso della richiesta: successo, senza allegato, rifiuti, Content-Length eccessivo, iniezione di intestazioni, antispam, rate limit, origine, guasto SMTP con verifica che **nessun dato personale compaia nei log**; più un server SMTP finto locale per l'autenticazione rifiutata, il server non raggiungibile e l'integrità dell'allegato, e **7 controlli statici di sicurezza** (nessun segreto o `.env` tracciato, nessuna scrittura su disco, log solo con codici tecnici, interruttore predefinito = FormSubmit).
 - **Collaudo completo in locale** (build con `NEXT_PUBLIC_CONTACT_BACKEND=api`, browser integrato, server SMTP finto su loopback): modulo compilato con allegato PDF → pagina `/grazie`; messaggio ricevuto con mittente, destinatario, Reply-To, oggetto, testo con accenti e virgolette e allegato **identico** (300.034 byte); messaggi d'errore nel browser per file troppo grande ("Massimo 4,4 MB"), formato non valido e contenuto falso (rifiutato dal server, nulla inviato).
+- **Matrice di collaudo automatica** (`npm run collaudo:contact -- local`): 19 casi contro un build locale e un SMTP finto, 8 email con allegati identici (SHA-256) e prova del limite di richieste; dettagli in [COLLAUDO.md](COLLAUDO.md).
 - **Su Vercel (Preview)**: regione fra1; TLS con verifica attiva verso Register.it; saluto SMTP in 43 ms; soglia del corpo misurata.
 - **Non eseguito**: invio reale a Register.it (nessuna credenziale), recapito su Gmail, DKIM/DMARC, comportamento dell'inoltro, regola WAF, prova con file vicino al limite in produzione.
 - Nota sull'ambiente di prova: sul PC usato un antivirus intercetta il TLS (anche locale), perciò la consegna TLS verso un server locale non è stata provata lì; la verifica TLS reale è stata fatta dall'infrastruttura Vercel.

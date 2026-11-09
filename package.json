@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:contact": "tsc -p tsconfig.contact-test.json && node --test \".test-build/tests/contact/*.test.js\""
+    "test:contact": "tsc -p tsconfig.contact-test.json && node --test \".test-build/tests/contact/*.test.js\"",
+    "collaudo:contact": "tsc -p tsconfig.contact-test.json && node scripts/contact-collaudo.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^6.0.3",

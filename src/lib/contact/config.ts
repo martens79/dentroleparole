@@ -1,4 +1,4 @@
-import { CONTACT_FALLBACK_EMAIL } from "./limits";
+import { CONTACT_FALLBACK_EMAIL, RATE_LIMIT } from "./limits";
 
 /**
  * Configurazione dell'endpoint, letta SOLO da variabili d'ambiente di Vercel
@@ -14,6 +14,11 @@ import { CONTACT_FALLBACK_EMAIL } from "./limits";
  *   SMTP_ALLOW_PLAINTEXT_LOOPBACK  SOLO per sviluppo locale: "true" consente la connessione in chiaro
  *                       a un server SMTP di prova su 127.0.0.1/localhost. Viene ignorata se l'host non è
  *                       un indirizzo di loopback o se l'ambiente è Vercel (variabile VERCEL presente).
+ *   CONTACT_RATE_IP_MAX            facoltativa (1-100): richieste per IP nella finestra. Predefinito 3.
+ *   CONTACT_RATE_IP_WINDOW_SEC     facoltativa (60-3600): finestra in secondi. Predefinito 600.
+ *   CONTACT_RATE_INSTANCE_MAX      facoltativa (1-1000): richieste totali all'ora per istanza. Predefinito 40.
+ *                       Servono ad allargare i limiti durante un collaudo (es. solo in Preview): in produzione
+ *                       vanno lasciate assenti.
  *   CONTACT_TO          destinatario, predefinito contatti@dentroleparole.com
  *   CONTACT_FROM        mittente, predefinito = SMTP_USER (deve essere la casella autenticata)
  */
@@ -70,6 +75,31 @@ export function loadConfig(env: Env): ConfigResult {
         env.SMTP_ALLOW_PLAINTEXT_LOOPBACK === "true" &&
         LOOPBACK_HOSTS.has(host.toLowerCase()) &&
         !env.VERCEL,
+    },
+  };
+}
+
+export type RateLimits = {
+  perIp: { windowMs: number; max: number };
+  perInstance: { windowMs: number; max: number };
+};
+
+function intInRange(value: string | undefined, min: number, max: number, fallback: number): number {
+  if (value === undefined || value.trim() === "") return fallback;
+  const n = Number(value);
+  return Number.isInteger(n) && n >= min && n <= max ? n : fallback;
+}
+
+/** Limiti di richieste: predefiniti prudenti, modificabili solo entro intervalli fissi. */
+export function readRateLimits(env: Env): RateLimits {
+  return {
+    perIp: {
+      windowMs: intInRange(env.CONTACT_RATE_IP_WINDOW_SEC, 60, 3600, RATE_LIMIT.perIp.windowMs / 1000) * 1000,
+      max: intInRange(env.CONTACT_RATE_IP_MAX, 1, 100, RATE_LIMIT.perIp.max),
+    },
+    perInstance: {
+      windowMs: RATE_LIMIT.perInstance.windowMs,
+      max: intInRange(env.CONTACT_RATE_INSTANCE_MAX, 1, 1000, RATE_LIMIT.perInstance.max),
     },
   };
 }
