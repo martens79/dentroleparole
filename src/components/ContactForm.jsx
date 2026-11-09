@@ -390,7 +390,9 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={sending}
-        className="mt-2 rounded-2xl bg-gold px-5 py-3 text-sm font-semibold text-night shadow-glow transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60"
+        className={`mt-2 rounded-2xl bg-gold px-5 py-3 text-sm font-semibold text-night shadow-glow transition hover:opacity-95${
+          USE_API ? " disabled:cursor-not-allowed disabled:opacity-60" : ""
+        }`}
       >
         {sending ? "Invio in corso..." : "Invia richiesta"}
       </button>
