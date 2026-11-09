@@ -11,6 +11,9 @@ import { CONTACT_FALLBACK_EMAIL } from "./limits";
  *   SMTP_PORT           predefinito: 465 (SSL/TLS implicito)
  *   SMTP_SECURE         facoltativo ("true"/"false"): predefinito true solo sulla porta 465; serve per le
  *                       prove con un server SMTP locale. La verifica del certificato resta sempre attiva.
+ *   SMTP_ALLOW_PLAINTEXT_LOOPBACK  SOLO per sviluppo locale: "true" consente la connessione in chiaro
+ *                       a un server SMTP di prova su 127.0.0.1/localhost. Viene ignorata se l'host non è
+ *                       un indirizzo di loopback o se l'ambiente è Vercel (variabile VERCEL presente).
  *   CONTACT_TO          destinatario, predefinito contatti@dentroleparole.com
  *   CONTACT_FROM        mittente, predefinito = SMTP_USER (deve essere la casella autenticata)
  */
@@ -24,6 +27,8 @@ export type ContactConfig = {
   to: string;
   from: string;
   secret: string;
+  /** Vero solo per prove locali verso un server di loopback (vedi sopra). */
+  allowPlaintextLoopback: boolean;
 };
 
 export type ConfigResult =
@@ -31,6 +36,8 @@ export type ConfigResult =
   | { ok: false; missing: string[] };
 
 type Env = Record<string, string | undefined>;
+
+const LOOPBACK_HOSTS = new Set(["127.0.0.1", "localhost", "::1"]);
 
 export function loadConfig(env: Env): ConfigResult {
   const missing: string[] = [];
@@ -59,6 +66,10 @@ export function loadConfig(env: Env): ConfigResult {
       to: env.CONTACT_TO?.trim() || CONTACT_FALLBACK_EMAIL,
       from: env.CONTACT_FROM?.trim() || user,
       secret,
+      allowPlaintextLoopback:
+        env.SMTP_ALLOW_PLAINTEXT_LOOPBACK === "true" &&
+        LOOPBACK_HOSTS.has(host.toLowerCase()) &&
+        !env.VERCEL,
     },
   };
 }

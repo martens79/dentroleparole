@@ -56,6 +56,33 @@ test("trasporto SMTP: TLS sempre verificato, TLS 1.2 minimo, timeout, niente acc
   }
 });
 
+test("deroga per prove locali: solo loopback, mai su Vercel, mai verso host reali", () => {
+  const local = { ...TEST_ENV, SMTP_HOST: "127.0.0.1", SMTP_PORT: "2525", SMTP_ALLOW_PLAINTEXT_LOOPBACK: "true" };
+  const ok = loadConfig(local);
+  assert.ok(ok.ok && ok.config.allowPlaintextLoopback);
+  if (ok.ok) {
+    const o = buildTransportOptions(ok.config);
+    assert.equal(o.ignoreTLS, true);
+    assert.equal(o.secure, false);
+  }
+
+  for (const blocked of [
+    { ...local, SMTP_HOST: "authsmtp.securemail.pro" }, // host reale
+    { ...local, SMTP_HOST: "192.168.1.10" }, // rete locale, non loopback
+    { ...local, VERCEL: "1" }, // ambiente Vercel
+    { ...local, SMTP_ALLOW_PLAINTEXT_LOOPBACK: "false" },
+  ]) {
+    const r = loadConfig(blocked);
+    assert.ok(r.ok);
+    if (r.ok) {
+      assert.equal(r.config.allowPlaintextLoopback, false);
+      const o = buildTransportOptions(r.config);
+      assert.equal(o.ignoreTLS, undefined);
+      assert.equal(o.tls?.rejectUnauthorized, true);
+    }
+  }
+});
+
 test("token: valido, troppo veloce, scaduto, manomesso, di un'altra chiave", () => {
   const t0 = 1_800_000_000_000;
   const token = issueToken(SECRET, t0);

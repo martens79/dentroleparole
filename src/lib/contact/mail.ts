@@ -78,10 +78,28 @@ export function buildMailOptions(
 }
 
 /**
- * Opzioni del trasporto SMTP. TLS sempre verificato: nessuna scorciatoia
- * (`rejectUnauthorized` resta true, protocollo minimo TLS 1.2).
+ * Opzioni del trasporto SMTP. Verso host reali il TLS è sempre obbligatorio e verificato
+ * (`rejectUnauthorized` resta true, protocollo minimo TLS 1.2). L'unica deroga è la connessione in
+ * chiaro verso 127.0.0.1/localhost per le prove locali, mai su Vercel (vedi config.ts).
  */
 export function buildTransportOptions(config: ContactConfig): SMTPTransport.Options {
+  if (config.allowPlaintextLoopback) {
+    // Solo sviluppo locale verso 127.0.0.1 (la config lo consente soltanto fuori da Vercel).
+    return {
+      host: config.host,
+      port: config.port,
+      secure: false,
+      ignoreTLS: true,
+      auth: { user: config.user, pass: config.pass },
+      connectionTimeout: 5_000,
+      greetingTimeout: 5_000,
+      socketTimeout: 15_000,
+      disableFileAccess: true,
+      disableUrlAccess: true,
+      logger: false,
+      debug: false,
+    };
+  }
   return {
     host: config.host,
     port: config.port,
