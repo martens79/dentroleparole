@@ -177,6 +177,8 @@ L'opzione C (Workspace) è la scelta se la titolare vuole continuare a lavorare 
 
 > **Solo analisi e proposta.** Nessun codice, DNS, credenziale, inoltro o impostazione di produzione è stato modificato. La PR #5 resta Draft. Dove un dato non è stato verificato è scritto.
 
+> **Aggiornamento 9 novembre 2026:** l'implementazione è nella PR #7 (Draft, [feat/contact-endpoint-smtp-2026](https://github.com/martens79/dentroleparole/pull/7)). I limiti qui indicati come "da misurare" sono stati **misurati** (corpo massimo 4.493.210 byte, file 4,4 MB; TLS verso Register.it verificato da Vercel in fra1) e il testo di informativa aggiornato al nuovo flusso è in `docs/contact-form/README.md` (§9) di quella PR, non qui.
+
 ## 8.0 Decisione ricevuta e conseguenze
 
 - **Gmail personale di Donatella resta** come oggi (inoltro esistente dalla casella Register, invariato). Resta quindi aperto il rischio descritto in 7.2 e 7.3 (nessun accordo sul trattamento dei dati con Google, Termini "uso personale"): non è risolto da questa architettura, va **dichiarato nell'informativa** (vedi 8.6) ed è una scelta consapevole del titolare del sito.
