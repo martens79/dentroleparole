@@ -36,7 +36,7 @@
 - **Privacy Policy** completa in 12 sezioni (titolare, dati trattati, manoscritti e allegati, basi giuridiche, natura del conferimento, destinatari, trasferimenti, conservazione, diritti, decisioni automatizzate, cookie, aggiornamenti).
 - **Cookie Policy** allineata al sistema di consenso della PR #6 (banner, 180 giorni, pulsante permanente, cookie tecnici e analitici, riferimenti normativi).
 - **Termini di servizio** che separano l'uso del sito dagli incarichi editoriali (che nascono solo con accettazione scritta del preventivo/accordo).
-- I dati ancora mancanti sono evidenziati come "DA CONFERMARE" e raccolti in `src/content/legal.ts`. `node scripts/check-legal-placeholders.mjs` elenca cosa manca (oggi 11 punti) e fallisce finché non sono risolti.
+- I dati ancora mancanti sono evidenziati come "DA CONFERMARE" e raccolti in `src/content/legal.ts`. `node scripts/check-legal-placeholders.mjs` elenca cosa manca (oggi 10 punti) e fallisce finché non sono risolti.
 
 ## 3. Segnalazioni non legali ma rilevanti
 - **Tempi di risposta incoerenti sul sito**: "3-5 giorni" in home, "24–48 ore" in Chi sono e nel menu.
@@ -48,7 +48,7 @@
 1. **Indirizzo (domicilio o sede professionale)** — obbligatorio per l'informativa (art. 13 GDPR) e tra le informazioni da rendere accessibili sul sito (art. 7 D.Lgs. 70/2003).
 2. **Ha la partita IVA?** Se sì, quale — stesso art. 7 D.Lgs. 70/2003. Se esercita come professionista iscritta a un albo o registro, anche quello.
 3. **Per quanto tempo conserva** (a) richieste/estratti quando non nasce un incarico, (b) manoscritti e materiali dopo la fine di un incarico? — è un contenuto obbligatorio dell'informativa. Esempi (da scegliere, non decisi da me): 12 mesi dall'ultimo contatto; 12–24 mesi dopo la consegna.
-4. **Quale provider di posta usa** per contatti@dentroleparole.com (Gmail, Aruba, altro)? — è un destinatario dei dati.
+4. ~~Quale provider di posta usa~~ — **risolto**: la posta in ingresso di dentroleparole.com è gestita da Register.it (record MX verificato tramite Google DNS: `10 mail.register.it`, confermato dalla titolare il 9 novembre 2026). Nella Privacy Policy è indicato solo come provider della posta in ingresso, senza attribuirgli altri servizi o trattamenti (conservazione, casella di invio, sede, garanzie), non ancora verificati.
 5. **Altre persone accedono ai manoscritti** (collaboratori, voci per audiolibri, ecc.)? — destinatari dei dati e riservatezza.
 6. **Usa strumenti di intelligenza artificiale sul contenuto dei manoscritti?** — i clienti devono saperlo prima di inviare il testo.
 7. **Impostazioni di Google Analytics** (Admin > Impostazioni dati > Conservazione dei dati: 2 o 14 mesi) — vanno scritte nella Cookie Policy.

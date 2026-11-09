@@ -187,8 +187,8 @@ export default function PrivacyPolicyPage() {
 
       <LegalSection title="6. A chi vengono comunicati i dati">
         <p>
-          I dati non vengono venduti né diffusi. Possono essere trattati dai
-          seguenti fornitori, che operano per conto della titolare:
+          I dati non vengono venduti né diffusi. Per il funzionamento del sito e
+          dei servizi collegati vengono utilizzati i seguenti fornitori:
         </p>
         <LegalList>
           <li>
@@ -211,12 +211,14 @@ export default function PrivacyPolicyPage() {
             Analytics, attivo solo con il tuo consenso.
           </li>
           <li>
-            <strong className="text-ivory">Provider di posta elettronica</strong>
-            :{" "}
-            <Val
-              v={legal.emailProvider}
-              todo="nome del provider della casella contatti@dentroleparole.com"
-            />
+            <strong className="text-ivory">
+              <Val
+                v={legal.emailProvider}
+                todo="nome del provider della posta in ingresso"
+              />
+            </strong>
+            : provider della posta elettronica in ingresso del dominio
+            dentroleparole.com.
           </li>
           <li>
             <strong className="text-ivory">Collaboratori o fornitori</strong>

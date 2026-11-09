@@ -34,8 +34,8 @@ export const legal = {
     materiali: null as Confirmable,
   },
 
-  /** Provider della casella contatti@dentroleparole.com. */
-  emailProvider: null as Confirmable,
+  /** Provider della posta in ingresso del dominio (record MX verificato: 10 mail.register.it). */
+  emailProvider: "Register.it" as Confirmable,
   /** Collaboratori o fornitori che possono accedere ai manoscritti. `false` = nessuno. */
   collaboratori: null as Confirmable,
   /** Uso di strumenti di intelligenza artificiale sui manoscritti. `false` = nessuno. */
