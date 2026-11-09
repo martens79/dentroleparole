@@ -120,11 +120,9 @@ async function longWait(port: number, implicitTls: boolean) {
   const handshakeMs = Date.now() - t0;
   await new Promise((r) => setTimeout(r, 30_000));
   const silentAt30 = log.length === 0;
-  if (silentAt30) sock.write("EHLO probe.invalid
-"); // il server risponde se gli si parla per primi?
+  if (silentAt30) sock.write("EHLO probe.invalid\r\n"); // il server risponde se gli si parla per primi?
   await new Promise((r) => setTimeout(r, 25_000));
-  sock.write("QUIT
-");
+  sock.write("QUIT\r\n");
   sock.destroy();
   return { port, implicitTls, handshakeMs, silentAt30, receivedAfterEhloAt30: silentAt30 ? log.length > 0 : null, log };
 }
