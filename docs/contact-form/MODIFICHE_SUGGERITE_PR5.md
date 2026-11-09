@@ -75,7 +75,7 @@ Eliminare il riferimento a FormSubmit nel segnaposto: «[DA CONFERMARE: sede e g
 **Primo paragrafo, da sostituire con:**
 > Il modulo di contatto serve al **primo contatto**. Puoi allegare, se vuoi, un’**anteprima del tuo testo** (indicativamente le prime 5–10 cartelle editoriali, circa 1.800 battute ciascuna, spazi inclusi) in formato PDF, DOC o DOCX: l’allegato è facoltativo e non è necessario inviare il manoscritto completo, che potrà essere richiesto successivamente via email. Se invii un’anteprima dichiari di esserne l’autore o di avere il diritto di inviarla, e sei responsabile del suo contenuto. Il file può pesare al massimo **8 MB** *(Variante A)* / **4,4 MB** *(Variante B)*. I materiali inviati sono trattati in modo riservato e usati solo per valutare la tua richiesta, come descritto nella Privacy Policy.
 
-**Secondo paragrafo:** «La prima lettura **dell’anteprima** e i tempi di risposta indicati sul sito sono forniti a titolo orientativo e senza impegno per le parti.» *(Prima della pubblicazione va risolta l'incoerenza dei tempi di risposta nel sito: «3–5 giorni» nella home, «24–48 ore» in «Chi sono» e nel menu.)*
+**Secondo paragrafo:** «La prima lettura **dell’anteprima** e i tempi di risposta indicati sul sito sono forniti a titolo orientativo e senza impegno per le parti.» *(Il tempo di risposta alle richieste iniziali è stato uniformato dalla titolare a **3–5 giorni lavorativi** in tutto il sito, nella PR #7; vedi §5.)*
 
 ### 2.2 Sezione 5, secondo paragrafo (righe 125-128) — [COMUNE]
 **Oggi:** «Inviando un testo non cedi alcun diritto sul tuo manoscritto. …»
@@ -102,3 +102,16 @@ Il testo sulla "valutazione completa del manoscritto" come servizio a incarico r
 3. Se la titolare conferma le affermazioni «resta di tua proprietà», «non viene condiviso con editori o agenti senza consenso» e «utilizzato per finalità estranee».
 4. Uso di strumenti di intelligenza artificiale sui testi (segnaposto già presente).
 5. Il resto dei dati della PR #5 (indirizzo, partita IVA, collaboratori, impostazioni di Google Analytics, link Amazon, consumatori).
+
+## 5. Tempi di risposta (decisione della titolare: «Rispondo entro 3–5 giorni lavorativi.»)
+
+Il sito (PR #7) usa ora una sola formula per il **tempo di risposta alle richieste iniziali**. Nei contenuti della PR #5 restano da correggere **in seguito** (non toccati) questi riferimenti:
+
+| Dove (PR #5, ultimo commit `2ff630b`) | Testo attuale | Cosa fare |
+|---|---|---|
+| `docs/legal/VERIFICHE_E_DOMANDE_2026-11-09.md` riga 42 | «**Tempi di risposta incoerenti sul sito**: "3-5 giorni" in home, "24–48 ore" in Chi sono e nel menu.» | segnare come **risolto**: tempo uniformato a 3–5 giorni lavorativi |
+| stesso file, riga 60 (domanda 13) | «**Tempi di risposta**: 24–48 ore o 3–5 giorni? (coerenza del sito)» | rimuovere la domanda: risposta data (3–5 giorni lavorativi) |
+| `src/app/termini-di-servizio/page.tsx` riga 110 | «La prima lettura dell’estratto e i tempi di risposta indicati sul sito sono forniti a titolo orientativo e senza impegno per le parti.» | nessuna correzione obbligatoria; con la formula uniforme conviene: «La prima lettura dell’anteprima e il tempo di risposta indicato sul sito (3–5 giorni lavorativi) sono forniti a titolo orientativo e senza impegno per le parti.» (già coperto dal §2.1 per la parte «anteprima») |
+| `src/app/page.tsx` (righe 265, 488-489), `src/app/chi-sono/page.tsx` (riga 300), `src/components/Header.tsx` (riga 383) | copie dei file di `main` con «3-5 giorni» e «24–48 ore» | **nessuna azione**: sono file che la PR #5 non modifica; si correggono con la PR #7 senza conflitti |
+
+Non vanno confusi con i **tempi di esecuzione** dei lavori («stima realistica dei tempi di lavoro» nelle FAQ), che restano invariati. Nei contenuti pubblici, articoli del blog (Sanity) compresi, non risultano altre promesse di risposta.

@@ -106,3 +106,29 @@ test("il tema globale non è stato modificato (nessun @config/@theme aggiunto in
   const css = read("src/app/globals.css");
   assert.equal(/@config|@theme/.test(css), false);
 });
+
+/* ---------- tempo di risposta alle richieste iniziali ---------- */
+
+test("tempo di risposta: una sola promessa in tutto il sito, «entro 3–5 giorni lavorativi»", () => {
+  for (const f of visibleFiles) {
+    const text = flat(f);
+    for (const old of [/24\s*[–-]\s*48/, /\b48 ore\b/, /entro 2 giorni/i, /appena possibile/i, /Risposta entro/, /3-5 giorni/]) {
+      assert.equal(old.test(text), false, `promessa di risposta incompatibile (${old}) in ${f}`);
+    }
+  }
+  const expected: [string, string][] = [
+    ["src/app/page.tsx", "Rispondo entro 3–5 giorni lavorativi"],
+    ["src/app/chi-sono/page.tsx", "Rispondo entro 3–5 giorni lavorativi con indicazioni chiare."],
+    ["src/components/Header.tsx", "Rispondo entro 3–5 giorni lavorativi."],
+    ["src/app/grazie/page.jsx", "ti risponderò entro 3–5 giorni lavorativi."],
+  ];
+  for (const [file, text] of expected) assert.ok(flat(file).includes(text), `formula mancante in ${file}`);
+  // la home la mostra due volte: accanto al titolo e sotto il modulo
+  assert.ok(flat("src/app/page.tsx").includes('Rispondo entro{" "} <span className="text-ivory/90">3–5 giorni lavorativi</span>.'));
+});
+
+test("i tempi di lavoro (editing, consegna, valutazione) non sono stati toccati dall'uniformazione", () => {
+  const home = flat("src/app/page.tsx");
+  assert.ok(home.includes("fornisco sempre una stima realistica dei tempi di lavoro"));
+  assert.equal(/3–5 giorni lavorativi/.test(home.split("Quanto tempo richiede una revisione?")[1]?.slice(0, 400) ?? ""), false);
+});

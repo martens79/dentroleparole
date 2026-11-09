@@ -262,7 +262,7 @@ export default function Home() {
 
             <div className="mt-4 flex flex-wrap gap-3 text-sm text-ivory/75">
               <div className="flex items-center gap-2 rounded-2xl border border-gold/15 bg-midnight/35 px-4 py-2">
-                <span className="text-gold">✓</span> Risposta entro 3-5 giorni
+                <span className="text-gold">✓</span> Rispondo entro 3–5 giorni lavorativi
               </div>
               <div className="flex items-center gap-2 rounded-2xl border border-gold/15 bg-midnight/35 px-4 py-2">
                 <span className="text-gold">✓</span> Anteprima facoltativa: 5–10 cartelle editoriali (circa 1.800 battute ciascuna, spazi inclusi), riscontro gratuito
@@ -483,8 +483,8 @@ export default function Home() {
                 <ContactForm />
 
                 <p className="mt-6 text-center text-sm text-ivory/65">
-                  Risposta entro{" "}
-                  <span className="text-ivory/90">3-5 giorni</span>.
+                  Rispondo entro{" "}
+                  <span className="text-ivory/90">3–5 giorni lavorativi</span>.
                 </p>
 
                

@@ -27,8 +27,7 @@ export default function GraziePage() {
             <p>Il tuo messaggio è stato ricevuto correttamente.</p>
 
             <p>
-             Leggerò con attenzione la tua richiesta e ti risponderò
-              appena possibile.
+             Leggerò con attenzione la tua richiesta e ti risponderò entro 3–5 giorni lavorativi.
             </p>
 
             <p>

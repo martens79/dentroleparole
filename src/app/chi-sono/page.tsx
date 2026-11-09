@@ -296,8 +296,7 @@ export default function ChiSonoPage() {
           </h2>
 
           <p className="mt-4 max-w-3xl leading-relaxed text-ivory/85">
-            Inviami, se vuoi, un’anteprima facoltativa (5–10 cartelle editoriali) e dimmi qual è il tuo obiettivo. Ti rispondo
-            entro 24–48 ore con indicazioni chiare.
+            Inviami, se vuoi, un’anteprima facoltativa (5–10 cartelle editoriali) e dimmi qual è il tuo obiettivo. Rispondo entro 3–5 giorni lavorativi con indicazioni chiare.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
