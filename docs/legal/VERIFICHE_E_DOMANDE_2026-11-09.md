@@ -258,7 +258,7 @@ Cosa significa in pratica (stima, non misura): un romanzo in DOCX solo testo pes
 - Le istanze possono essere riutilizzate tra richieste: il codice non deve mantenere dati dei visitatori in variabili globali.
 - I log di Vercel non devono contenere nome, email, testo o nome del file.
 - **Regione**: il default per i nuovi progetti è `iad1` (Washington). Per tenere l'elaborazione in UE impostare `fra1` (impostazione del progetto o `vercel.json`; Pro permette fino a 5 regioni). **Modifica di configurazione: da autorizzare.** Anche con `fra1`, Vercel Inc. è un fornitore statunitense: restano il contratto con clausole contrattuali standard e l'adesione al Data Privacy Framework dichiarati da Vercel.
-- **Piano effettivo del progetto: non verificato.** Non ho accesso alla dashboard (la sessione del browser è scaduta; il login è del proprietario). Indizi, non prove: il nome del team (`lorenzos-projects-…`) è quello predefinito degli account personali; Vercel limita il piano Hobby all'uso non commerciale e l'accordo sul trattamento dei dati vale per Pro ed Enterprise. **Da fare: controllare in Impostazioni > Billing** (o mandarmi il piano indicato) prima di scegliere i limiti WAF e la regione.
+- **Piano effettivo verificato (9 novembre 2026, dashboard, sola lettura):** il team ha il piano **Pro**, attivo (periodo 25 ottobre - 25 novembre 2026, credito incluso usato 11,65 $ su 20 $, budget di spesa 200 $). Quindi: uso commerciale consentito, accordo sul trattamento dei dati di Vercel applicabile, regole WAF fino a 40, fino a 5 regioni. Impostazioni del progetto `dentroleparole`: **Fluid compute attivo**, CPU "Standard" (2 GB), **regione delle funzioni attuale `iad1` (Washington)**: per l'UE va portata a `fra1` (modifica da autorizzare; vale per i nuovi deployment). Firewall: nessun avviso, nessuna azione persistente; non ho aperto l'elenco delle regole personalizzate.
 
 ## 8.5 Costi aggiuntivi reali
 
@@ -322,7 +322,7 @@ Da pubblicare **solo al passaggio in produzione**, perché fino ad allora FormSu
 | Recapito su Gmail tramite inoltro (spam, mittente) | Media | Prova; DKIM e DMARC; Reply-To |
 | Nessuna scansione antivirus dei file | Media | Tipi ammessi, no macro, antivirus Register/Gmail; rischio dichiarato |
 | Gmail personale senza accordo sul trattamento dei dati | **Alta** (decisione consapevole) | Dichiarazione in informativa; Workspace come opzione futura |
-| Piano Vercel non confermato (Hobby escluso per uso commerciale e senza accordo) | Alta se Hobby | Verifica in Billing prima di procedere |
+| Piano Vercel | — | **Risolto**: Pro (verificato in dashboard) |
 | Credenziali SMTP esposte | Alta | Variabili Secret, casella dedicata, nessun log, rotazione |
 | Regione di elaborazione predefinita USA | Media | Regione `fra1` (da autorizzare); clausole standard di Vercel |
 
@@ -332,7 +332,7 @@ Nessun impedimento tecnico è emerso: Vercel permette SMTP sulla 465 e Register 
 
 ## 8.10 Decisioni e autorizzazioni da darmi
 
-1. Piano Vercel: mi confermi quello indicato in Settings > Billing? (oppure accedi tu alla dashboard)
+1. ~~Piano Vercel~~ — **verificato: Pro** (vedi 8.4). Resta da autorizzare la regione `fra1`.
 2. Autorizzi la modifica della **regione delle funzioni** a `fra1` e la regola di **rate limiting WAF** (configurazioni Vercel, da fare solo dopo il tuo via)?
 3. Chi scrive a **Register.it** (invio da sito, quota, antispam in ingresso, nomina a responsabile) e chi crea la casella `form@` e attiva DKIM/DMARC (DNS)?
 4. Antispam: honeypot + token + rate limiting (consigliato); aggiungere BotID? Turnstile solo come ripiego?
@@ -349,4 +349,4 @@ Nessun impedimento tecnico è emerso: Vercel permette SMTP sulla 465 e Register 
 - Next.js: documentazione dei Route Handler e dei limiti del corpo (1 MB predefinito per le Server Actions; nessun limite documentato per i Route Handler). OWASP: File Upload Cheat Sheet. Firme dei file: elenco delle firme (PDF, ZIP, OLE2).
 - Nodemailer: homepage (zero dipendenze, TLS/STARTTLS; Node 20 o successivo per la v10). Pagine su opzioni SMTP e allegati non raggiungibili: **opzioni di TLS e invio di allegati da memoria da verificare nei test**.
 - Cloudflare Turnstile: gratuito, token valido 300 s, uso singolo, verifica lato server; uso di cookie e archiviazione locale non documentato.
-- **Non verificato**: piano effettivo Vercel; invio da script ammesso da Register; funzionamento dell'inoltro verso Gmail; comportamento esatto del limite 4,5 MB con multipart; gestione della memoria del multipart; nessun test eseguito.
+- **Non verificato**: invio da script ammesso da Register; funzionamento dell'inoltro verso Gmail; comportamento esatto del limite 4,5 MB con multipart; gestione della memoria del multipart; nessun test eseguito.
