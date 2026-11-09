@@ -22,6 +22,34 @@ Gmail personale di Donatella
 
 Il mittente tecnico è una casella dedicata (es. `form@dentroleparole.com`, da creare). L'email del visitatore è in **Reply-To**: Donatella risponde dal proprio Gmail come oggi. L'oggetto è identico a quello usato con FormSubmit ("Nuova richiesta dal sito Dentro le Parole"); se l'allegato presenta elementi sospetti viene anteposto "[ATTENZIONE: allegato da verificare]".
 
+## 1b. Anteprima facoltativa del manoscritto (testi del modulo)
+
+Il modulo serve per il **primo approccio** tra autore e professionista: l'autore non invia il manoscritto completo dal sito. Se serve, Donatella lo richiede dopo, via email (Gmail) o con un collegamento privato. **Non è stato introdotto alcun servizio di archiviazione o caricamento file.**
+
+**Testi mostrati nel riquadro dell'allegato** (uguali nelle due modalità, `src/components/ContactForm.jsx`):
+
+| Elemento | Testo |
+|---|---|
+| Titolo | **Anteprima del manoscritto (facoltativa)** |
+| Accompagnamento | Allega, se desideri, le prime 5–10 cartelle editoriali del tuo testo in formato PDF, DOC o DOCX. Non è necessario inviare il manoscritto completo: potremo concordarne l’invio successivamente via email. |
+| Definizione | Una cartella editoriale corrisponde indicativamente a 1.800 battute, spazi inclusi. |
+| Dimensione | Max 4,4 MB. (con l'endpoint) — Max 8 MB. (con FormSubmit, invariato) |
+| Pulsante | Allega anteprima *(prima: "Carica estratto")* |
+
+Sostituiscono il titolo "Estratto (PDF, DOC, DOCX)". Il consiglio delle 5–10 cartelle è **indicativo**: il codice non conta pagine, cartelle, battute o parole del file. L'unico limite sul file è la dimensione (e il formato). Se l'autore non allega nulla il modulo funziona normalmente (campo facoltativo, nessun `required`). Tutti i campi restano: nome, email, titolo, genere, numero di parole, obiettivo del libro, messaggio, allegato. *Nota: nel modulo attuale non esiste un campo "tipo di servizio richiesto": il campo equivalente è il menu "Obiettivo del libro" (Invio a case editrici / Self publishing / Ancora da decidere), lasciato invariato.*
+
+**Differenze tra le due modalità (da conoscere):**
+
+| | FormSubmit (predefinita) | Endpoint SMTP (`api`) |
+|---|---|---|
+| Testi dell'anteprima | uguali | uguali |
+| Dimensione massima del file | **8 MB** (limite del modulo attuale; FormSubmit dichiara 10 MB totali) | **4,4 MB** (limite di Vercel, misurato) |
+| Controllo del formato PDF/DOC/DOCX | solo nel browser (tipo dichiarato dal browser) | browser **e server** (estensione, contenuto reale, macro) |
+| Protezioni sugli allegati, antispam, rate limiting | quelle di FormSubmit (campo trappola `_honey`) | del nuovo endpoint |
+| Dove passa il file | FormSubmit → Register.it → Gmail | sito (solo memoria) → Register.it → Gmail |
+
+La differenza di limite (8 MB contro 4,4 MB) è voluta: **non si è ridotto il limite di FormSubmit** per non cambiarne il funzionamento. Il testo "Max N MB." mostra sempre il limite della modalità attiva. Al passaggio all'endpoint il limite scende a 4,4 MB; per 5–10 cartelle (circa 9.000–18.000 battute) è ampiamente sufficiente.
+
 ## 2. Interruttore e rollback
 
 | Variabile | Valore | Effetto |
@@ -135,8 +163,9 @@ Nessuna è stata eseguita.
 
 ## 8. Test eseguiti
 
-- **41 test automatici** (`npm run test:contact`, `node:test`, nessuna libreria di test aggiuntiva) con **SMTP simulato**: nessuna email reale. Coprono validatori (email, campi, nomi di file, PDF/DOCX/DOC, macro, zip corrotti), token, rate limiting, configurazione e opzioni del trasporto (TLS verificato, TLS 1.2 minimo, timeout), costruzione del messaggio, e l'intero percorso della richiesta: successo, senza allegato, rifiuti, Content-Length eccessivo, iniezione di intestazioni, antispam, rate limit, origine, guasto SMTP con verifica che **nessun dato personale compaia nei log**; più un server SMTP finto locale per l'autenticazione rifiutata, il server non raggiungibile e l'integrità dell'allegato, e **7 controlli statici di sicurezza** (nessun segreto o `.env` tracciato, nessuna scrittura su disco, log solo con codici tecnici, interruttore predefinito = FormSubmit).
+- **47 test automatici** (`npm run test:contact`, `node:test`, nessuna libreria di test aggiuntiva) con **SMTP simulato**: nessuna email reale. Coprono validatori (email, campi, nomi di file, PDF/DOCX/DOC, macro, zip corrotti), token, rate limiting, configurazione e opzioni del trasporto (TLS verificato, TLS 1.2 minimo, timeout), costruzione del messaggio, e l'intero percorso della richiesta: successo, senza allegato, rifiuti, Content-Length eccessivo, iniezione di intestazioni, antispam, rate limit, origine, guasto SMTP con verifica che **nessun dato personale compaia nei log**; più un server SMTP finto locale per l'autenticazione rifiutata, il server non raggiungibile e l'integrità dell'allegato, e **7 controlli statici di sicurezza** (nessun segreto o `.env` tracciato, nessuna scrittura su disco, log solo con codici tecnici, interruttore predefinito = FormSubmit).
 - **Collaudo completo in locale** (build con `NEXT_PUBLIC_CONTACT_BACKEND=api`, browser integrato, server SMTP finto su loopback): modulo compilato con allegato PDF → pagina `/grazie`; messaggio ricevuto con mittente, destinatario, Reply-To, oggetto, testo con accenti e virgolette e allegato **identico** (300.034 byte); messaggi d'errore nel browser per file troppo grande ("Massimo 4,4 MB"), formato non valido e contenuto falso (rifiutato dal server, nulla inviato).
+- **Anteprima facoltativa (9 novembre 2026)**: 6 test sui testi (presenti, uguali nelle due modalità, nessun limite di pagine o parole, campo facoltativo, tutti i campi presenti, 4,4 MB con l'endpoint e 8 MB con FormSubmit); matrice e invio dal modulo (senza allegato e con anteprima DOCX) ripetuti dopo la modifica; confronto con la produzione in modalità FormSubmit: cambia solo il riquadro dell'allegato; controllo a 375 px senza scorrimento orizzontale.
 - **Matrice di collaudo automatica** (`npm run collaudo:contact -- local`): 19 casi contro un build locale e un SMTP finto, 8 email con allegati identici (SHA-256) e prova del limite di richieste; dettagli in [COLLAUDO.md](COLLAUDO.md).
 - **Su Vercel (Preview)**: regione fra1; TLS con verifica attiva verso Register.it; saluto SMTP in 43 ms; soglia del corpo misurata.
 - **Non eseguito**: invio reale a Register.it (nessuna credenziale), recapito su Gmail, DKIM/DMARC, comportamento dell'inoltro, regola WAF, prova con file vicino al limite in produzione.
@@ -157,6 +186,21 @@ Da pubblicare **solo al passaggio in produzione**, perché finché resta FormSub
 *Cookie Policy:* eliminare i riferimenti a FormSubmit; nessun nuovo cookie (il token antispam è nel contenuto della pagina, non in un cookie).
 
 **Da non nascondere:** finché i manoscritti arrivano su un Gmail personale (nessun accordo sul trattamento dati con Google, Termini "uso personale") la Privacy Policy deve dirlo e restano valide le criticità descritte nel report di audit (PR #5, `docs/legal/VERIFICHE_E_DOMANDE_2026-11-09.md`, sezione 7).
+
+### Aggiornamento per l'anteprima facoltativa (proposta, NON pubblicata)
+
+Il modulo non riceve il manoscritto completo ma, al più, un'anteprima. Testo proposto per la Privacy Policy (sezione 3, "Estratti, manoscritti e allegati", da sostituire a quello attuale al passaggio in produzione; nessuna modifica è stata fatta alla PR #5):
+
+> **Anteprima del manoscritto (facoltativa).** Nel modulo puoi allegare, se lo desideri, un’anteprima del tuo testo (indicativamente le prime 5–10 cartelle editoriali) in formato PDF, DOC o DOCX. L’allegato è facoltativo e non è necessario inviare il manoscritto completo. L’anteprima viene utilizzata per valutare la tua richiesta di servizio editoriale e per risponderti. Il testo resta di tua proprietà: non viene pubblicato né utilizzato per finalità estranee alla tua richiesta. Se, dopo il primo contatto, fosse utile leggere il manoscritto completo, ti verrà chiesto separatamente con un’altra comunicazione via email.
+
+Coerenze da riportare altrove, **al passaggio in produzione** (non modificate ora):
+- *Finalità e basi giuridiche*: invariata (richiesta e misure precontrattuali su richiesta dell'interessato).
+- *Termini di servizio (bozza nella PR #5), sezione 4*: oggi parla di "estratti e manoscritti" e di "file fino a 8 MB". Con il nuovo flusso va riscritta come "anteprima facoltativa" con il limite della modalità attiva (4,4 MB con l'endpoint) e il rimando al manoscritto completo da concordare separatamente.
+- *Conservazione*: **non è definita e non è stata inventata**: resta il segnaposto "[DA CONFERMARE]" già previsto (per quanto tempo si conservano richieste e anteprime quando non nasce un incarico).
+- *Rimandi*: il testo "Il testo resta di tua proprietà" corrisponde alla clausola già proposta nei Termini ("Inviando un testo non cedi alcun diritto sul tuo manoscritto"): la titolare deve confermare che la condivide.
+- *Invio del manoscritto completo*: se verrà chiesto per email o con un collegamento privato, va prevista una nota specifica (chi lo legge, dove viene conservato, per quanto tempo), **da definire** insieme alla scelta dello strumento: non è parte di questo modulo.
+
+**Incoerenza di contenuto non toccata (fuori dal modulo):** nella home compaiono "Estratto 5–10 pagine (gratuito)" e "Invia 5–10 pagine", mentre il modulo ora parla di "cartelle editoriali" (1 cartella ≈ 1.800 battute): conviene allineare l'unità di misura quando si rivedono i testi della home.
 
 ## 10. Rischi residui
 

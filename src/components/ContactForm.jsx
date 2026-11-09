@@ -333,13 +333,24 @@ export default function ContactForm() {
       />
 
       <div className="mt-2 rounded-2xl border border-gold/20 bg-night/25 p-4">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <div className="text-sm font-medium text-ivory/85">
-              Estratto (PDF, DOC, DOCX)
-            </div>
+        <div id="anteprima-titolo" className="text-sm font-medium text-ivory/85">
+          Anteprima del manoscritto (facoltativa)
+        </div>
 
-            <div className="mt-1 text-xs text-ivory/60">
+        <p id="anteprima-aiuto" className="mt-1 text-xs leading-relaxed text-ivory/60">
+          Allega, se desideri, le prime 5–10 cartelle editoriali del tuo testo in
+          formato PDF, DOC o DOCX. Non è necessario inviare il manoscritto
+          completo: potremo concordarne l’invio successivamente via email.
+        </p>
+
+        <p className="mt-1 text-xs leading-relaxed text-ivory/60">
+          Una cartella editoriale corrisponde indicativamente a 1.800 battute,
+          spazi inclusi.
+        </p>
+
+        <div className="mt-3 flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <div className="text-xs text-ivory/60">
               Max <span className="text-gold/80">{MAX_FILE_SIZE_MB} MB</span>.
             </div>
 
@@ -358,9 +369,10 @@ export default function ContactForm() {
             <button
               type="button"
               onClick={onPickFile}
+              aria-describedby="anteprima-aiuto"
               className="rounded-2xl border border-gold/30 bg-midnight/40 px-4 py-2 text-sm text-ivory/90 transition hover:border-gold/50"
             >
-              Carica estratto
+              Allega anteprima
             </button>
 
             {fileName ? (

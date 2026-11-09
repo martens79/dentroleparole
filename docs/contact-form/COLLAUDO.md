@@ -6,7 +6,7 @@
 
 | Cosa | Esito |
 |---|---|
-| `npm run test:contact`: 41 test con SMTP simulato (validatori, token, rate limiting, configurazione, trasporto, intero percorso della richiesta, **controlli statici di sicurezza**) | 41/41 |
+| `npm run test:contact`: 47 test con SMTP simulato (validatori, token, rate limiting, configurazione, trasporto, intero percorso della richiesta, **controlli statici di sicurezza**) | 47/47 |
 | Controlli statici: nessun `.env`/chiave tracciati; nessun segreto letterale nel codice; `.env.example` con valori vuoti; il codice dell'endpoint non scrive su disco né su archivi; i log sono solo `{ event, code }`; interruttore predefinito = FormSubmit e nessun file lo imposta su `api` | superati (provati anche con 4 violazioni inserite apposta: tutte intercettate) |
 | `npm run collaudo:contact -- local …`: **19 casi** contro un build locale con server SMTP finto su loopback; **8 email** ricevute dal server finto, ciascuna con allegato identico (SHA-256), compreso il file alla soglia di 4.461.210 byte, oggetto invariato, avviso per il PDF con contenuti attivi, nessuna intestazione `Bcc` creata dall'iniezione | tutto come atteso |
 | `npm run collaudo:contact -- ratelimit …`: con i limiti predefiniti la richiesta n. 4 dallo stesso IP riceve 429 (le prime 3 passano); nessuna email (richieste "trappola") | OK |
@@ -28,7 +28,7 @@ Le Preview di Vercel sono protette da login (Vercel Authentication): un programm
 
 1. Genera gli allegati: `npm run collaudo:contact -- generate --out collaudo-files` (file con testo inventato e impronta SHA-256 stampata).
 2. Apri la Preview del ramo `feat/contact-endpoint-smtp-2026` (con `NEXT_PUBLIC_CONTACT_BACKEND=api` impostata **solo in Preview**).
-3. Esegui i casi della tabella §2.3 compilando il modulo e caricando i file indicati. Annota esito e messaggio mostrato.
+3. Esegui i casi della tabella §2.3 compilando il modulo e caricando i file indicati nel riquadro **"Anteprima del manoscritto (facoltativa)"** (pulsante "Allega anteprima"). Annota esito e messaggio mostrato.
 4. Controlla la casella di prova per i casi che devono inviare.
 
 ### 2.3 Casi
