@@ -4,9 +4,8 @@ import { createDefaultDeps, handleGet, handlePost } from "@/lib/contact/handler"
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
-// Elaborazione in UE (Francoforte). Configurazione nel codice della funzione:
-// le impostazioni globali del progetto Vercel non vengono modificate.
-export const preferredRegion = "fra1";
+// La regione (fra1) è impostata per questa sola funzione in vercel.json ("functions"):
+// preferredRegion è deprecato e non ha effetto sul runtime Node.js.
 
 // Istanza condivisa per i limiti in memoria.
 const deps = createDefaultDeps();

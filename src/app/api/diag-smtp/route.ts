@@ -6,8 +6,7 @@ import tls from "node:tls";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-export const maxDuration = 30;
-export const preferredRegion = "fra1";
+export const maxDuration = 90;
 
 const HOST = "authsmtp.securemail.pro";
 
@@ -22,7 +21,7 @@ function describe(c: tls.PeerCertificate) {
   };
 }
 
-function readUntil(sock: net.Socket, re: RegExp, ms = 8000): Promise<string> {
+function readUntil(sock: net.Socket, re: RegExp, ms = 25000): Promise<string> {
   return new Promise((resolve, reject) => {
     let buf = "";
     const t = setTimeout(() => {
@@ -41,14 +40,17 @@ function readUntil(sock: net.Socket, re: RegExp, ms = 8000): Promise<string> {
   });
 }
 
-async function tlsProbe(port: number, starttls: boolean, strict: boolean) {
+async function tlsProbe(port: number, starttls: boolean, strict: boolean, out: Record<string, unknown>) {
+  const t0 = Date.now();
+  Object.assign(out, { port, mode: starttls ? "STARTTLS" : "TLS implicito", strict });
   const raw = net.connect({ host: HOST, port });
   await new Promise<void>((res, rej) => {
     raw.once("connect", () => res());
     raw.once("error", rej);
   });
+  out.tcpConnectMs = Date.now() - t0;
+  out.remoteAddress = raw.remoteAddress;
   let socket: net.Socket | tls.TLSSocket = raw;
-  const out: Record<string, unknown> = { port, mode: starttls ? "STARTTLS" : "TLS implicito", strict };
   if (starttls) {
     await readUntil(raw, /^220 .*\n/m);
     raw.write("EHLO probe.invalid\r\n");
@@ -66,6 +68,7 @@ async function tlsProbe(port: number, starttls: boolean, strict: boolean) {
     t.once("secureConnect", () => res());
     t.once("error", rej);
   });
+  out.tlsMs = Date.now() - t0;
   out.authorized = t.authorized;
   out.authorizationError = t.authorizationError || null;
   out.protocol = t.getProtocol();
@@ -90,11 +93,13 @@ async function tlsProbe(port: number, starttls: boolean, strict: boolean) {
   return out;
 }
 
-async function safe(fn: () => Promise<unknown>) {
+async function safe(fn: (out: Record<string, unknown>) => Promise<unknown>) {
+  const out: Record<string, unknown> = {};
   try {
-    return await fn();
+    await fn(out);
+    return out;
   } catch (e) {
-    return { error: String((e as Error).message ?? e).slice(0, 200), code: (e as { code?: string }).code };
+    return { ...out, error: String((e as Error).message ?? e).slice(0, 200), code: (e as { code?: string }).code };
   }
 }
 
@@ -106,9 +111,9 @@ export async function GET() {
     vercelEnv: process.env.VERCEL_ENV,
     vercelRegion: process.env.VERCEL_REGION ?? null,
     node: process.version,
-    strict465: await safe(() => tlsProbe(465, false, true)),
-    insecure465: await safe(() => tlsProbe(465, false, false)),
-    strict587: await safe(() => tlsProbe(587, true, true)),
+    strict465: await safe((o) => tlsProbe(465, false, true, o)),
+    insecure465: await safe((o) => tlsProbe(465, false, false, o)),
+    strict587: await safe((o) => tlsProbe(587, true, true, o)),
   };
   return new Response(JSON.stringify(result, null, 1), {
     headers: { "content-type": "application/json", "cache-control": "no-store" },
