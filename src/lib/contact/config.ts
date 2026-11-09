@@ -9,6 +9,8 @@ import { CONTACT_FALLBACK_EMAIL } from "./limits";
  *   CONTACT_FORM_SECRET chiave per firmare i token del modulo (obbligatorio, Secret, 32+ caratteri)
  *   SMTP_HOST           predefinito: authsmtp.securemail.pro (parametri ufficiali Register.it)
  *   SMTP_PORT           predefinito: 465 (SSL/TLS implicito)
+ *   SMTP_SECURE         facoltativo ("true"/"false"): predefinito true solo sulla porta 465; serve per le
+ *                       prove con un server SMTP locale. La verifica del certificato resta sempre attiva.
  *   CONTACT_TO          destinatario, predefinito contatti@dentroleparole.com
  *   CONTACT_FROM        mittente, predefinito = SMTP_USER (deve essere la casella autenticata)
  */
@@ -51,7 +53,7 @@ export function loadConfig(env: Env): ConfigResult {
     config: {
       host,
       port,
-      secure: port === 465,
+      secure: env.SMTP_SECURE ? env.SMTP_SECURE.trim().toLowerCase() === "true" : port === 465,
       user,
       pass,
       to: env.CONTACT_TO?.trim() || CONTACT_FALLBACK_EMAIL,

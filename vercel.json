@@ -12,11 +12,6 @@
       "regions": [
         "fra1"
       ]
-    },
-    "src/app/api/diag-smtp/route.ts": {
-      "regions": [
-        "fra1"
-      ]
     }
   }
 }

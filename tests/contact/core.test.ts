@@ -24,6 +24,11 @@ test("configurazione: valori obbligatori mancanti e predefiniti ufficiali Regist
     assert.equal(ok.config.from, "form@example.test");
   }
   assert.equal(loadConfig({ ...TEST_ENV, SMTP_PORT: "99999" }).ok, false);
+
+  const forced = loadConfig({ ...TEST_ENV, SMTP_PORT: "4465", SMTP_SECURE: "true" });
+  assert.ok(forced.ok && forced.config.secure === true);
+  const implicit587 = loadConfig({ ...TEST_ENV, SMTP_PORT: "587" });
+  assert.ok(implicit587.ok && implicit587.config.secure === false);
 });
 
 test("trasporto SMTP: TLS sempre verificato, TLS 1.2 minimo, timeout, niente accesso a file/URL", () => {

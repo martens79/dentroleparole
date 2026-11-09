@@ -3,17 +3,24 @@
  * Nessun import da Node: questo file è usato anche dal browser (ContactForm).
  *
  * DIMENSIONE DEGLI ALLEGATI
- * Il vincolo che comanda è il corpo massimo di una richiesta a una Vercel Function
- * (documentato come 4,5 MB). Il valore effettivo in produzione va MISURATO su un
- * deployment Vercel (vedi docs/contact-form/README.md): non è un numero scelto a caso
- * e non va aumentato senza una nuova misura.
+ * Il vincolo che comanda è il corpo massimo di una richiesta a una Vercel Function.
+ * La documentazione indica 4,5 MB; il valore effettivo è stato MISURATO il 9 novembre 2026
+ * su un deployment di Preview del progetto (funzione in regione fra1, piano Pro):
+ *   - corpo di 4.493.210 byte: accettato (la richiesta raggiunge la funzione);
+ *   - corpo di 4.493.211 byte: rifiutato dalla piattaforma (413 FUNCTION_PAYLOAD_TOO_LARGE).
+ * Il numero non va aumentato senza una nuova misura (vedi docs/contact-form/README.md).
  */
 
-/** Soglia di rifiuto della piattaforma, misurata sul deployment (byte del corpo della richiesta). */
-export const PLATFORM_BODY_LIMIT_BYTES = 4_500_000;
+/** Soglia di rifiuto della piattaforma, MISURATA: byte massimi del corpo della richiesta. */
+export const PLATFORM_BODY_LIMIT_BYTES = 4_493_210;
 
-/** Margine per l'intestazione multipart e i campi di testo (messaggio incluso). */
-export const MULTIPART_OVERHEAD_BYTES = 100_000;
+/**
+ * Margine per l'intestazione multipart e i campi di testo.
+ * Misurato: 380 byte per un modulo minimo. Caso peggiore del modulo completo: messaggio di
+ * 5.000 caratteri a 4 byte ciascuno (20.000) + altri campi e token (~3.000) + intestazioni
+ * delle parti (~1.500) = circa 24.500 byte; si arrotonda per eccesso.
+ */
+export const MULTIPART_OVERHEAD_BYTES = 32_000;
 
 /** Corpo massimo accettato dall'endpoint. */
 export const MAX_REQUEST_BYTES = PLATFORM_BODY_LIMIT_BYTES;
