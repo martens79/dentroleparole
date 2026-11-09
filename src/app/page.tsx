@@ -91,7 +91,7 @@ const manuscriptAssessmentService: {
   title: "Valutazione manoscritto",
   icon: PenTool,
   desc:
-    "Valutazione editoriale dell’estratto (5–10 pagine) con indicazioni sui punti di forza, eventuali criticità e suggerimenti di sviluppo. Il riscontro sull’estratto è gratuito e consente di capire se procedere con una valutazione completa o con un intervento di editing.",
+    "Valutazione editoriale dell’anteprima facoltativa (5–10 cartelle editoriali, circa 1.800 battute ciascuna, spazi inclusi) con indicazioni sui punti di forza, eventuali criticità e suggerimenti di sviluppo. Il riscontro sull’anteprima è gratuito e consente di capire se procedere con una valutazione completa o con un intervento di editing. Non è necessario inviare il manoscritto completo.",
   badge: "VALUTAZIONE",
 };
 
@@ -107,7 +107,7 @@ const method = [
   {
     n: "1",
     title: "Valutazione",
-    desc: "Estratto + obiettivi + preventivo dettagliato.",
+    desc: "Anteprima + obiettivi + preventivo dettagliato.",
   },
   {
     n: "2",
@@ -124,11 +124,11 @@ const method = [
 const faq = [
   {
     q: "Quanto costa un intervento editoriale?",
-    a: "Il costo dipende dalla lunghezza del manoscritto e dal tipo di intervento richiesto (editing, correzione di bozze o consulenza). Dopo aver letto l’estratto invio sempre un preventivo chiaro e personalizzato.",
+    a: "Il costo dipende dalla lunghezza del manoscritto e dal tipo di intervento richiesto (editing, correzione di bozze o consulenza). Dopo aver letto l’anteprima invio sempre un preventivo chiaro e personalizzato.",
   },
   {
     q: "Cosa serve per iniziare?",
-    a: "Per una prima valutazione mi servono: titolo e genere del manoscritto, numero indicativo di parole o cartelle, un estratto di 5–10 pagine e l’obiettivo del progetto.",
+    a: "Per una prima valutazione mi servono: titolo e genere del manoscritto, numero indicativo di parole o cartelle e l’obiettivo del progetto. Se vuoi, puoi aggiungere un’anteprima facoltativa: 5–10 cartelle editoriali (circa 1.800 battute ciascuna, spazi inclusi). Non è necessario inviare il manoscritto completo: potrò chiedertelo successivamente via email.",
   },
   {
     q: "L’editing cambierà la mia voce?",
@@ -144,7 +144,7 @@ const faq = [
   },
   {
     q: "Posso inviarti il manoscritto completo?",
-    a: "Per iniziare preferisco leggere un estratto. Questo mi permette di capire il tipo di intervento necessario e di formulare un preventivo preciso. In seguito potremo lavorare sull’intero manoscritto.",
+    a: "Per iniziare non è necessario inviare il manoscritto completo: preferisco leggere un’anteprima facoltativa di 5–10 cartelle editoriali (circa 1.800 battute ciascuna, spazi inclusi). Questo mi permette di capire il tipo di intervento necessario e di formulare un preventivo preciso. Il manoscritto completo potrò chiedertelo successivamente via email, e in seguito potremo lavorare sull’intero testo.",
   },
   {
     q: "Il mio manoscritto rimane riservato?",
@@ -156,7 +156,7 @@ const faq = [
   },
   {
     q: "Posso ricevere una prima valutazione prima di decidere?",
-    a: "Sì. Puoi inviarmi un estratto di 5–10 pagine del tuo manoscritto. Questa prima lettura mi permette di capire il tipo di intervento necessario e di inviarti un preventivo chiaro e personalizzato, senza alcun impegno.",
+    a: "Sì. Puoi inviarmi un’anteprima facoltativa del tuo manoscritto: 5–10 cartelle editoriali (circa 1.800 battute ciascuna, spazi inclusi), senza bisogno del testo completo. Questa prima lettura mi permette di capire il tipo di intervento necessario e di inviarti un preventivo chiaro e personalizzato, senza alcun impegno.",
   },
 ];
 
@@ -265,8 +265,7 @@ export default function Home() {
                 <span className="text-gold">✓</span> Risposta entro 3-5 giorni
               </div>
               <div className="flex items-center gap-2 rounded-2xl border border-gold/15 bg-midnight/35 px-4 py-2">
-                <span className="text-gold">✓</span> Estratto 5–10 pagine
-                (gratuito)
+                <span className="text-gold">✓</span> Anteprima facoltativa: 5–10 cartelle editoriali (circa 1.800 battute ciascuna, spazi inclusi), riscontro gratuito
               </div>
               <div className="flex items-center gap-2 rounded-2xl border border-gold/15 bg-midnight/35 px-4 py-2">
                 <span className="text-gold">✓</span> Riservatezza garantita
@@ -329,11 +328,10 @@ export default function Home() {
                 Da dove si parte
               </div>
               <div className="mt-2 text-lg font-semibold text-gold">
-                Valutazione estratto
+                Valutazione dell’anteprima
               </div>
               <p className="mt-2 text-ivory/88">
-                Invia 5–10 pagine: ricevi un riscontro su punti di forza,
-                criticità e direzione di lavoro.
+                Anteprima facoltativa: 5–10 cartelle editoriali (circa 1.800 battute ciascuna, spazi inclusi). Non serve il manoscritto completo: ricevi un riscontro su punti di forza, criticità e direzione di lavoro.
               </p>
 
               <div className="mt-4">
@@ -384,7 +382,7 @@ export default function Home() {
   <div className="mt-6 grid gap-4 md:grid-cols-2">
     <Card
       title={manuscriptAssessmentService.title}
-      desc="Riscontro editoriale sull’estratto con punti di forza, criticità e direzione di lavoro."
+      desc="Riscontro editoriale sull’anteprima con punti di forza, criticità e direzione di lavoro."
       icon={manuscriptAssessmentService.icon}
       badge="VALUTAZIONE"
       full
@@ -431,7 +429,7 @@ export default function Home() {
 <Section
   id="metodo"
   title="Metodo di lavoro"
-  subtitle="Un percorso semplice e trasparente, dall’estratto alla consegna."
+  subtitle="Un percorso semplice e trasparente, dall’anteprima alla consegna."
   titleClassName="px-6 py-3 text-3xl md:text-[2.6rem]"
 >
   <div className="grid gap-4 md:grid-cols-3">
@@ -477,7 +475,7 @@ export default function Home() {
         <Section
           id="contatti"
           title="Richiedi un preventivo"
-          subtitle="Invia titolo, genere, numero parole e un estratto (5–10 pagine)."
+          subtitle="Invia titolo, genere, numero parole e, se vuoi, un’anteprima facoltativa (5–10 cartelle editoriali)."
         >
           <div className="flex justify-center">
             <div className="w-full max-w-2xl">

@@ -193,7 +193,7 @@ export default async function BlogPostPage({
           <div className="text-gold font-semibold text-lg">Vuoi un parere sul tuo testo?</div>
           <p className="mt-2 text-ivory/85">
             Se hai un romanzo o un racconto in lavorazione, puoi richiedere una valutazione
-            dell’estratto (5–10 pagine) per capire direzione e priorità di intervento.
+            dell’anteprima facoltativa (5–10 cartelle editoriali) per capire direzione e priorità di intervento.
           </p>
 
           <div className="mt-5 flex flex-wrap gap-3">

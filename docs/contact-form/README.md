@@ -2,7 +2,7 @@
 
 > **Stato: bozza in PR Draft. Non in produzione.** Il modulo continua a usare FormSubmit finché l'interruttore `NEXT_PUBLIC_CONTACT_BACKEND` non viene portato a `api`. Nessuna credenziale reale è stata inserita, nessuna email reale è stata inviata, nessuna impostazione globale di Vercel è stata modificata.
 
-**Documenti collegati:** [GUIDA_CONFIGURAZIONE.md](GUIDA_CONFIGURAZIONE.md) (casella Register.it e variabili Vercel, passo per passo), [RICHIESTA_ASSISTENZA_REGISTER.md](RICHIESTA_ASSISTENZA_REGISTER.md) (bozza di messaggio, non inviata), [COLLAUDO.md](COLLAUDO.md) (piano di collaudo e registro).
+**Documenti collegati:** [MODIFICHE_SUGGERITE_PR5.md](MODIFICHE_SUGGERITE_PR5.md) (modifiche suggerite ai testi legali, non applicate), [GUIDA_CONFIGURAZIONE.md](GUIDA_CONFIGURAZIONE.md) (casella Register.it e variabili Vercel, passo per passo), [RICHIESTA_ASSISTENZA_REGISTER.md](RICHIESTA_ASSISTENZA_REGISTER.md) (bozza di messaggio, non inviata), [COLLAUDO.md](COLLAUDO.md) (piano di collaudo e registro).
 
 ## 1. Flusso
 
@@ -163,8 +163,9 @@ Nessuna è stata eseguita.
 
 ## 8. Test eseguiti
 
-- **47 test automatici** (`npm run test:contact`, `node:test`, nessuna libreria di test aggiuntiva) con **SMTP simulato**: nessuna email reale. Coprono validatori (email, campi, nomi di file, PDF/DOCX/DOC, macro, zip corrotti), token, rate limiting, configurazione e opzioni del trasporto (TLS verificato, TLS 1.2 minimo, timeout), costruzione del messaggio, e l'intero percorso della richiesta: successo, senza allegato, rifiuti, Content-Length eccessivo, iniezione di intestazioni, antispam, rate limit, origine, guasto SMTP con verifica che **nessun dato personale compaia nei log**; più un server SMTP finto locale per l'autenticazione rifiutata, il server non raggiungibile e l'integrità dell'allegato, e **7 controlli statici di sicurezza** (nessun segreto o `.env` tracciato, nessuna scrittura su disco, log solo con codici tecnici, interruttore predefinito = FormSubmit).
+- **55 test automatici** (`npm run test:contact`, `node:test`, nessuna libreria di test aggiuntiva) con **SMTP simulato**: nessuna email reale. Coprono validatori (email, campi, nomi di file, PDF/DOCX/DOC, macro, zip corrotti), token, rate limiting, configurazione e opzioni del trasporto (TLS verificato, TLS 1.2 minimo, timeout), costruzione del messaggio, e l'intero percorso della richiesta: successo, senza allegato, rifiuti, Content-Length eccessivo, iniezione di intestazioni, antispam, rate limit, origine, guasto SMTP con verifica che **nessun dato personale compaia nei log**; più un server SMTP finto locale per l'autenticazione rifiutata, il server non raggiungibile e l'integrità dell'allegato, e **7 controlli statici di sicurezza** (nessun segreto o `.env` tracciato, nessuna scrittura su disco, log solo con codici tecnici, interruttore predefinito = FormSubmit).
 - **Collaudo completo in locale** (build con `NEXT_PUBLIC_CONTACT_BACKEND=api`, browser integrato, server SMTP finto su loopback): modulo compilato con allegato PDF → pagina `/grazie`; messaggio ricevuto con mittente, destinatario, Reply-To, oggetto, testo con accenti e virgolette e allegato **identico** (300.034 byte); messaggi d'errore nel browser per file troppo grande ("Massimo 4,4 MB"), formato non valido e contenuto falso (rifiutato dal server, nulla inviato).
+- **Rifiniture (9 novembre 2026)**: 8 test su testi uniformati e pulsante (formula unica in tutto il sito, nessun "5–10 pagine" residuo, contrasto AAA, stati hover/focus/disabilitato, tema globale non modificato); verifica visiva desktop (1280 px) e mobile (375 px), confronto prima/dopo del pulsante con CSS calcolato; matrice con SMTP simulato e invio dal modulo senza allegato ripetuti.
 - **Anteprima facoltativa (9 novembre 2026)**: 6 test sui testi (presenti, uguali nelle due modalità, nessun limite di pagine o parole, campo facoltativo, tutti i campi presenti, 4,4 MB con l'endpoint e 8 MB con FormSubmit); matrice e invio dal modulo (senza allegato e con anteprima DOCX) ripetuti dopo la modifica; confronto con la produzione in modalità FormSubmit: cambia solo il riquadro dell'allegato; controllo a 375 px senza scorrimento orizzontale.
 - **Matrice di collaudo automatica** (`npm run collaudo:contact -- local`): 19 casi contro un build locale e un SMTP finto, 8 email con allegati identici (SHA-256) e prova del limite di richieste; dettagli in [COLLAUDO.md](COLLAUDO.md).
 - **Su Vercel (Preview)**: regione fra1; TLS con verifica attiva verso Register.it; saluto SMTP in 43 ms; soglia del corpo misurata.
@@ -172,6 +173,8 @@ Nessuna è stata eseguita.
 - Nota sull'ambiente di prova: sul PC usato un antivirus intercetta il TLS (anche locale), perciò la consegna TLS verso un server locale non è stata provata lì; la verifica TLS reale è stata fatta dall'infrastruttura Vercel.
 
 ## 9. Proposta di informativa aggiornata (NON pubblicata)
+
+> **Testi precisi, riga per riga e in due varianti** (oggi con FormSubmit / dopo l'attivazione dell'endpoint) in [MODIFICHE_SUGGERITE_PR5.md](MODIFICHE_SUGGERITE_PR5.md). Questa sezione ne è la sintesi.
 
 Da pubblicare **solo al passaggio in produzione**, perché finché resta FormSubmit il testo attuale è quello corretto. Da rivedere con un professionista.
 
@@ -216,6 +219,25 @@ Coerenze da riportare altrove, **al passaggio in produzione** (non modificate or
 | Rate limiting nel codice valido per singola istanza | Media | regola WAF necessaria |
 | Credenziali SMTP esposte | Alta | Secret, casella dedicata, nessun log, rotazione |
 
-## 11. Osservazioni non legate a questa modifica
-- Il pulsante "Invia richiesta" ha sfondo trasparente anche **oggi in produzione** (`bg-gold` non produce un colore di sfondo): è così nel modulo attuale e non è stato toccato.
+## 11. Pulsante "Invia richiesta": causa, correzione e problema più ampio
+
+**Sintomo:** il pulsante appariva senza sfondo (solo testo) nonostante la classe `bg-gold`.
+
+**Causa esatta:** il progetto usa **Tailwind CSS v4** (`@import "tailwindcss"` in `src/app/globals.css`), che **non legge `tailwind.config.ts`** se non lo si dichiara con `@config` (o con `@theme` nel CSS). Nel repository il file `tailwind.config.ts` definisce i colori `night`, `midnight`, `nebula`, `gold`, `ivory` e l'ombra `glow`, ma `globals.css` non lo carica: quindi **nessuna utility basata su quei nomi viene generata**. Questo vale fin dal primo commit (8 marzo 2026), non è una regressione.
+
+**Prova (CSS realmente generato):** in produzione (`/_next/static/chunks/8b150417da94d127.css`, 56.425 byte) le regole `.bg-gold`, `.text-gold`, `.text-night`, `.text-ivory`, `.bg-midnight`, `.bg-night`, `.border-gold`, `.shadow-glow` sono **0**. Colore calcolato del pulsante in produzione: sfondo `rgba(0, 0, 0, 0)`, testo `rgb(233, 230, 223)` (ereditato dal `body`), nessuna ombra.
+
+**Correzione (solo il pulsante, nessuna modifica al tema globale):** in `ContactForm.jsx` le classi usano valori espliciti, gli stessi del tema previsto: sfondo `#D6B36A` (oro), testo `#070A12` (notte), ombra `0 0 40px rgba(214,179,106,0.15)`, hover `#E2C58A`, anello di focus da tastiera `#E2C58A` con distacco `#070A12`, stato disabilitato con opacità 60% e cursore non consentito. Le stesse classi valgono per FormSubmit e per l'endpoint.
+
+| Stato | Prima (produzione) | Dopo |
+|---|---|---|
+| Normale | sfondo trasparente, testo ivory | sfondo `rgb(214,179,106)`, testo `rgb(7,10,18)`, contrasto **9,91:1** (AAA) |
+| Hover | nessun effetto visibile | sfondo `rgb(226,197,138)`, contrasto **11,9:1** |
+| Focus da tastiera | nessun indicatore | anello oro con distacco scuro (verificato con il tasto Tab, `:focus-visible`) |
+| Disabilitato | invariato | opacità 0,6, cursore `not-allowed` |
+| Mobile 375 px / desktop 1280 px | — | dentro la larghezza, nessuno scorrimento orizzontale |
+
+**Problema più ampio, NON corretto (decisione necessaria):** lo stesso difetto riguarda **tutto il sito**: ogni classe `bg-gold`, `text-gold`, `border-gold/…`, `text-ivory/…`, `bg-night/…`, `bg-midnight/…`, `shadow-glow` è inerte (per esempio il pulsante principale della home "Richiedi una valutazione" ha oggi sfondo trasparente). Anche il banner dei cookie e il pulsante "Preferenze cookie" (PR #6) usano alcuni di questi nomi e oggi appaiono con aspetto neutro. Una correzione globale è una riga in `globals.css` (`@config "../../tailwind.config.ts";`), ma **cambierebbe l'aspetto di quasi tutte le pagine** (bordi e testi dorati, sfondi scuri dei campi, ecc.) rispetto a quello che i visitatori vedono oggi: va decisa e collaudata a parte, non in questa PR.
+
+## 12. Nota sulle altre osservazioni
 - Nella cronologia del branch compaiono commit di una diagnostica temporanea di sola lettura (`/api/diag-smtp`, solo Preview, senza credenziali) usata per misurare TLS, regione e limiti: **è stata rimossa** e non è nel codice finale.

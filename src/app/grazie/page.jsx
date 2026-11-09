@@ -32,8 +32,7 @@ export default function GraziePage() {
             </p>
 
             <p>
-              Se hai inviato un estratto del manoscritto, verrà valutato con
-              cura insieme alle informazioni che hai inserito nel modulo.
+              Se hai allegato un’anteprima del manoscritto, verrà valutata con cura insieme alle informazioni che hai inserito nel modulo.
             </p>
 
             <p className="italic text-[#CDBA97]">Grazie per la fiducia.</p>

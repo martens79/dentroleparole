@@ -187,7 +187,7 @@ export default function ChiSonoPage() {
               {
                 n: "1",
                 title: "Valutazione iniziale",
-                desc: "Mi invii un estratto del manoscritto e l’obiettivo del tuo progetto. Analizzo il testo per individuare punti di forza e aree di miglioramento.",
+                desc: "Mi invii l’obiettivo del tuo progetto e, se vuoi, un’anteprima facoltativa del manoscritto (5–10 cartelle editoriali). Analizzo il testo per individuare punti di forza e aree di miglioramento.",
               },
               {
                 n: "2",
@@ -296,7 +296,7 @@ export default function ChiSonoPage() {
           </h2>
 
           <p className="mt-4 max-w-3xl leading-relaxed text-ivory/85">
-            Inviami un estratto e dimmi qual è il tuo obiettivo. Ti rispondo
+            Inviami, se vuoi, un’anteprima facoltativa (5–10 cartelle editoriali) e dimmi qual è il tuo obiettivo. Ti rispondo
             entro 24–48 ore con indicazioni chiare.
           </p>
 

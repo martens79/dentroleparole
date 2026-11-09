@@ -6,7 +6,7 @@
 
 | Cosa | Esito |
 |---|---|
-| `npm run test:contact`: 47 test con SMTP simulato (validatori, token, rate limiting, configurazione, trasporto, intero percorso della richiesta, **controlli statici di sicurezza**) | 47/47 |
+| `npm run test:contact`: 55 test con SMTP simulato (validatori, token, rate limiting, configurazione, trasporto, intero percorso della richiesta, **controlli statici di sicurezza**) | 55/55 |
 | Controlli statici: nessun `.env`/chiave tracciati; nessun segreto letterale nel codice; `.env.example` con valori vuoti; il codice dell'endpoint non scrive su disco né su archivi; i log sono solo `{ event, code }`; interruttore predefinito = FormSubmit e nessun file lo imposta su `api` | superati (provati anche con 4 violazioni inserite apposta: tutte intercettate) |
 | `npm run collaudo:contact -- local …`: **19 casi** contro un build locale con server SMTP finto su loopback; **8 email** ricevute dal server finto, ciascuna con allegato identico (SHA-256), compreso il file alla soglia di 4.461.210 byte, oggetto invariato, avviso per il PDF con contenuti attivi, nessuna intestazione `Bcc` creata dall'iniezione | tutto come atteso |
 | `npm run collaudo:contact -- ratelimit …`: con i limiti predefiniti la richiesta n. 4 dallo stesso IP riceve 429 (le prime 3 passano); nessuna email (richieste "trappola") | OK |

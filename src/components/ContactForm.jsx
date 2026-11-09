@@ -399,12 +399,17 @@ export default function ContactForm() {
         />
       </div>
 
+      {/*
+        Pulsante principale. I colori sono scritti come valori espliciti (#D6B36A oro, #E2C58A oro
+        chiaro, #070A12 notte) perché le utility `bg-gold`, `text-night`, `shadow-glow` NON vengono
+        generate: il progetto usa Tailwind v4, che non legge tailwind.config.ts senza `@config` in
+        globals.css. La correzione è limitata a questo pulsante, senza modificare il tema globale.
+        Contrasto testo/sfondo: circa 9,9:1 (normale) e 11,9:1 (hover).
+      */}
       <button
         type="submit"
         disabled={sending}
-        className={`mt-2 rounded-2xl bg-gold px-5 py-3 text-sm font-semibold text-night shadow-glow transition hover:opacity-95${
-          USE_API ? " disabled:cursor-not-allowed disabled:opacity-60" : ""
-        }`}
+        className="mt-2 rounded-2xl bg-[#D6B36A] px-5 py-3 text-sm font-semibold text-[#070A12] shadow-[0_0_40px_rgba(214,179,106,0.15)] transition hover:bg-[#E2C58A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E2C58A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070A12] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {sending ? "Invio in corso..." : "Invia richiesta"}
       </button>

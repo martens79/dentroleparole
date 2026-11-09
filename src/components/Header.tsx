@@ -380,7 +380,7 @@ export default function Header() {
                     <div className="font-semibold text-gold">Richiedi una valutazione</div>
 
                     <p className="mt-2 text-sm text-ivory/80">
-                      Invia un estratto (5–10 pagine). Risposta entro 24–48 ore.
+                      Anteprima facoltativa: 5–10 cartelle editoriali. Risposta entro 24–48 ore.
                     </p>
 
                     <motion.div whileHover={{ scale: 1.015 }} whileTap={{ scale: 0.99 }}>
