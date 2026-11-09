@@ -132,6 +132,8 @@ Non adatte: **Supabase** (piano gratuito 1 GB, regione UE ma progetti sospesi do
 
 ## 7.5 Raccomandazione
 
+> **Aggiornamento:** la titolare ha deciso di mantenere Gmail e di eliminare FormSubmit. Questa raccomandazione è superata dalla **sezione 8** (proposta implementativa).
+
 **Fase 1 — subito, senza costi né codice: opzione B.** Interrompere l'inoltro verso Gmail personale e leggere la posta dalla webmail di Register.it (o da un client IMAP). In più: chiedere a Register.it la nomina a responsabile del trattamento, verificare limite degli allegati e filtro antispam in ingresso, e decidere cosa fare delle email con manoscritti già presenti in Gmail (conservare, spostare, cancellare). È il passo che riduce di più il rischio al costo più basso.
 
 **Fase 2 — soluzione definitiva, gratuita: opzione D.** Sostituire FormSubmit con un endpoint del sito che inoltra la richiesta via SMTP alla casella Register.it, con un tetto di circa 4 MB per allegato (l'estratto da 5-10 pagine ci sta; per un manoscritto completo si propone un invio dedicato). Ha pochi anelli, tutti europei o con contratto, nessun costo e mantiene il caricamento. Condizioni da verificare prima: (a) Register.it consente l'invio SMTP da script; (b) piano Vercel e regione delle funzioni (`fra1`); (c) disponibilità della nomina da Register.it.
@@ -167,3 +169,184 @@ L'opzione C (Workspace) è la scelta se la titolare vuole continuare a lavorare 
 - Vercel: docs/functions/limitations (limite 4,5 MB), configuring-functions/region, vercel-blob, legal/dpa.
 - Cloudflare R2: developers.cloudflare.com/r2/pricing e /reference/data-location; Cloudflare DPA. Supabase: supabase.com/pricing, /regions, /legal/dpa.
 - DNS pubblico: MX, SPF e DMARC di dentroleparole.com (interrogazione DNS).
+
+
+---
+
+# 8. Proposta implementativa: modulo contatti senza FormSubmit (9 novembre 2026)
+
+> **Solo analisi e proposta.** Nessun codice, DNS, credenziale, inoltro o impostazione di produzione è stato modificato. La PR #5 resta Draft. Dove un dato non è stato verificato è scritto.
+
+## 8.0 Decisione ricevuta e conseguenze
+
+- **Gmail personale di Donatella resta** come oggi (inoltro esistente dalla casella Register, invariato). Resta quindi aperto il rischio descritto in 7.2 e 7.3 (nessun accordo sul trattamento dei dati con Google, Termini "uso personale"): non è risolto da questa architettura, va **dichiarato nell'informativa** (vedi 8.6) ed è una scelta consapevole del titolare del sito.
+- **FormSubmit viene eliminato**; il caricamento dei manoscritti resta nel modulo.
+- Le opzioni B (webmail Register) e D con tetto fisso di 4 MB della sezione 7 sono superate da questa sezione. **Correzione**: le pagine Register non riportano "20 invii gratuiti" ma 50 o 500 invii al giorno a seconda della pagina (vedi 8.1).
+
+Architettura scelta:
+
+```
+Modulo esistente (stessa grafica)
+   │  POST multipart (fetch) → https://www.dentroleparole.com/api/contatti
+   ▼
+Route Handler Next.js (runtime Node.js, regione fra1) su Vercel
+   │  validazione + antispam; file solo in memoria, mai scritto su disco
+   │  SMTP con TLS implicito: authsmtp.securemail.pro:465
+   ▼
+Casella Register.it (contatti@dentroleparole.com)
+   │  inoltro esistente, invariato
+   ▼
+Gmail personale di Donatella
+```
+
+## 8.1 Compatibilità SMTP Register.it con Vercel e credenziali
+
+**Vercel.** Dalla guida ufficiale (kb "serverless functions and SMTP", agg. 29.9.2026): Vercel blocca solo la porta 25; **465 (TLS implicito) e 587 (STARTTLS) sono aperte**; il runtime Node.js supporta SMTP, il runtime Edge no. Con Fluid compute il lavoro in background si ferma dopo la risposta: l'invio va atteso (`await sendMail`) prima di rispondere. → **Tecnicamente compatibile**, runtime Node.js.
+
+**Register.it** (parametri ufficiali): server `authsmtp.securemail.pro`, porta **465 con SSL**, utente = indirizzo completo, password della casella; TLS 1.2 dichiarato (ODS art. 8.8). Nessuna lista di IP consentiti: gli IP dinamici di Vercel non sono un problema, **non serve l'opzione "Static IP" di Vercel (100 $/mese)**.
+
+**Punti non confermati da Register** (da chiedere per iscritto al supporto):
+1. L'invio **da un sito/script** non è né permesso né vietato nelle pagine lette; la sola clausola pertinente vieta lo spam e consente la sospensione del servizio. Va chiesta conferma scritta.
+2. **Quota giornaliera**: le pagine Register si contraddicono (500 al giorno, ma anche "50 invii gratuiti al giorno" per casella). Ogni destinatario conta come un invio. Per un modulo che invia un solo messaggio a richiesta basta anche 50, ma una raffica di spam la esaurisce e blocca anche le richieste vere → serve un buon antispam (8.3).
+3. **Inoltro verso Gmail**: nelle pagine pubbliche non ho trovato come funziona (se resta una copia nella casella, come viene gestito il mittente, controlli SPF/DKIM). Poiché l'inoltro resta invariato, va solo **provato** con un messaggio di test (arrivo in posta in arrivo o spam, allegato integro).
+4. **Antispam/antivirus in ingresso**: le pagine non concordano (incluso per le 3 caselle o solo in uscita). Quello in uscita non è disattivabile e può bloccare un messaggio: va provato con i tipi di file ammessi.
+
+**Mittente consigliato.** Usare una casella **dedicata solo all'invio** (es. `form@dentroleparole.com`), non quella personale di Donatella: Register include 3 caselle con il dominio (le caselle aggiuntive hanno un costo non verificato). Il messaggio parte da `form@` verso `contatti@`; l'email del visitatore va in **Reply-To**, così Donatella risponde dal suo Gmail come oggi. SPF del dominio (`include:spf.webapps.net`) è quello indicato da Register per i suoi invii SMTP. In più: attivare **DKIM** dal pannello (Email > Azioni > DKIM) e una politica **DMARC** iniziale `p=none` con report (modifica DNS: la fa il proprietario, non io).
+
+**Credenziali.** Variabili d'ambiente di Vercel di tipo **Secret** (in sola scrittura dopo il salvataggio; valore mai in repository, mai con prefisso `NEXT_PUBLIC_`), ambiti separati per Production e Preview (in Preview una casella di prova). Variabili: host, porta, utente, password, destinatario, mittente. Password lunga e casuale, cambiata se emerge un sospetto di fuga. Nel codice: nessun log di credenziali né di contenuto del messaggio.
+
+## 8.2 Dimensione massima reale degli allegati
+
+Non si usa un valore arbitrario: è il minore tra più limiti reali.
+
+| Vincolo | Valore | Fonte |
+|---|---|---|
+| **Corpo della richiesta a una funzione Vercel** | **4,5 MB**, rifiuto automatico con errore 413 prima che il codice giri | docs Vercel, limiti delle funzioni |
+| Overhead multipart e campi di testo | circa 10-20 KB (+ messaggio) | indicazione della documentazione Next.js (Server Actions) |
+| Messaggio Register (allegati compresi) | 30 MB | pagina di confronto Register |
+| Ricezione Gmail | 25 MB | Google |
+| Memoria della funzione | 2 GB | docs Vercel |
+
+Il limite che comanda è quello di Vercel: **la dimensione utile del file è poco sotto 4,5 MB**. Il valore preciso (4,5 MB decimali o binari, e il comportamento con il multipart) **non è documentato**: va **misurato** su una preview con file di prova di dimensione crescente, e il limite del modulo impostato un po' sotto la soglia misurata. Il controllo va fatto sia nel browser (messaggio chiaro) sia sul server.
+
+Cosa significa in pratica (stima, non misura): un romanzo in DOCX solo testo pesa in genere da poche centinaia di KB a pochi MB, quindi **rientra**; i PDF con molte immagini o scansioni possono superare il limite.
+
+**Oltre il limite** non c'è modo di restare nell'architettura richiesta senza archiviare il file: la soluzione tecnica ufficiale di Vercel è il caricamento diretto dal browser su Vercel Blob, che però **conserva il file** (da cancellare dopo l'invio) e cambia la privacy. Proposta: **non farlo ora**; per manoscritti più grandi indicare nel modulo "scrivimi e concordiamo l'invio". Valutare Blob solo se emerge la necessità reale.
+
+## 8.3 Sicurezza degli upload, antispam e rate limiting
+
+**Validazione server-side** (il controllo del browser non basta, resta solo per l'esperienza d'uso):
+- Solo POST, solo `multipart/form-data`, controllo `Origin`/`Host` del sito.
+- Campi: nome ed email obbligatori (formato e lunghezza), tutti gli altri con tetti di lunghezza; rifiuto di caratteri di controllo (**iniezione di intestazioni email** con a capo nei campi usati in `Reply-To` o oggetto); testo del messaggio inserito nel corpo come testo semplice, mai come HTML non filtrato.
+- **Un solo file**, estensione ammessa (lista consentita: `.pdf`, `.docx`, e `.doc` solo se la titolare lo vuole mantenere), **una sola estensione** (rifiuto di `nome.pdf.exe`, byte nulli, caratteri di percorso).
+- **Verifica del contenuto** oltre al tipo dichiarato (il tipo MIME inviato dal browser si può falsificare): firma `%PDF-` per PDF; per DOCX firma ZIP `PK\x03\x04` più lettura dell'elenco interno dei file con voci `[Content_Types].xml` e `word/document.xml`, **senza decomprimere** (nessun rischio di zip-bomb); per DOC firma OLE2 `D0 CF 11 E0 A1 B1 1A E1`. La sola firma non basta (lo dice anche OWASP): serve come filtro, non come garanzia.
+- **Contenuto attivo**: rifiuto dei DOCX con `vbaProject.bin` (macro); per i PDF, segnalazione nell'oggetto dell'email se compaiono marcatori come `/JavaScript` o `/Launch` (scelta: segnalare o rifiutare).
+- Nome file riscritto: senza percorso, solo caratteri sicuri, lunghezza massima, estensione coerente col tipo verificato.
+- **Antivirus**: su Vercel non è praticabile una scansione. Resta come protezione la verifica dei tipi, l'antivirus di Register (se attivo in ingresso, da confermare) e la scansione di Gmail. **È un rischio residuo, non diverso da oggi**, e va dichiarato.
+
+**Antispam senza nuovi fornitori.**
+1. Campo trappola nascosto (honeypot) e **token firmato con orario** (rifiuto se troppo veloce o troppo vecchio).
+2. **Rate limiting della piattaforma** (Vercel WAF): disponibile su tutti i piani; Pro permette 40 regole, finestre da 10 secondi a 10 minuti, chiave per IP e impronta JA4. Regola proposta sul percorso `/api/contatti`, solo POST, con soglia bassa per IP (da tarare). Serve perché le funzioni non hanno memoria condivisa e un contatore "fatto in casa" non è affidabile. È una **modifica di configurazione Vercel: va autorizzata**.
+3. **Vercel BotID** (Basic gratuito su tutti i piani; Deep Analysis a pagamento: 1 $ ogni 1000 verifiche sul piano Pro). Da decidere se usarlo; il costo è trascurabile ma **cresce con i tentativi dei bot**, quindi va dietro al rate limiting.
+4. **Cloudflare Turnstile** (gratuito) solo come ripiego se lo spam persiste: aggiunge uno script di un terzo, con aggiornamento di Cookie Policy e Privacy Policy.
+5. Messaggio di errore sempre generico; **nessun contenuto del modulo nei log**; in caso di guasto SMTP il visitatore vede un avviso con l'indirizzo email di contatto come alternativa.
+
+## 8.4 Funzioni Vercel: limiti, memoria, conservazione
+
+- **Runtime Node.js** (non Edge); memoria predefinita 2 GB, durata fino a 300 s con Fluid compute (sufficiente).
+- Il file viene letto in memoria (`request.formData()`), inoltrato e scartato: **nessuna scrittura su disco** e nessun archivio. Non è documentato come Vercel gestisca la memoria del multipart: con file da pochi MB su 2 GB non è un problema pratico, ma si verifica nella prova di carico.
+- Le istanze possono essere riutilizzate tra richieste: il codice non deve mantenere dati dei visitatori in variabili globali.
+- I log di Vercel non devono contenere nome, email, testo o nome del file.
+- **Regione**: il default per i nuovi progetti è `iad1` (Washington). Per tenere l'elaborazione in UE impostare `fra1` (impostazione del progetto o `vercel.json`; Pro permette fino a 5 regioni). **Modifica di configurazione: da autorizzare.** Anche con `fra1`, Vercel Inc. è un fornitore statunitense: restano il contratto con clausole contrattuali standard e l'adesione al Data Privacy Framework dichiarati da Vercel.
+- **Piano effettivo del progetto: non verificato.** Non ho accesso alla dashboard (la sessione del browser è scaduta; il login è del proprietario). Indizi, non prove: il nome del team (`lorenzos-projects-…`) è quello predefinito degli account personali; Vercel limita il piano Hobby all'uso non commerciale e l'accordo sul trattamento dei dati vale per Pro ed Enterprise. **Da fare: controllare in Impostazioni > Billing** (o mandarmi il piano indicato) prima di scegliere i limiti WAF e la regione.
+
+## 8.5 Costi aggiuntivi reali
+
+| Voce | Costo |
+|---|---|
+| Vercel Pro (già pagato) | 20 $/mese, invariato |
+| Funzioni, banda, rate limiting WAF | nessun costo aggiuntivo atteso a questi volumi (il prezzo per richiesta del rate limiting non è pubblicato nelle pagine lette) |
+| BotID Deep Analysis (opzionale) | 1 $ ogni 1000 verifiche; a poche centinaia di invii al mese pochi centesimi, ma cresce con i bot |
+| Static IP Vercel | **non necessario** (100 $/mese evitati) |
+| Register.it: casella di invio dedicata | compresa se si usa una delle 3 caselle incluse; costo di caselle addizionali non verificato |
+| Register.it: invii SMTP aggiuntivi | non necessari (3,14 €/mese per +1000 al giorno) |
+| Cloudflare Turnstile | 0 € (solo se serve) |
+| Libreria `nodemailer` | 0 € (licenza libera, senza dipendenze); **nuova dipendenza da autorizzare** |
+| Sviluppo e test | stima 1,5-2 giorni (endpoint, validazioni, test, integrazione nel modulo, informativa) |
+
+Costo ricorrente aggiuntivo atteso: **0 €**; caso peggiore realistico: pochi euro al mese se si adotta BotID in presenza di molti bot.
+
+## 8.6 Privacy Policy e Cookie Policy: testo proposto (non applicato)
+
+Da pubblicare **solo al passaggio in produzione**, perché fino ad allora FormSubmit resta in uso. Wording da rivedere con un professionista.
+
+*Sezione 3 (manoscritti e allegati)*: «Le richieste e gli allegati inviati tramite il modulo vengono ricevuti dal server del sito (ospitato da Vercel), elaborati solo in memoria per il tempo necessario all'invio e consegnati via email alla casella contatti@dentroleparole.com, il cui servizio di posta è fornito da Register.it. Il sito non conserva copie dei messaggi né dei file. La titolare riceve i messaggi anche sul proprio account Gmail personale, a cui la casella è inoltrata automaticamente.»
+
+*Sezione 6 (destinatari)*: eliminare FormSubmit; indicare **Register.it** (posta elettronica del dominio), **Google Ireland Limited** (account Gmail personale della titolare su cui vengono inoltrati i messaggi) e **Vercel** (hosting ed elaborazione della richiesta, regione UE se confermata).
+
+*Sezione 7 (trasferimenti)*: eliminare FormSubmit; mantenere Vercel (clausole contrattuali standard / Data Privacy Framework dichiarati dal fornitore) e Google (da verificare).
+
+*Sezione 8 (conservazione)*: eliminare la riga su FormSubmit; aggiungere «Messaggi e allegati: nella casella di posta e nell'account Gmail della titolare per [DA CONFERMARE] mesi». **Resta da definire**.
+
+*Cookie Policy*: eliminare i riferimenti a FormSubmit (che oggi imposta cookie sul proprio sito); aggiungere Turnstile solo se adottato.
+
+**Punto da non nascondere**: finché i manoscritti arrivano su un Gmail personale, la Privacy Policy deve dirlo (come sopra) e restano valide le criticità 2 e 3 di 7.3. L'alternativa (Workspace, circa 82 €/anno) è disponibile quando si vorrà.
+
+## 8.7 Piano di test, migrazione e rollback (senza interrompere il modulo attuale)
+
+**Principio**: il modulo con FormSubmit resta attivo finché il nuovo non è provato; il passaggio è un interruttore, non una sostituzione.
+
+1. **Prerequisiti (azioni del proprietario, nessun mio intervento)**: verificare il piano Vercel; scrivere a Register.it (conferma invio da sito, quota reale, antispam in ingresso, nomina a responsabile); creare la casella `form@`; attivare DKIM e DMARC `p=none`.
+2. **Implementazione in una PR nuova** (non la #5), con l'endpoint `/api/contatti` accanto al modulo esistente e un **interruttore** (variabile pubblica `NEXT_PUBLIC_CONTACT_BACKEND`, predefinito `formsubmit`). Senza modifiche al codice FormSubmit finché non serve.
+3. **Prova in Preview** con variabili di Preview (casella di prova come destinatario) e solo **file sintetici**, mai manoscritti veri. Matrice di test:
+   - esito: PDF, DOCX, DOC; file alla soglia misurata e appena sopra (verifica 413 e messaggio nel browser); integrità dell'allegato (confronto con l'hash);
+   - rifiuti: estensione non ammessa, doppia estensione, testo rinominato `.pdf`, DOCX con macro, file vuoto, due file;
+   - campi: email non valida, nome vuoto, campi troppo lunghi, a capo nei campi (iniezione intestazioni), caratteri non ASCII nel nome file;
+   - antispam: honeypot compilato, invio troppo rapido, token scaduto, superamento del rate limit;
+   - guasto: password SMTP errata (in Preview) → messaggio generico + email alternativa, nessun dato nei log;
+   - recapito: arrivo su Register e poi su **Gmail** (posta in arrivo o spam, allegato apribile);
+   - esperienza: stesso aspetto del modulo, mobile, e funzionamento senza JavaScript (reindirizzamento a `/grazie`).
+   - Test automatici dei soli validatori con `node --test` (nessuna dipendenza di test nuova).
+4. **Messa in produzione con interruttore su `api`** solo dopo la tua autorizzazione, insieme al nuovo testo di Privacy e Cookie Policy. Primo invio reale concordato con la titolare. Osservare i log di Vercel e la casella per 48 ore.
+5. **Rollback immediato**: *Instant Rollback* di Vercel al deployment precedente (nessun codice), oppure interruttore su `formsubmit` con nuovo deploy (circa 40 secondi), oppure revert del merge. FormSubmit resta nel codice finché il nuovo flusso non è stabile.
+6. **Pulizia (PR separata, dopo almeno una settimana di funzionamento)**: rimuovere FormSubmit e l'interruttore, aggiornare la documentazione.
+
+## 8.8 Rischi e limiti (riepilogo)
+
+| Rischio / limite | Gravità | Mitigazione |
+|---|---|---|
+| Limite di 4,5 MB per richiesta: PDF grandi non passano | Media | Misura reale, messaggio chiaro, invio concordato; Blob solo se necessario |
+| Register non conferma l'invio da script, quota ambigua (50 o 500 al giorno) | Alta se negata | Conferma scritta prima di iniziare; alternativa solo in quel caso (8.9) |
+| Esaurimento della quota da spam → richieste vere bloccate | Media | Honeypot, token, rate limiting WAF, avviso con email alternativa |
+| Messaggio bloccato dall'antispam in uscita di Register | Media | Prova con i tipi ammessi; segnalazione a Register |
+| Recapito su Gmail tramite inoltro (spam, mittente) | Media | Prova; DKIM e DMARC; Reply-To |
+| Nessuna scansione antivirus dei file | Media | Tipi ammessi, no macro, antivirus Register/Gmail; rischio dichiarato |
+| Gmail personale senza accordo sul trattamento dei dati | **Alta** (decisione consapevole) | Dichiarazione in informativa; Workspace come opzione futura |
+| Piano Vercel non confermato (Hobby escluso per uso commerciale e senza accordo) | Alta se Hobby | Verifica in Billing prima di procedere |
+| Credenziali SMTP esposte | Alta | Variabili Secret, casella dedicata, nessun log, rotazione |
+| Regione di elaborazione predefinita USA | Media | Regione `fra1` (da autorizzare); clausole standard di Vercel |
+
+## 8.9 Alternative (solo se emerge un impedimento concreto)
+
+Nessun impedimento tecnico è emerso: Vercel permette SMTP sulla 465 e Register offre il server SMTP. L'unico punto aperto è **la conferma di Register all'invio da script**. Solo se Register la negasse: (a) servizio di posta transazionale europeo con contratto sul trattamento dei dati, da valutare e verificare (Brevo è già usato per la newsletter, ma le pagine pubbliche consultate non permettono di verificare limite degli allegati, piano gratuito e accordo); (b) caricamento diretto su storage in UE (Cloudflare R2, vedi 7.4, opzione E) se servono file più grandi di quanto Vercel consenta.
+
+## 8.10 Decisioni e autorizzazioni da darmi
+
+1. Piano Vercel: mi confermi quello indicato in Settings > Billing? (oppure accedi tu alla dashboard)
+2. Autorizzi la modifica della **regione delle funzioni** a `fra1` e la regola di **rate limiting WAF** (configurazioni Vercel, da fare solo dopo il tuo via)?
+3. Chi scrive a **Register.it** (invio da sito, quota, antispam in ingresso, nomina a responsabile) e chi crea la casella `form@` e attiva DKIM/DMARC (DNS)?
+4. Antispam: honeypot + token + rate limiting (consigliato); aggiungere BotID? Turnstile solo come ripiego?
+5. Tipi di file: mantenere `.doc` oltre a `.pdf` e `.docx`? Per i PDF con contenuto attivo: segnalare o rifiutare?
+6. Autorizzi la nuova dipendenza `nodemailer`?
+7. Autorizzi l'implementazione in una **nuova PR** (non la #5), con interruttore, senza merge né deploy?
+8. Autorizzi i **messaggi di prova** (solo file sintetici) alla casella di prova e, per la prova di recapito, a `contatti@` e quindi al Gmail di Donatella?
+9. Approvi il testo di informativa proposto in 8.6, da far rivedere a un professionista, e la scelta consapevole di mantenere Gmail personale?
+10. Tempo di conservazione di email e allegati (casella Register e Gmail).
+
+## 8.11 Fonti e verifiche
+- Vercel: docs/functions/limitations (4,5 MB, memoria, durata), kb/guide/serverless-functions-and-smtp, docs/vercel-firewall/vercel-waf/rate-limiting, docs/botid, docs/environment-variables (Secret/Config), docs/networking/static-ips, docs/limits/fair-use-guidelines, docs/functions/configuring-functions/region.
+- Register.it: parametri email, ODS Email (art. 3, 5, 6, 8), ODS invii aggiuntivi, pagine di assistenza su invii SMTP inclusi, SPF/DKIM/DMARC, pagina di confronto (30 MB, 100 destinatari).
+- Next.js: documentazione dei Route Handler e dei limiti del corpo (1 MB predefinito per le Server Actions; nessun limite documentato per i Route Handler). OWASP: File Upload Cheat Sheet. Firme dei file: elenco delle firme (PDF, ZIP, OLE2).
+- Nodemailer: homepage (zero dipendenze, TLS/STARTTLS; Node 20 o successivo per la v10). Pagine su opzioni SMTP e allegati non raggiungibili: **opzioni di TLS e invio di allegati da memoria da verificare nei test**.
+- Cloudflare Turnstile: gratuito, token valido 300 s, uso singolo, verifica lato server; uso di cookie e archiviazione locale non documentato.
+- **Non verificato**: piano effettivo Vercel; invio da script ammesso da Register; funzionamento dell'inoltro verso Gmail; comportamento esatto del limite 4,5 MB con multipart; gestione della memoria del multipart; nessun test eseguito.
