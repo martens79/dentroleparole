@@ -6,7 +6,7 @@ import tls from "node:tls";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-export const maxDuration = 90;
+export const maxDuration = 120;
 
 const HOST = "authsmtp.securemail.pro";
 
@@ -103,7 +103,40 @@ async function safe(fn: (out: Record<string, unknown>) => Promise<unknown>) {
   }
 }
 
-export async function GET() {
+/** Attende a lungo il saluto SMTP registrando ogni byte con il suo tempo. Nessuna credenziale. */
+async function longWait(port: number, implicitTls: boolean) {
+  const t0 = Date.now();
+  const log: { ms: number; text: string }[] = [];
+  const raw = net.connect({ host: HOST, port });
+  await new Promise<void>((res, rej) => {
+    raw.once("connect", () => res());
+    raw.once("error", rej);
+  });
+  const sock: net.Socket = implicitTls
+    ? (tls.connect({ socket: raw, servername: HOST, minVersion: "TLSv1.2" }) as unknown as net.Socket)
+    : raw;
+  sock.on("data", (d: Buffer) => log.push({ ms: Date.now() - t0, text: d.toString("latin1").slice(0, 160) }));
+  if (implicitTls) await new Promise<void>((r) => (sock as unknown as tls.TLSSocket).once("secureConnect", () => r()));
+  const handshakeMs = Date.now() - t0;
+  await new Promise((r) => setTimeout(r, 30_000));
+  const silentAt30 = log.length === 0;
+  if (silentAt30) sock.write("EHLO probe.invalid
+"); // il server risponde se gli si parla per primi?
+  await new Promise((r) => setTimeout(r, 25_000));
+  sock.write("QUIT
+");
+  sock.destroy();
+  return { port, implicitTls, handshakeMs, silentAt30, receivedAfterEhloAt30: silentAt30 ? log.length > 0 : null, log };
+}
+
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  if (process.env.VERCEL_ENV === "preview" && url.searchParams.get("probe") === "wait") {
+    const r465 = await safe(async (o) => Object.assign(o, await longWait(465, true)));
+    return new Response(JSON.stringify({ vercelRegion: process.env.VERCEL_REGION, r465 }, null, 1), {
+      headers: { "content-type": "application/json", "cache-control": "no-store" },
+    });
+  }
   if (process.env.VERCEL_ENV !== "preview") {
     return new Response("Not found", { status: 404 });
   }
