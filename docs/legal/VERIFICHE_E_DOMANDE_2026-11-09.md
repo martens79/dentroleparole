@@ -52,7 +52,7 @@
 5. **Altre persone accedono ai manoscritti** (collaboratori, voci per audiolibri, ecc.)? — destinatari dei dati e riservatezza.
 6. **Usa strumenti di intelligenza artificiale sul contenuto dei manoscritti?** — i clienti devono saperlo prima di inviare il testo.
 7. **Impostazioni di Google Analytics** (Admin > Impostazioni dati > Conservazione dei dati: 2 o 14 mesi) — vanno scritte nella Cookie Policy.
-8. **FormSubmit**: vuole continuare a usarlo? Il fornitore non offre garanzie documentate (vedi sopra) ma i dati inviati includono manoscritti. Alternative tecniche: inviare il modulo dal sito con un servizio email con contratto di trattamento dati (decisione e costi sua, implementazione mia). Se resta, serve almeno sapere se le email arrivano.
+8. **FormSubmit** e posta: aggiornato dall'audit del 9 novembre — vedi la sezione 7 (flusso reale, alternative, raccomandazione e decisioni aperte).
 9. **Newsletter**: (a) quanto spesso scrive e che contenuti; (b) vuole la conferma via email (double opt-in, consigliata) — richiede di creare un modello "DOI" in Brevo e darmi l'ID e la pagina di destinazione; (c) nelle email di Brevo c'è il link per disiscriversi?
 10. **I link amzn.to** nella pagina Pubblicazioni sono di affiliazione Amazon? — in tal caso serve la dichiarazione prevista dal programma.
 11. **Clienti consumatori** (privati): come fornisce le informazioni precontrattuali e le condizioni di recesso (nel preventivo)? — obbligo del Codice del consumo per contratti a distanza. Se lavora solo con professionisti, lo scrivo diversamente.
@@ -68,3 +68,102 @@ Basi giuridiche, elenco destinatari e ruoli (responsabili o autonomi titolari), 
 - Brevo: developers.brevo.com (Create a contact; Create DOI contact). Pagine legali Brevo non raggiungibili: sede, hosting e DPA non verificati.
 - FormSubmit: formsubmit.co (documentazione, help, privacy.pdf).
 - Google: pagine di assistenza Google Analytics (cookie GA4, conservazione dati, privacy). Vercel: DPA e informativa privacy.
+
+
+---
+
+# 7. Audit del flusso reale: modulo contatti e manoscritti (9 novembre 2026)
+
+> Audit di **sola lettura**: nessun manoscritto o modulo di prova inviato, nessuna modifica al form né a FormSubmit. Dove non è stato possibile verificare un dato è indicato. Non è consulenza legale.
+
+## 7.1 Flusso effettivo (confermato dalla titolare + codice + DNS)
+
+```
+Visitatore (browser)
+   │  POST multipart direttamente a formsubmit.co  (ContactForm.jsx; allegato PDF/DOC/DOCX, max 8 MB lato sito)
+   ▼
+FormSubmit (Devro LABS; dietro Cloudflare; sede/origine dei server non dichiarate)
+   │  inoltro via email a contatti@dentroleparole.com
+   ▼
+Register.it (record MX: 10 mail.register.it; server in Italia, datacenter Settimo Milanese)
+   │  inoltro automatico
+   ▼
+Gmail personale gratuito di Donatella (Google Ireland Limited; NON Google Workspace)
+```
+
+Il sito stesso (Vercel) **non vede** i dati del modulo: il browser li invia direttamente a FormSubmit. Dopo l'invio il visitatore viene riportato a `/grazie`.
+
+Una stessa email con il manoscritto può quindi esistere in **quattro sistemi** (FormSubmit per 30 giorni, Register.it, Gmail, più eventuali copie locali): più copie significa più superficie di rischio e più conservazione da governare (minimizzazione, art. 5 GDPR).
+
+## 7.2 Esito per fornitore
+
+| Fornitore | Ruolo | Garanzie e accordi trovati | Conservazione | Trasferimenti extra SEE | Giudizio |
+|---|---|---|---|---|---|
+| **FormSubmit** (Devro LABS) | Trasmette dati e allegati per conto del sito (probabile responsabile, art. 28) | Nessun DPA/nomina a responsabile, nessun riferimento al GDPR, nessuna sede dichiarata. Informativa del 17 gennaio 2019, poche righe. Sito dietro Cloudflare (richiesta servita da Milano, ma l'origine dei server è ignota). Imposta cookie propri (`XSRF-TOKEN`, `formsubmit_session`) sul proprio sito | Invii conservati **30 giorni**; gli allegati "non vengono conservati" (documentazione). Nessuna data di cancellazione verificabile | **Non determinabili**: operatore e sede non dichiarati | **Critico**: dati e manoscritti passano da un soggetto senza garanzie documentate |
+| **Register.it** (Register SpA, socio unico Combell NV, Belgio) | Posta in ingresso del dominio; per i contenuti dei clienti agisce come **responsabile** (ODS email, art. 7) | Ruolo di responsabile dichiarato nelle condizioni del servizio email. Il testo della nomina è nelle Condizioni Generali (PDF non leggibile dall'audit: **da verificare**). Server in Italia (Settimo Milanese), backup a Milano, TLS 1.2, antivirus/antispam | Casella a tua cura. Backup giornalieri conservati 6 giorni | Nessuno dichiarato per il servizio email (server italiani) | **Accettabile**, da completare chiedendo la nomina scritta |
+| **Gmail personale** (Google Ireland Limited) | Per gli account consumer Google è **titolare autonomo**, non responsabile | **Nessun DPA** per Gmail gratuito: l'addendum sul trattamento dei dati vale per Workspace/Cloud. Per i Termini Google "consumatore" = uso personale e non commerciale. I contenuti sono analizzati (spam, malware, personalizzazione servizi); Google dichiara di non usare Gmail per annunci personalizzati | Finché non cancelli | Il trattamento può avvenire in qualsiasi Paese in cui Google ha sedi; garanzie per account consumer non verificate | **Critico**: ricevere manoscritti di clienti su un account personale è un uso fuori dal perimetro "non commerciale" dei Termini e non ha un contratto di responsabile |
+| **Vercel** (sito) | Hosting; non tratta il modulo | DPA con clausole contrattuali standard, adesione al Data Privacy Framework (informativa Vercel). Il DPA è indicato per i piani Enterprise e Pro | Log tecnici | Funzioni di default in USA (iad1) | Non coinvolto nel flusso del modulo oggi |
+
+## 7.3 Criticità GDPR (in ordine di gravità)
+
+1. **Nessun accordo ex art. 28 con FormSubmit** e nessuna informazione su sede, sicurezza e sub-responsabili. I manoscritti possono contenere dati di terzi o dati particolari.
+2. **Gmail personale come destinazione dei manoscritti**: nessun DPA, titolarità autonoma di Google, uso commerciale non previsto dai Termini consumer, contenuti analizzati dal fornitore.
+3. **Moltiplicazione delle copie e conservazione non governata**: Gmail e la casella Register conservano a tempo indefinito; non c'è una regola di cancellazione.
+4. **Informativa incompleta rispetto al flusso reale**: oggi la Privacy Policy nomina FormSubmit ma non cita Google/Gmail come destinatario della posta; la Cookie Policy dice che l'unico servizio terzo che installa cookie è Google Analytics, mentre FormSubmit imposta cookie sul proprio sito (da verificare cosa accade al momento dell'invio, senza inviare nulla).
+5. **Trasferimenti extra SEE non dimostrabili** per FormSubmit e non verificati per Gmail personale.
+6. **Minori, ma da sistemare**: dall'interrogazione DNS non risulta una politica DMARC (c'è solo SPF `include:spf.webapps.net ~all`); riduce la protezione contro l'invio di email false a nome del dominio.
+
+Punti a favore: il traffico è cifrato (HTTPS verso FormSubmit; TLS 1.2 su Register), FormSubmit dichiara di non conservare gli allegati, il sito non registra i dati del modulo, Register.it ha server in Italia e un ruolo di responsabile dichiarato.
+
+## 7.4 Alternative a confronto
+
+Requisito comune: mantenere il caricamento di allegati e tutelare la riservatezza. "Impegno" = lavoro tecnico stimato.
+
+| # | Soluzione | Costo | Allegati | Riservatezza / GDPR | Svantaggi | Impegno |
+|---|---|---|---|---|---|---|
+| **A** | **Stato attuale** (FormSubmit → Register → Gmail personale) | 0 € | fino a 8 MB | Debole: due anelli senza accordo (FormSubmit, Gmail) | Vedi criticità 1-5 | — |
+| **B** | **Togliere Gmail dalla catena**: niente inoltro automatico, lettura dalla webmail Register o da un client IMAP (la posta resta a Register) | **0 €** | invariato | Migliora molto: resta FormSubmit, ma sparisce l'account consumer | FormSubmit resta senza DPA; la titolare deve usare la webmail/client | 10-30 min, nessun codice (decisione e configurazione della titolare) |
+| **C** | **Google Workspace Business Starter** come destinazione, con DPA | ~6,80 €/utente/mese in listino annuale (≈ 82 €/anno; promozioni temporanee, IVA da verificare); 30 GB; email personalizzata inclusa | 25 MB | Gmail con DPA e responsabile | Costo; FormSubmit resta; Gmail continua a essere un'ulteriore copia | 1-2 ore |
+| **D** | **Endpoint proprio sul sito + invio SMTP via Register.it**, senza FormSubmit né Gmail | **0 €** (Vercel già in uso; 3 caselle Register incluse con il dominio) | **max ~4 MB per invio** (limite 4,5 MB del corpo richiesta delle funzioni Vercel) | Buona: catena ridotta a Vercel + Register (Italia, responsabile); nessun fornitore sconosciuto | Richiede la dipendenza `nodemailer` (nuova libreria); funzioni Vercel di default in USA → serve impostare la regione `fra1` (modifica di configurazione); invio SMTP da script non esplicitamente previsto da Register (da chiedere); estratti ok, manoscritti completi no | ½-1 giorno |
+| **E** | **Upload diretto su storage UE** (Cloudflare R2, giurisdizione UE) + email con solo il link | 0 € entro 10 GB e senza costi di uscita dati; oltre ~0,015 $/GB/mese | Anche file grandi | Ottima: il file non passa da email né da Gmail; scadenza automatica possibile; DPA Cloudflare con clausole standard | Più complessa (URL firmati, CORS, regole di cancellazione); serve un account Cloudflare (carta di pagamento da verificare); un nuovo fornitore | 1-2 giorni |
+| **F** | Togliere l'allegato: modulo solo testo, manoscritto richiesto dopo il primo contatto | 0 € | nessuno | Massima semplicità | Non soddisfa il requisito di mantenere il caricamento | ½ giornata |
+
+Non adatte: **Supabase** (piano gratuito 1 GB, regione UE ma progetti sospesi dopo 1 settimana di inattività: poco affidabile per un modulo di contatto); **Vercel Blob** (regioni UE possibili, ma 1 GB gratuito e DPA indicato per i piani Pro/Enterprise); **Brevo transactional** (già usato per la newsletter, ma limiti degli allegati, piano gratuito e DPA **non verificabili** dalle pagine pubbliche consultate).
+
+## 7.5 Raccomandazione
+
+**Fase 1 — subito, senza costi né codice: opzione B.** Interrompere l'inoltro verso Gmail personale e leggere la posta dalla webmail di Register.it (o da un client IMAP). In più: chiedere a Register.it la nomina a responsabile del trattamento, verificare limite degli allegati e filtro antispam in ingresso, e decidere cosa fare delle email con manoscritti già presenti in Gmail (conservare, spostare, cancellare). È il passo che riduce di più il rischio al costo più basso.
+
+**Fase 2 — soluzione definitiva, gratuita: opzione D.** Sostituire FormSubmit con un endpoint del sito che inoltra la richiesta via SMTP alla casella Register.it, con un tetto di circa 4 MB per allegato (l'estratto da 5-10 pagine ci sta; per un manoscritto completo si propone un invio dedicato). Ha pochi anelli, tutti europei o con contratto, nessun costo e mantiene il caricamento. Condizioni da verificare prima: (a) Register.it consente l'invio SMTP da script; (b) piano Vercel e regione delle funzioni (`fra1`); (c) disponibilità della nomina da Register.it.
+
+**Fase 3 — solo se servono manoscritti completi dal form: opzione E** (storage UE con scadenza automatica).
+
+L'opzione C (Workspace) è la scelta se la titolare vuole continuare a lavorare dentro Gmail: risolve il contratto con Google ma non elimina FormSubmit e costa circa 82 €/anno.
+
+## 7.6 Decisioni aperte (a cura della titolare / del proprietario del sito)
+
+1. **Inoltro verso Gmail**: interromperlo (opzione B)? Cosa fare delle email con manoscritti già presenti su Gmail?
+2. **Direzione**: B + D (consigliata), B + E, C oppure restare con FormSubmit (A) con informativa corretta?
+3. **Limite allegati**: va bene ~4 MB nel form (opzione D)? Come gestire i manoscritti completi: invio concordato, link di caricamento, altro?
+4. **Register.it**: richiedere (a) la nomina a responsabile del trattamento, (b) conferma che l'invio SMTP da un sito è consentito, (c) il limite reale degli allegati e se il filtro antispam in ingresso è incluso.
+5. **Vercel**: quale piano usa il sito (Hobby o Pro)? Autorizzazione a impostare la regione delle funzioni su `fra1` (modifica di configurazione, non fatta).
+6. **Nuova dipendenza** (`nodemailer`) per l'opzione D: autorizzata?
+7. **Regola di conservazione** per posta e allegati: per quanto tempo si tengono le email con manoscritti, e chi le cancella.
+8. **Informativa**: dopo la decisione verranno aggiornate Privacy Policy (flusso reale, destinatari, conservazione) e Cookie Policy (cookie di FormSubmit, se resta). **Non modificate in questo audit.**
+9. **DMARC**: aggiungere una politica DMARC al dominio (gestita su Register.it)?
+
+## 7.7 Cosa non è stato verificato
+- Sede, origine dei server e sub-responsabili di FormSubmit; esistenza di un DPA non pubblicato.
+- Testo della nomina a responsabile di Register.it e sede legale (PDF non leggibili in questo audit); limite effettivo degli allegati per le caselle incluse; conflitti nelle pagine Register sul filtro antispam in ingresso (incluso o a pagamento) e sui limiti di invio SMTP (500 al giorno o 20 gratuiti).
+- Cosa fa Gmail personale ai contenuti oltre quanto scritto nei Termini; eventuale revisione umana.
+- Se FormSubmit imposta cookie al momento dell'invio (verificato solo sulla pagina iniziale del servizio, non con un invio).
+- Limiti degli allegati, piano gratuito e DPA di Brevo (pagine non leggibili senza JavaScript).
+- Per leggere le intestazioni di FormSubmit ho eseguito una richiesta OPTIONS (preflight) verso un indirizzo fittizio non valido: nessun dato inviato, nessun invio del modulo.
+
+## 7.8 Fonti principali
+- FormSubmit: formsubmit.co, /documentation, /help, /privacy.pdf (17.1.2019).
+- Google: Privacy Policy (policies.google.com/privacy, in vigore dal 16.10.2026), Termini (in vigore dal 30.7.2026), Cloud Data Processing Addendum (cloud.google.com/terms/data-processing-addendum), prezzi Workspace (workspace.google.com/intl/it/pricing), limiti allegati (support.google.com/mail/answer/8770).
+- Register.it: pagine Email, Email personale, parametri email, ODS email (art. 3, 5, 6, 7, 8), home (ragione sociale).
+- Vercel: docs/functions/limitations (limite 4,5 MB), configuring-functions/region, vercel-blob, legal/dpa.
+- Cloudflare R2: developers.cloudflare.com/r2/pricing e /reference/data-location; Cloudflare DPA. Supabase: supabase.com/pricing, /regions, /legal/dpa.
+- DNS pubblico: MX, SPF e DMARC di dentroleparole.com (interrogazione DNS).
