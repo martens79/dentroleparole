@@ -128,8 +128,8 @@ export default function PrivacyPolicyPage() {
           <p>
             La titolare non utilizza strumenti di intelligenza artificiale sui
             manoscritti dei clienti. Questa dichiarazione riguarda il lavoro
-            editoriale svolto dalla titolare: i fornitori elencati al punto
-            seguente trattano i dati secondo le proprie condizioni e possono
+            editoriale svolto dalla titolare: i fornitori indicati al punto 6
+            trattano i dati secondo le proprie condizioni e possono
             usare sistemi automatici propri, ad esempio i filtri antispam e
             antivirus dei servizi di posta.
           </p>
