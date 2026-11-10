@@ -14,7 +14,7 @@ type Confirmable = string | null | false;
 
 export const legal = {
   /** Data mostrata come "Ultimo aggiornamento" (da aggiornare alla pubblicazione). */
-  updated: "9 novembre 2026",
+  updated: "10 novembre 2026",
 
   titolare: {
     nome: "Donatella Tamburini",
@@ -26,9 +26,17 @@ export const legal = {
     partitaIva: null as Confirmable,
   },
 
+  /** Decisioni già confermate dalla titolare sul primo contatto (valgono per tutte le pagine). */
+  primoContatto: {
+    /** Formula ufficiale del tempo di risposta alle richieste iniziali. */
+    risposta: "3–5 giorni lavorativi",
+    /** Anteprima facoltativa del manoscritto. */
+    anteprima: "5–10 cartelle editoriali (circa 1.800 battute ciascuna, spazi inclusi)",
+  },
+
   /** Tempi di conservazione (testo libero, es. "12 mesi dall'ultimo contatto"). */
   retention: {
-    /** Richieste, preventivi ed estratti non seguiti da un incarico. */
+    /** Richieste, preventivi e anteprime non seguiti da un incarico. */
     richieste: null as Confirmable,
     /** Manoscritti, allegati e materiali di un incarico concluso. */
     materiali: null as Confirmable,
@@ -46,6 +54,11 @@ export const legal = {
     conservazione: null as Confirmable,
   },
 
-  /** I link amzn.to nella pagina Pubblicazioni sono link di affiliazione? `false` = no. */
-  affiliazioneAmazon: null as Confirmable,
+  /**
+   * Link di affiliazione Amazon: verificato il 10 novembre 2026, tutti i 9 link amzn.to del sito
+   * rimandano ad Amazon con il tag di affiliazione Associates. La dichiarazione è già presente
+   * anche nella pagina Pubblicazioni.
+   */
+  affiliazioneAmazon:
+    "In qualità di Affiliato Amazon, la titolare riceve un guadagno dagli acquisti idonei effettuati tramite i link presenti nella pagina Pubblicazioni, senza costi aggiuntivi per chi acquista." as Confirmable,
 } as const;

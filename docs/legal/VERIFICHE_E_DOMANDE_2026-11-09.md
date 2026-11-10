@@ -39,11 +39,13 @@
 - I dati ancora mancanti sono evidenziati come "DA CONFERMARE" e raccolti in `src/content/legal.ts`. `node scripts/check-legal-placeholders.mjs` elenca cosa manca (oggi 10 punti) e fallisce finché non sono risolti.
 
 ## 3. Segnalazioni non legali ma rilevanti
-- **Tempi di risposta incoerenti sul sito**: "3-5 giorni" in home, "24–48 ore" in Chi sono e nel menu.
+- ~~**Tempi di risposta incoerenti sul sito**~~ — **risolto (10 novembre)**: la titolare ha deciso «Rispondo entro 3–5 giorni lavorativi»; il sito è uniformato nella PR #7 e le pagine legali usano la stessa formula.
 - **Piè di pagina**: contiene le pagine legali solo in home. Per i link a Privacy/Cookie su ogni pagina (indicazione del Garante) serve un piè di pagina minimo su tutte le pagine (modifica di layout, non inclusa).
 - **Estratto "gratuito"**: indicato in home; va coerente con le condizioni dei preventivi.
 
 ## 4. Domande per la titolare (perché servono)
+
+> **Aggiornamento 10 novembre 2026:** l'elenco aggiornato e ridotto delle conferme ancora necessarie è in `STATO_E_DOMANDE_2026-11-10.md`. Questa sezione è mantenuta come storico.
 
 1. **Indirizzo (domicilio o sede professionale)** — obbligatorio per l'informativa (art. 13 GDPR) e tra le informazioni da rendere accessibili sul sito (art. 7 D.Lgs. 70/2003).
 2. **Ha la partita IVA?** Se sì, quale — stesso art. 7 D.Lgs. 70/2003. Se esercita come professionista iscritta a un albo o registro, anche quello.
@@ -57,7 +59,7 @@
 10. **I link amzn.to** nella pagina Pubblicazioni sono di affiliazione Amazon? — in tal caso serve la dichiarazione prevista dal programma.
 11. **Clienti consumatori** (privati): come fornisce le informazioni precontrattuali e le condizioni di recesso (nel preventivo)? — obbligo del Codice del consumo per contratti a distanza. Se lavora solo con professionisti, lo scrivo diversamente.
 12. **Telefono/WhatsApp**: viene richiesto o usato per contattare i clienti? (L'informativa non lo cita più perché il modulo non lo chiede.)
-13. **Tempi di risposta**: 24–48 ore o 3–5 giorni? (coerenza del sito)
+13. ~~**Tempi di risposta**~~ — **risolto**: 3–5 giorni lavorativi.
 
 ## 5. Da far verificare a un professionista
 Basi giuridiche, elenco destinatari e ruoli (responsabili o autonomi titolari), trasferimenti extra-UE (Google, FormSubmit, Brevo), uso di Google Analytics 4 alla luce dei provvedimenti del Garante del 2022 e del Data Privacy Framework, durata di 180 giorni della scelta sui cookie, clausole dei Termini verso consumatori.

@@ -6,7 +6,6 @@ import {
   LegalPage,
   LegalSection,
   RelatedLegalLinks,
-  Todo,
   Val,
   legalLink,
 } from "@/components/legal/LegalLayout";
@@ -19,16 +18,16 @@ export const metadata = pageMetadata({
 });
 
 export default function PrivacyPolicyPage() {
-  const { titolare, retention } = legal;
+  const { titolare, retention, primoContatto } = legal;
 
   return (
     <LegalPage title="Privacy Policy" updated={legal.updated}>
       <p>
         Questa informativa spiega come vengono trattati i dati personali di chi
         visita il sito “Dentro le Parole” (dentroleparole.com), compila il modulo
-        di contatto, scrive via email, si iscrive alla newsletter o invia un
-        estratto o un manoscritto per una valutazione. È resa ai sensi degli
-        articoli 13 e 14 del Regolamento (UE) 2016/679 (GDPR).
+        di contatto, scrive via email, si iscrive alla newsletter o invia
+        un’anteprima del proprio manoscritto. È resa ai sensi degli articoli 13
+        e 14 del Regolamento (UE) 2016/679 (GDPR).
       </p>
 
       <LegalSection title="1. Titolare del trattamento">
@@ -69,13 +68,16 @@ export default function PrivacyPolicyPage() {
           </li>
           <li>
             <strong className="text-ivory">Modulo di contatto.</strong> Nome e
-            cognome e indirizzo email (obbligatori), titolo, genere e numero di
-            parole del testo, obiettivo del libro, messaggio e un eventuale file
-            allegato (PDF, DOC o DOCX, fino a 8 MB).
+            cognome e indirizzo email (obbligatori); titolo, genere e numero di
+            parole del testo, obiettivo del libro e messaggio (facoltativi);
+            un’eventuale anteprima del manoscritto in allegato, in formato PDF,
+            DOC o DOCX.
           </li>
           <li>
             <strong className="text-ivory">Email.</strong> I dati contenuti nei
-            messaggi che scrivi direttamente a {titolare.email} e nelle risposte.
+            messaggi che scrivi direttamente a {titolare.email} e nelle risposte,
+            compresi gli eventuali file che invii in seguito, ad esempio il
+            manoscritto completo se ti viene richiesto.
           </li>
           <li>
             <strong className="text-ivory">Newsletter.</strong> L’indirizzo email
@@ -92,20 +94,31 @@ export default function PrivacyPolicyPage() {
           </li>
         </LegalList>
         <p>
-          I dati sono raccolti direttamente da te. Gli estratti e i manoscritti
+          I dati sono raccolti direttamente da te. Le anteprime e i manoscritti
           possono contenere anche dati di altre persone: vedi il punto
           successivo.
         </p>
       </LegalSection>
 
-      <LegalSection title="3. Estratti, manoscritti e allegati">
+      <LegalSection title="3. Anteprima facoltativa e manoscritti">
         <p>
-          Gli estratti e i manoscritti che invii possono contenere dati personali
-          tuoi e, talvolta, di altre persone (ad esempio se il testo si ispira a
-          fatti reali). Vengono utilizzati esclusivamente per valutare la
-          richiesta, formulare un preventivo e, se affidi l’incarico, svolgere il
-          lavoro editoriale concordato. Non vengono pubblicati né condivisi con
-          editori, agenti o altri soggetti senza il tuo consenso.
+          Per un primo contatto puoi allegare, se lo desideri, un’anteprima del
+          testo di {primoContatto.anteprima}. È facoltativa e{" "}
+          <strong className="text-ivory">
+            non è necessario inviare il manoscritto completo
+          </strong>
+          : se serve, la titolare potrà chiedertelo successivamente via email,
+          dopo il primo contatto.
+        </p>
+        <p>
+          Le anteprime e i manoscritti possono contenere dati personali tuoi e,
+          talvolta, di altre persone (ad esempio se il testo si ispira a fatti
+          reali). Vengono utilizzati esclusivamente per valutare la richiesta,
+          formulare un preventivo e, se affidi l’incarico, svolgere il lavoro
+          editoriale concordato. Non vengono pubblicati né condivisi con editori,
+          agenti o altri soggetti senza il tuo consenso. Il testo resta di tua
+          proprietà: l’invio non trasferisce alla titolare alcun diritto di
+          sfruttamento dell’opera.
         </p>
         <p>
           Ti chiedo di non inviare, se non strettamente necessario, informazioni
@@ -128,9 +141,9 @@ export default function PrivacyPolicyPage() {
           </p>
         )}
         <p>
-          Il file allegato al modulo di contatto viene trasmesso tramite il
-          servizio FormSubmit e recapitato via email alla titolare (vedi il punto
-          sui destinatari).
+          L’anteprima allegata al modulo di contatto viene trasmessa tramite il
+          servizio FormSubmit e recapitata via email alla casella{" "}
+          {titolare.email}, come descritto al punto sui destinatari.
         </p>
       </LegalSection>
 
@@ -179,46 +192,54 @@ export default function PrivacyPolicyPage() {
         <p>
           Per rispondere a una richiesta sono necessari almeno nome e indirizzo
           email: senza questi dati non è possibile risponderti. Gli altri campi
-          del modulo e l’allegato sono facoltativi ma aiutano a formulare un
-          preventivo preciso. L’iscrizione alla newsletter e l’accettazione dei
-          cookie analitici sono facoltative e non condizionano l’uso del sito.
+          del modulo e l’anteprima allegata sono facoltativi ma aiutano a
+          formulare un preventivo preciso. L’iscrizione alla newsletter e
+          l’accettazione dei cookie analitici sono facoltative e non condizionano
+          l’uso del sito.
         </p>
       </LegalSection>
 
       <LegalSection title="6. A chi vengono comunicati i dati">
         <p>
           I dati non vengono venduti né diffusi. Per il funzionamento del sito e
-          dei servizi collegati vengono utilizzati i seguenti fornitori:
+          dei servizi collegati intervengono i seguenti soggetti:
         </p>
         <LegalList>
           <li>
             <strong className="text-ivory">FormSubmit</strong> (formsubmit.co,
-            gestito da Devro LABS): riceve i dati del modulo di contatto e gli
-            eventuali allegati e li inoltra via email alla titolare. Nella
-            propria documentazione indica di conservare gli invii per 30 giorni e
-            di non conservare i file allegati.
+            gestito da Devro LABS): il modulo di contatto invia i dati e
+            l’eventuale anteprima direttamente dal tuo browser a questo servizio,
+            che li inoltra via email alla titolare; il server del sito non li
+            riceve. Nella propria documentazione FormSubmit indica di conservare
+            gli invii per 30 giorni e di non conservare i file allegati.
           </li>
           <li>
-            <strong className="text-ivory">Brevo</strong>: gestisce l’elenco di
-            iscrizione alla newsletter e l’invio delle email.
+            <strong className="text-ivory">{legal.emailProvider}</strong>:
+            fornisce la posta elettronica del dominio dentroleparole.com; i
+            messaggi indirizzati a {titolare.email} arrivano nella casella
+            gestita da questo provider.
           </li>
           <li>
-            <strong className="text-ivory">Vercel Inc.</strong>: fornisce
-            l’hosting del sito.
+            <strong className="text-ivory">Google (Gmail)</strong>: i messaggi
+            ricevuti a {titolare.email} vengono inoltrati automaticamente
+            all’account Gmail personale della titolare, dove li riceve e li legge.
+            Il servizio è soggetto alle condizioni di Google per gli
+            account personali.
           </li>
           <li>
-            <strong className="text-ivory">Google</strong>: fornisce Google
-            Analytics, attivo solo con il tuo consenso.
+            <strong className="text-ivory">Brevo</strong>: riceve l’indirizzo
+            email di chi si iscrive alla newsletter, gestisce l’elenco degli
+            iscritti e l’invio delle email. L’indirizzo transita dal server del
+            sito prima di essere inviato a Brevo; il sito non ne conserva copia.
           </li>
           <li>
-            <strong className="text-ivory">
-              <Val
-                v={legal.emailProvider}
-                todo="nome del provider della posta in ingresso"
-              />
-            </strong>
-            : provider della posta elettronica in ingresso del dominio
-            dentroleparole.com.
+            <strong className="text-ivory">Vercel Inc.</strong>: ospita il sito e
+            tratta i dati tecnici di navigazione. Non riceve i dati del modulo di
+            contatto.
+          </li>
+          <li>
+            <strong className="text-ivory">Google (Analytics)</strong>: fornisce
+            Google Analytics, attivo solo con il tuo consenso.
           </li>
           <li>
             <strong className="text-ivory">Collaboratori o fornitori</strong>
@@ -244,29 +265,46 @@ export default function PrivacyPolicyPage() {
       <LegalSection title="7. Trasferimenti verso Paesi extra UE">
         <p>
           Alcuni fornitori hanno sede o usano infrastrutture fuori dallo Spazio
-          economico europeo, in particolare negli Stati Uniti. Vercel Inc.
-          dichiara nella propria informativa di aderire all’EU-U.S. Data Privacy
-          Framework e di ricorrere, ove necessario, alle clausole contrattuali
-          standard approvate dalla Commissione europea.
+          economico europeo, in particolare negli Stati Uniti.
         </p>
-        <p>
-          <Todo>
-            sede e garanzie di trasferimento di Google (Analytics), FormSubmit e
-            Brevo: da verificare nella documentazione contrattuale dei fornitori
-            prima della pubblicazione
-          </Todo>
-        </p>
+        <LegalList>
+          <li>
+            <strong className="text-ivory">Vercel</strong> dichiara nella propria
+            informativa di aderire all’EU-U.S. Data Privacy Framework e di
+            ricorrere, ove necessario, alle clausole contrattuali standard
+            approvate dalla Commissione europea.
+          </li>
+          <li>
+            <strong className="text-ivory">Google</strong> dichiara nella propria
+            documentazione di aderire all’EU-U.S. Data Privacy Framework per i
+            trasferimenti di dati verso gli Stati Uniti.
+          </li>
+          <li>
+            <strong className="text-ivory">FormSubmit</strong> non indica
+            pubblicamente la sede dei propri server né le garanzie applicate a
+            eventuali trasferimenti extra UE: i dati inviati con il modulo di
+            contatto possono quindi essere trattati fuori dallo Spazio economico
+            europeo senza che sia possibile indicare qui le garanzie adottate.
+            Se preferisci evitarlo puoi scrivere direttamente a {titolare.email}.
+          </li>
+          <li>
+            Per <strong className="text-ivory">Brevo</strong> le garanzie
+            applicabili a eventuali trasferimenti extra UE sono quelle previste
+            dalle condizioni contrattuali del fornitore; puoi chiedere alla
+            titolare le informazioni disponibili scrivendo a {titolare.email}.
+          </li>
+        </LegalList>
       </LegalSection>
 
       <LegalSection title="8. Per quanto tempo vengono conservati i dati">
         <LegalList>
           <li>
             <strong className="text-ivory">
-              Richieste, preventivi ed estratti non seguiti da un incarico:
+              Richieste, preventivi e anteprime non seguiti da un incarico:
             </strong>{" "}
             <Val
               v={retention.richieste}
-              todo="per quanto tempo si conservano le richieste e gli estratti quando non nasce un incarico"
+              todo="per quanto tempo si conservano le richieste e le anteprime quando non nasce un incarico (nella casella di posta e nell’account Gmail)"
             />
           </li>
           <li>
@@ -319,7 +357,8 @@ export default function PrivacyPolicyPage() {
           portabilità dei dati e opporti al trattamento fondato sul legittimo
           interesse (artt. 15-22 GDPR). Se il trattamento si basa sul consenso
           puoi revocarlo in ogni momento, senza che ciò pregiudichi i trattamenti
-          già effettuati.
+          già effettuati; per la newsletter puoi anche chiedere la cancellazione
+          dell’iscrizione scrivendo a {titolare.email}.
         </p>
         <p>
           Per esercitare i tuoi diritti scrivi a{" "}

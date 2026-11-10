@@ -17,7 +17,7 @@ const problems = [];
 const config = read("src/content/legal.ts")
   .split("\n")
   .filter((line) => !/^\s*(\/\/|\/\*|\*)/.test(line));
-config.forEach((line, i) => {
+config.forEach((line) => {
   const m = line.match(/^\s*(\w+):\s*null\b/);
   if (m) problems.push(`legal.ts: campo "${m[1]}" ancora da confermare (null)`);
 });
@@ -36,6 +36,27 @@ for (const page of pages) {
   // <Todo> scritti direttamente nella pagina
   const todos = (src.match(/<Todo>/g) || []).length;
   if (todos) problems.push(`${page}: ${todos} blocco/i <Todo> ancora presenti`);
+}
+
+// 3) Coerenza con le decisioni confermate (tempi di risposta, anteprima, sistema di contatto attuale)
+const legalConfig = read("src/content/legal.ts");
+if (!legalConfig.includes('risposta: "3–5 giorni lavorativi"')) {
+  problems.push('legal.ts: il tempo di risposta ufficiale è «3–5 giorni lavorativi»');
+}
+for (const page of pages) {
+  const text = read(page).replace(/\s+/g, " ");
+  const forbidden = [
+    [/24\s*[–-]\s*48/, "tempo di risposta non ufficiale (24–48)"],
+    [/\b48 ore\b/, "tempo di risposta non ufficiale (48 ore)"],
+    [/appena possibile/i, "tempo di risposta generico"],
+    [/3-5 giorni/, "tempo di risposta scritto con trattino semplice"],
+    [/5\s*[–-]\s*10 pagine/i, "anteprima indicata in pagine invece che in cartelle editoriali"],
+    [/\bestratto\b/i, "«estratto» al posto di «anteprima»"],
+    [/SMTP|Nodemailer|\/api\/contatti/, "sistema SMTP della PR #7 descritto come attivo"],
+  ];
+  for (const [re, why] of forbidden) {
+    if (re.test(text)) problems.push(`${page}: ${why}`);
+  }
 }
 
 if (problems.length) {

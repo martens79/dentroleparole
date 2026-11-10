@@ -304,6 +304,13 @@ export default function ContactForm() {
         />
       </div>
 
+      <button
+        type="submit"
+        className="mt-2 rounded-2xl bg-gold px-5 py-3 text-sm font-semibold text-night shadow-glow transition hover:opacity-95"
+      >
+        Invia richiesta
+      </button>
+
       <p className="text-xs leading-relaxed text-ivory/55">
         Inviando la richiesta i tuoi dati saranno trattati come descritto nella{" "}
         <a href="/privacy-policy" className="underline underline-offset-2 hover:text-gold">
@@ -311,13 +318,6 @@ export default function ContactForm() {
         </a>
         .
       </p>
-
-      <button
-        type="submit"
-        className="mt-2 rounded-2xl bg-gold px-5 py-3 text-sm font-semibold text-night shadow-glow transition hover:opacity-95"
-      >
-        Invia richiesta
-      </button>
     </form>
   );
 }

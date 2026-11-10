@@ -123,12 +123,21 @@ export default function CookiePolicyPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="5. Collegamenti verso altri siti">
+      <LegalSection title="5. Modulo di contatto, newsletter e collegamenti verso altri siti">
+        <p>
+          Quando invii il modulo di contatto, i dati vengono trasmessi dal tuo
+          browser al servizio FormSubmit (formsubmit.co). Il sito non imposta
+          cookie in questa fase; FormSubmit, sul proprio dominio, può usare
+          propri cookie tecnici secondo la propria informativa. La richiesta di
+          iscrizione alla newsletter, invece, passa dal server del sito e il tuo
+          browser non contatta direttamente il servizio di invio.
+        </p>
         <p>
           Il sito contiene collegamenti a siti esterni (ad esempio negozi online,
-          editori e social network). Se li apri, quei siti possono usare propri
-          cookie secondo le rispettive informative, sulle quali la titolare non
-          ha controllo.
+          editori e social network). Alcuni link della pagina Pubblicazioni
+          portano ad Amazon con un codice di affiliazione. Se apri questi
+          collegamenti, quei siti possono usare propri cookie secondo le
+          rispettive informative, sulle quali la titolare non ha controllo.
         </p>
       </LegalSection>
 
