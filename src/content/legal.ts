@@ -14,6 +14,14 @@
 
 type Confirmable = string | null | false;
 
+/** Segnaposto INTERNO del recapito professionale: non deve mai comparire nell'HTML pubblico. */
+export const RECAPITO_PLACEHOLDER = "[RECAPITO PROFESSIONALE DA COMPLETARE]";
+
+/** Recapito da mostrare sulle pagine pubbliche: `null` finché è ancora il segnaposto interno. */
+export function recapitoPubblico(value: Confirmable): string | null {
+  return typeof value === "string" && value !== RECAPITO_PLACEHOLDER ? value : null;
+}
+
 export const legal = {
   /** Data mostrata come "Ultimo aggiornamento" (da aggiornare alla pubblicazione). */
   updated: "10 novembre 2026",
@@ -24,15 +32,17 @@ export const legal = {
     email: "contatti@dentroleparole.com",
 
     /**
-     * ┌─ DA INSERIRE PRIVATAMENTE ─────────────────────────────────────────────────────────┐
-     * │ Domicilio o sede professionale della titolare (art. 13 GDPR; art. 7 D.Lgs. 70/2003). │
-     * │ Sostituire `null` con una stringa, ad esempio "via Esempio 1, 00100 Città (XX)", poi │
-     * │ eseguire `node scripts/check-legal-placeholders.mjs`.                                │
-     * │ Finché è `null` il sito NON mostra alcun indirizzo né segnaposto (la frase viene    │
-     * │ semplicemente omessa) e il controllo pre-pubblicazione resta in errore.             │
+     * ┌─ RECAPITO PROFESSIONALE: PUNTO SOSPESO ─────────────────────────────────────────────┐
+     * │ La titolare non vuole inserire ora un indirizzo nel repository pubblico.            │
+     * │ Finché il valore è il segnaposto interno RECAPITO_PLACEHOLDER, le pagine pubbliche  │
+     * │ NON mostrano né l'indirizzo né il segnaposto (la frase viene omessa): restano il    │
+     * │ nome della titolare e l'email professionale. Il recapito va completato prima della  │
+     * │ pubblicazione definitiva: sostituire il valore con il recapito scelto dalla titolare │
+     * │ e lanciare `node scripts/check-legal-placeholders.mjs --strict`.                    │
+     * │ Se ne servirà la pubblicazione, tenere presente che il repository è pubblico.       │
      * └──────────────────────────────────────────────────────────────────────────────────────┘
      */
-    indirizzo: null as Confirmable,
+    indirizzo: RECAPITO_PLACEHOLDER as Confirmable,
 
     /**
      * Partita IVA. La titolare ha dichiarato (10 novembre 2026) di non averne attualmente una:
@@ -81,12 +91,15 @@ export const legal = {
 
   analytics: {
     /**
-     * Conservazione dei dati nell'account Google Analytics. NON verificabile dal codice
-     * (è un'impostazione dell'account, non presente nel sito): `null` finché la titolare non la
-     * controlla nel pannello (percorso in docs/legal/STATO_E_DOMANDE_2026-11-10.md).
-     * La Cookie Policy usa una formulazione neutra finché il valore non è noto.
+     * Conservazione dei dati nell'account Google Analytics: è un'impostazione dell'account, non
+     * verificabile dal codice. Decisione della titolare (10 novembre 2026): NON dichiarare una
+     * durata; le pagine usano la formulazione neutra concordata e rimandano alla documentazione
+     * Google. `false` = nessuna durata dichiarata. Se in futuro la durata verrà verificata, basta
+     * inserirla qui come stringa (es. "14 mesi").
      */
-    conservazione: null as Confirmable,
+    conservazione: false as Confirmable,
+    /** Documentazione ufficiale Google sulla conservazione dei dati (verificata: pagina in italiano). */
+    docsConservazioneUrl: "https://support.google.com/analytics/answer/7667196?hl=it",
   },
 
   /**

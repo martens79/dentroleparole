@@ -4,12 +4,12 @@
 
 ## 1. Stato
 
-Le tre pagine (Privacy Policy, Cookie Policy, Termini di servizio) sono complete e coerenti con il sito reale e con le decisioni della titolare. **Restano 2 dati** prima del merge; i due sono gestiti senza segnaposto sul sito pubblico (la frase relativa è omessa o neutra) e il controllo `node scripts/check-legal-placeholders.mjs` resta in errore finché non vengono risolti:
+Le tre pagine (Privacy Policy, Cookie Policy, Termini di servizio) sono tecnicamente complete. **L'unico punto dichiaratamente sospeso è il recapito professionale** (indirizzo): finché non viene completato le pagine legali **non sono complete** e non vanno pubblicate in modo definitivo.
 
-| Dato | Stato | Dove inserirlo |
-|---|---|---|
-| **Indirizzo / sede professionale** | non fornito (la titolare lo inserisce privatamente) | `src/content/legal.ts` → `titolare.indirizzo` |
-| **Conservazione dei dati in Google Analytics** | non verificabile dal codice: è un'impostazione dell'account | `src/content/legal.ts` → `analytics.conservazione` |
+| Punto | Stato |
+|---|---|
+| **Recapito professionale** | sospeso: in `src/content/legal.ts` vale il segnaposto interno `[RECAPITO PROFESSIONALE DA COMPLETARE]`, che **non compare nelle pagine pubbliche** (restano il nome della titolare e l'email professionale). `node scripts/check-legal-placeholders.mjs` lo segnala come **AVVISO** (exit 0); con `--strict` diventa errore. Non si afferma che l'assenza del recapito sia conforme alle norme: va completato prima della pubblicazione definitiva |
+| **Conservazione dati Google Analytics** | deciso: formulazione neutra (nessuna durata dichiarata), con link alla documentazione ufficiale di Google. Nessuna impostazione di Google Analytics è stata toccata |
 
 ## 2. Decisioni confermate e come sono state applicate
 
@@ -26,28 +26,18 @@ Le tre pagine (Privacy Policy, Cookie Policy, Termini di servizio) sono complete
 
 Già confermati in precedenza: anteprima facoltativa di 5–10 cartelle editoriali (circa 1.800 battute, spazi inclusi); manoscritto completo richiedibile dopo; «Rispondo entro 3–5 giorni lavorativi»; testo di proprietà dell'autore; sistema di contatto attuale = FormSubmit (l'SMTP della PR #7 non è descritto come attivo); inoltro verso Gmail personale.
 
-## 3. Come inserire privatamente l'indirizzo
+## 3. Come completare il recapito professionale
 
-1. Sul proprio computer, nella copia del repository sul branch `fix/privacy-cookie-consent-2026`, aprire `src/content/legal.ts`.
-2. Trovare il blocco «DA INSERIRE PRIVATAMENTE» e sostituire `indirizzo: null as Confirmable,` con, ad esempio, `indirizzo: "via Esempio 1, 00100 Città (XX)" as Confirmable,` (via, numero civico, CAP, città, provincia).
-3. Eseguire `node scripts/check-legal-placeholders.mjs`: senza l'indirizzo e senza il dato di Google Analytics elenca solo questi due punti.
-4. Salvare e inviare la modifica (commit e push) sullo stesso branch: la PR si aggiorna da sola. **Non scriverlo in chat né in documenti del repository**: l'unico posto è `legal.ts`.
-5. **Attenzione:** una volta pubblicato, l'indirizzo compare **in chiaro** nella Privacy Policy (punto 1) e nei Termini (punto 1). Se è un domicilio privato e non si vuole mostrarlo, la scelta di quale recapito indicare (sede, studio, altro indirizzo valido) va fatta con il consulente prima di inserirlo.
+1. Nella propria copia del repository, sul branch `fix/privacy-cookie-consent-2026`, aprire `src/content/legal.ts`.
+2. Sostituire `indirizzo: RECAPITO_PLACEHOLDER as Confirmable,` con il recapito scelto, ad esempio `indirizzo: "…" as Confirmable,`.
+3. Eseguire `node scripts/check-legal-placeholders.mjs --strict`: deve finire con «nessun segnaposto residuo».
+4. Commit e push sullo stesso branch. **Il repository è pubblico**: il recapito diventa visibile su GitHub dal momento del commit e resta nella cronologia; sul sito compare in chiaro nella Privacy Policy e nei Termini (punto 1). Farlo solo quando si è pronti a pubblicare.
 
-Finché il campo è `null` il sito non mostra alcun indirizzo né segnaposto: la frase «con domicilio o sede professionale in…» semplicemente non compare. Per questo il dato resta **un blocco al merge**: serve all'informativa (art. 13 GDPR) e tra le informazioni da rendere accessibili sul sito (art. 7 D.Lgs. 70/2003).
+Quale recapito indicare (domicilio, sede, studio) e se sia necessario per la propria situazione senza partita IVA va confermato con un consulente: qui non si afferma che sia obbligatorio né che se ne possa fare a meno.
 
-## 4. Google Analytics: dove verificare la conservazione
+## 4. Google Analytics: formulazione adottata
 
-Il valore **non è nel codice** (`Analytics.tsx` carica solo `gtag("config", "G-Z8PEVWKQVB")`, senza parametri di conservazione): dipende dalle impostazioni dell'account. Nessuna impostazione è stata toccata.
-
-Percorso (da una persona con accesso all'account, in sola lettura):
-1. Aprire analytics.google.com e scegliere l'account e la proprietà GA4 del sito (la proprietà con flusso dati `G-Z8PEVWKQVB`; il codice si controlla in Amministrazione → Flussi di dati).
-2. In basso a sinistra: **Amministrazione** (icona ingranaggio).
-3. Nella colonna **Proprietà**: **Raccolta e modifica dei dati** → **Conservazione dei dati** (in inglese: *Admin → Property → Data collection and modification → Data retention*; in alcune interfacce la voce è sotto *Data settings*).
-4. Leggere **Conservazione dei dati evento**: sono ammessi **2 mesi** o **14 mesi**. Per le nuove proprietà il valore predefinito indicato dalla documentazione Google è 2 mesi, ma va letto sulla proprietà reale.
-5. Annotare il valore (e l'impostazione «Reimposta i dati degli utenti a ogni nuova attività», se presente) e inserirlo in `legal.ts` → `analytics.conservazione`, ad esempio `"14 mesi"`. La Cookie Policy diventa «…conservati da Google nell'account del sito per 14 mesi».
-
-Nota: secondo le guide consultate la conservazione riguarda soprattutto le analisi personalizzate («Esplorazioni»), non i report standard aggregati. Le fonti non concordano sull'effetto retroattivo del cambio: non modificare senza una decisione informata. Fonte principale: pagina di assistenza Google «Conservazione dei dati» (support.google.com/analytics/answer/7667196). I nomi esatti delle voci possono variare con l'interfaccia.
+Privacy Policy (§8) e Cookie Policy (§3): «I dati raccolti tramite Google Analytics sono trattati e conservati secondo le impostazioni di conservazione configurate per la proprietà Google Analytics e secondo le politiche applicabili di Google. Per maggiori informazioni è possibile consultare la documentazione ufficiale di Google Analytics» (link a support.google.com/analytics/answer/7667196). Non è dichiarata alcuna durata di 2 o 14 mesi. I 180 giorni riguardano solo la scelta sui cookie memorizzata sul dispositivo. Se in futuro la durata verrà verificata nel pannello (Amministrazione → Raccolta e modifica dei dati → Conservazione dei dati), potrà essere inserita in `legal.ts` → `analytics.conservazione`.
 
 ## 5. Situazione fiscale: cosa è stato fatto e cosa va chiarito
 
@@ -72,7 +62,7 @@ Vedi `PROCEDURA_CONSERVAZIONE_DATI.md`: registro, controllo mensile, cancellazio
 - Dove salva la titolare allegati e copie di lavoro (computer, Drive, Dropbox, iCloud, backup) e se la casella Register conserva una copia dopo l'inoltro.
 - Newsletter: link di disiscrizione nelle email? Frequenza? Double opt-in? (vedi §9).
 - Come comunica le informazioni precontrattuali e il recesso ai clienti privati; uso di telefono/WhatsApp; cosa si intende per «giorni lavorativi» nei periodi di chiusura.
-- Indirizzo da mostrare (vedi §3, punto 5).
+- Indirizzo da mostrare (vedi §3).
 
 ## 9. Newsletter (Brevo): il messaggio non corrisponde al codice
 
@@ -91,7 +81,7 @@ Vedi `PROCEDURA_CONSERVAZIONE_DATI.md`: registro, controllo mensile, cancellazio
 Le pagine descrivono **solo FormSubmit**. All'attivazione (`NEXT_PUBLIC_CONTACT_BACKEND=api`) vanno aggiornati nello stesso rilascio: Privacy §3 (ultimo paragrafo), §6 (FormSubmit e Vercel: oggi «non riceve i dati del modulo»), §7 e §8 (righe FormSubmit); Cookie Policy §5 (primo paragrafo). Il testo proposto è in `docs/contact-form/README.md` §9 della PR #7. Nella procedura di conservazione scompare la riga FormSubmit e compare il passaggio in memoria sul server (nessuna copia). Resta vero l'inoltro verso Gmail personale.
 
 ## 11. Prima del merge
-1. Inserire l'indirizzo (§3) e il dato di Google Analytics (§4); `check-legal-placeholders` deve finire con «nessun segnaposto residuo».
+1. Completare il recapito professionale (§3); `check-legal-placeholders --strict` deve finire con «nessun segnaposto residuo».
 2. Far leggere i testi a un professionista (basi giuridiche, ruoli dei fornitori, trasferimenti, situazione fiscale e clausole verso i consumatori).
 3. Impegnarsi a tenere la procedura di conservazione (§7): le promesse della Privacy Policy sono impegni operativi.
 4. Aggiornare la data «Ultimo aggiornamento» in `legal.ts`.

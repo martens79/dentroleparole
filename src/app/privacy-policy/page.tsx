@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { pageMetadata } from "@/lib/site";
-import { legal } from "@/content/legal";
+import { legal, recapitoPubblico } from "@/content/legal";
 import {
   LegalList,
   LegalPage,
@@ -34,8 +34,11 @@ export default function PrivacyPolicyPage() {
         <p>
           Titolare del trattamento è{" "}
           <strong className="text-ivory">{titolare.nome}</strong>
-          {typeof titolare.indirizzo === "string" ? (
-            <>, con domicilio o sede professionale in {titolare.indirizzo}</>
+          {recapitoPubblico(titolare.indirizzo) ? (
+            <>
+              , con domicilio o sede professionale in{" "}
+              {recapitoPubblico(titolare.indirizzo)}
+            </>
           ) : null}
           {titolare.partitaIva !== false ? (
             <>
@@ -349,8 +352,25 @@ export default function PrivacyPolicyPage() {
             vengono conservati.
           </li>
           <li>
-            <strong className="text-ivory">Cookie e statistiche:</strong> vedi
-            la{" "}
+            <strong className="text-ivory">Google Analytics:</strong> i dati
+            raccolti tramite Google Analytics sono trattati e conservati secondo
+            le impostazioni di conservazione configurate per la proprietà Google
+            Analytics e secondo le politiche applicabili di Google. Per maggiori
+            informazioni è possibile consultare la{" "}
+            <a
+              href={legal.analytics.docsConservazioneUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={legalLink}
+            >
+              documentazione ufficiale di Google Analytics
+            </a>
+            .
+          </li>
+          <li>
+            <strong className="text-ivory">Scelta sui cookie:</strong> la tua
+            scelta è memorizzata sul tuo dispositivo per 180 giorni; è una durata
+            diversa dalla conservazione dei dati di Google Analytics. Vedi la{" "}
             <Link href="/cookie-policy" className={legalLink}>
               Cookie Policy
             </Link>

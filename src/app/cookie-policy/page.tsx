@@ -102,17 +102,19 @@ export default function CookiePolicyPage() {
         <p>
           <strong className="text-ivory">Due durate diverse.</strong> I 180
           giorni indicati al punto 1 riguardano soltanto la tua scelta sui
-          cookie, memorizzata sul tuo dispositivo. I dati statistici raccolti da
-          Google Analytics, se hai accettato, sono invece conservati da Google
-          nell’account Google Analytics del sito{" "}
-          {typeof analytics.conservazione === "string" ? (
-            <>per {analytics.conservazione}</>
-          ) : (
-            <>
-              per il periodo stabilito dalle impostazioni di conservazione dei
-              dati dell’account stesso
-            </>
-          )}
+          cookie, memorizzata sul tuo dispositivo. I dati raccolti tramite
+          Google Analytics, se hai accettato, sono invece trattati e conservati
+          secondo le impostazioni di conservazione configurate per la proprietà
+          Google Analytics e secondo le politiche applicabili di Google. Per
+          maggiori informazioni è possibile consultare la{" "}
+          <a
+            href={analytics.docsConservazioneUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={legalLink}
+          >
+            documentazione ufficiale di Google Analytics
+          </a>
           .
         </p>
         <p>

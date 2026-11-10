@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { pageMetadata } from "@/lib/site";
-import { legal } from "@/content/legal";
+import { legal, recapitoPubblico } from "@/content/legal";
 import {
   LegalList,
   LegalPage,
@@ -38,8 +38,11 @@ export default function TerminiDiServizioPage() {
         <p>
           Il sito è gestito da{" "}
           <strong className="text-ivory">{titolare.nome}</strong>
-          {typeof titolare.indirizzo === "string" ? (
-            <>, con domicilio o sede professionale in {titolare.indirizzo}</>
+          {recapitoPubblico(titolare.indirizzo) ? (
+            <>
+              , con domicilio o sede professionale in{" "}
+              {recapitoPubblico(titolare.indirizzo)}
+            </>
           ) : null}
           {titolare.partitaIva !== false ? (
             <>
