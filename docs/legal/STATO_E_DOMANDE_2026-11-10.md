@@ -87,3 +87,17 @@ Le pagine descrivono **solo FormSubmit**. All'attivazione (`NEXT_PUBLIC_CONTACT_
 4. Aggiornare la data «Ultimo aggiornamento» in `legal.ts`.
 5. Ordine con la PR #7: la nota «Inviando la richiesta…» è posizionata in modo che le due PR si fondano senza conflitti; le pagine parlano di «anteprima», il modulo di `main` dice ancora «estratto» finché non entra la PR #7.
 6. Fuori da questa PR: link a Privacy e Cookie nel piè di pagina di tutte le pagine (oggi il footer è solo in home).
+
+
+## Aggiornamento operativo — situazione dichiarata il 10 novembre 2026
+
+La titolare ha chiarito che **svolge l'attività da casa, non ha una sede professionale separata e non possiede una partita IVA**. Questi dati **non autorizzano** a inventare un indirizzo di studio, un numero fiscale o una forma societaria. Non pubblicare l'indirizzo domestico senza una decisione esplicita della titolare.
+
+**Distinzione normativa da verificare prima del merge:**
+- L'art. 13, par. 1, lett. a) del GDPR richiede identità e dati di contatto del titolare; non indica testualmente che l'informativa debba sempre mostrare un indirizzo postale. Fonte: https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32016R0679
+- L'art. 7 del D.Lgs. 70/2003 prevede, quando applicabile ai servizi della società dell'informazione, informazioni accessibili su nome, domicilio o sede legale e contatti. Non presumere che la sola email risolva tutti gli obblighi. Fonte: https://www.parlamento.it/parlam/leggi/deleghe/03070dl.htm
+- La mancanza di partita IVA è un fatto dichiarato, **non** una conclusione sulla natura occasionale dell'attività. Prima di pubblicare condizioni professionali definitive va chiarito se vi sono già prestazioni remunerate e con quale abitualità.
+
+**Stato operativo:** mantenere aperta la PR #5 e il controllo rigoroso del recapito. La pubblicazione non è autorizzata da questo aggiornamento. Le informazioni tecniche su FormSubmit restano quelle del sistema attualmente in produzione; non anticipare l'SMTP della PR #7. Evitare un valore di comodo come «sede online», «domicilio digitale» o una città scelta arbitrariamente.
+
+**Altri controlli non risolti dal solo recapito:** verificare il consenso e il messaggio di conferma della newsletter Brevo; assicurarsi che la procedura manuale di cancellazione a 90/180 giorni sia effettivamente praticabile. Non affermare conformità automatica.
