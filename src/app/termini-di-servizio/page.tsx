@@ -38,11 +38,8 @@ export default function TerminiDiServizioPage() {
         <p>
           Il sito è gestito da{" "}
           <strong className="text-ivory">{titolare.nome}</strong>
-          {titolare.indirizzo !== false ? (
-            <>
-              , con domicilio o sede professionale in{" "}
-              <Val v={titolare.indirizzo} todo="indirizzo o sede professionale" />
-            </>
+          {typeof titolare.indirizzo === "string" ? (
+            <>, con domicilio o sede professionale in {titolare.indirizzo}</>
           ) : null}
           {titolare.partitaIva !== false ? (
             <>
@@ -140,6 +137,16 @@ export default function TerminiDiServizioPage() {
           </Link>
           ).
         </p>
+        {legal.strumentiIA === false ? (
+          <p>
+            La titolare non utilizza strumenti di intelligenza artificiale sui
+            manoscritti dei clienti.
+          </p>
+        ) : null}
+        <p>
+          I tempi di conservazione di richieste, anteprime e manoscritti sono
+          indicati nella Privacy Policy.
+        </p>
       </LegalSection>
 
       <LegalSection title="7. Tempi di risposta">
@@ -224,11 +231,10 @@ export default function TerminiDiServizioPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="14. Legge applicabile e foro">
+      <LegalSection title="14. Legge applicabile">
         <p>
-          Questi Termini sono regolati dalla legge italiana. Per le controversie
-          con consumatori resta competente il giudice del luogo di residenza o
-          domicilio del consumatore, come previsto dalla legge.
+          Questi Termini sono regolati dalla legge italiana. Restano ferme le
+          norme inderogabili a tutela dei consumatori.
         </p>
       </LegalSection>
 

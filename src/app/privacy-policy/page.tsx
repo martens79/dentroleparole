@@ -34,11 +34,8 @@ export default function PrivacyPolicyPage() {
         <p>
           Titolare del trattamento è{" "}
           <strong className="text-ivory">{titolare.nome}</strong>
-          {titolare.indirizzo !== false ? (
-            <>
-              , con domicilio o sede professionale in{" "}
-              <Val v={titolare.indirizzo} todo="indirizzo o sede professionale" />
-            </>
+          {typeof titolare.indirizzo === "string" ? (
+            <>, con domicilio o sede professionale in {titolare.indirizzo}</>
           ) : null}
           {titolare.partitaIva !== false ? (
             <>
@@ -129,8 +126,12 @@ export default function PrivacyPolicyPage() {
         </p>
         {legal.strumentiIA === false ? (
           <p>
-            Per il lavoro editoriale non vengono utilizzati strumenti di
-            intelligenza artificiale che elaborano il contenuto dei manoscritti.
+            La titolare non utilizza strumenti di intelligenza artificiale sui
+            manoscritti dei clienti. Questa dichiarazione riguarda il lavoro
+            editoriale svolto dalla titolare: i fornitori elencati al punto
+            seguente trattano i dati secondo le proprie condizioni e possono
+            usare sistemi automatici propri, ad esempio i filtri antispam e
+            antivirus dei servizi di posta.
           </p>
         ) : (
           <p>
@@ -246,7 +247,10 @@ export default function PrivacyPolicyPage() {
             :{" "}
             {legal.collaboratori === false ? (
               <>
-                nessun collaboratore o fornitore esterno accede ai manoscritti.
+                nessun collaboratore accede ai manoscritti per svolgere il
+                lavoro editoriale. Restano l’accesso tecnico dei fornitori sopra
+                indicati (trasmissione del modulo, posta elettronica, hosting),
+                necessario al funzionamento dei rispettivi servizi.
               </>
             ) : (
               <Val
@@ -300,25 +304,35 @@ export default function PrivacyPolicyPage() {
         <LegalList>
           <li>
             <strong className="text-ivory">
-              Richieste, preventivi e anteprime non seguiti da un incarico:
+              Richieste di informazioni e anteprime non seguite da un incarico:
             </strong>{" "}
             <Val
               v={retention.richieste}
-              todo="per quanto tempo si conservano le richieste e le anteprime quando non nasce un incarico (nella casella di posta e nell’account Gmail)"
+              todo="tempo di conservazione delle richieste senza incarico"
             />
+            . La richiesta si considera chiusa quando ha ricevuto risposta
+            definitiva e non viene avviato un incarico (ad esempio perché il
+            preventivo non viene accettato o la richiesta viene ritirata).
           </li>
           <li>
             <strong className="text-ivory">
-              Manoscritti, allegati e materiali di un incarico:
+              Manoscritti, anteprime e copie di lavoro di un incarico:
             </strong>{" "}
             <Val
               v={retention.materiali}
-              todo="per quanto tempo si conservano i manoscritti e i materiali dopo la conclusione dell’incarico"
+              todo="tempo di conservazione dei manoscritti dopo l’incarico"
             />
+            . Se un incarico viene avviato, il termine di 180 giorni sostituisce
+            quello previsto per le richieste.
           </li>
           <li>
-            <strong className="text-ivory">Documenti fiscali e contabili:</strong>{" "}
-            per i termini previsti dalla normativa fiscale e contabile.
+            <strong className="text-ivory">
+              Documenti contrattuali, amministrativi e fiscali:
+            </strong>{" "}
+            per i termini previsti dalla legge, che possono essere diversi da
+            quelli indicati sopra: i termini di 90 e 180 giorni riguardano i
+            manoscritti, le anteprime, le richieste e le relative copie di lavoro, non
+            questi documenti.
           </li>
           <li>
             <strong className="text-ivory">Newsletter:</strong> fino alla
@@ -344,9 +358,21 @@ export default function PrivacyPolicyPage() {
           </li>
         </LegalList>
         <p>
-          Trascorsi questi periodi i dati vengono cancellati o resi anonimi,
-          salvo che la legge ne imponga o consenta la conservazione, ad esempio
-          per tutelare un diritto in sede giudiziaria.
+          Trascorsi questi periodi la titolare cancella i dati dalle caselle di
+          posta e dagli archivi che controlla direttamente (account Gmail,
+          casella di posta del dominio, computer ed eventuali servizi di
+          archiviazione). La cancellazione viene fatta dalla titolare, non è
+          automatica. Restano ferme la conservazione imposta o consentita dalla
+          legge, ad esempio per tutelare un diritto in sede giudiziaria, e le
+          copie tecniche dei fornitori (cestino, copie di sicurezza), che
+          possono persistere per periodi non controllabili dalla titolare: ad
+          esempio i messaggi eliminati restano nel cestino di Gmail per 30
+          giorni prima della cancellazione definitiva.
+        </p>
+        <p>
+          Puoi chiedere la cancellazione anticipata dei tuoi dati scrivendo a{" "}
+          {titolare.email}: sarà accolta salvo che la legge imponga di
+          conservarli o che servano per tutelare un diritto.
         </p>
       </LegalSection>
 

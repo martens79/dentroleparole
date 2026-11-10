@@ -1,70 +1,99 @@
-# Pagine legali — stato, conferme necessarie e newsletter (10 novembre 2026)
+# Pagine legali — stato, conferme e punti aperti (aggiornato con le decisioni della titolare)
 
-> Documento di lavoro, non pubblicato sul sito. Aggiorna `VERIFICHE_E_DOMANDE_2026-11-09.md` (che resta come storico). Non è consulenza legale e non attesta la conformità al GDPR: i testi vanno riletti da un professionista qualificato.
+> Documento di lavoro, non pubblicato sul sito. Aggiorna `VERIFICHE_E_DOMANDE_2026-11-09.md` (storico). Non è consulenza legale e non attesta la conformità al GDPR: i testi vanno riletti da un professionista qualificato.
 
-## 1. Cosa è stato completato in questa PR
+## 1. Stato
 
-| Pagina | Stato |
-|---|---|
-| **Privacy Policy** | Completa. Descrive: titolare; dati del modulo e dell'anteprima facoltativa; email; newsletter (Brevo); Google Analytics solo con consenso; FormSubmit; Register.it (posta in ingresso); inoltro verso Gmail personale; Vercel; basi giuridiche; trasferimenti extra UE; conservazione; diritti e reclamo al Garante |
-| **Cookie Policy** | Verificata riga per riga sul codice (vedi §2) e completata con FormSubmit e link di affiliazione Amazon |
-| **Termini di servizio** | Riscritti nei 9 punti richiesti: utilizzo del sito; richiesta iniziale; anteprima facoltativa; proprietà intellettuale dell'autore; riservatezza; tempi di risposta (3–5 giorni lavorativi); servizi editoriali con preventivo o accordo; tempi, compensi e condizioni nel singolo incarico. Nessun compenso, penale o recesso inventato |
+Le tre pagine (Privacy Policy, Cookie Policy, Termini di servizio) sono complete e coerenti con il sito reale e con le decisioni della titolare. **Restano 2 dati** prima del merge; i due sono gestiti senza segnaposto sul sito pubblico (la frase relativa è omessa o neutra) e il controllo `node scripts/check-legal-placeholders.mjs` resta in errore finché non vengono risolti:
 
-Decisioni usate come definitive (tutte in `src/content/legal.ts`): anteprima facoltativa di 5–10 cartelle editoriali (circa 1.800 battute, spazi inclusi); manoscritto completo non necessario e richiedibile dopo via email; «Rispondo entro 3–5 giorni lavorativi»; il testo resta dell'autore; sistema di contatto attuale = **FormSubmit**; consenso cookie della PR #6 già in produzione.
+| Dato | Stato | Dove inserirlo |
+|---|---|---|
+| **Indirizzo / sede professionale** | non fornito (la titolare lo inserisce privatamente) | `src/content/legal.ts` → `titolare.indirizzo` |
+| **Conservazione dei dati in Google Analytics** | non verificabile dal codice: è un'impostazione dell'account | `src/content/legal.ts` → `analytics.conservazione` |
 
-`node scripts/check-legal-placeholders.mjs` ora controlla anche la coerenza: nessun «24–48», «estratto», «5–10 pagine», nessun SMTP descritto come attivo. Esito attuale: **7 dati ancora da confermare** (non 10), nessun problema di coerenza.
+## 2. Decisioni confermate e come sono state applicate
 
-## 2. Verifiche eseguite il 10 novembre (sola lettura)
+| Tema | Decisione | Applicazione |
+|---|---|---|
+| Partita IVA | non ne ha una attualmente | `partitaIva: false` → riga omessa in Privacy e Termini. Nessun numero, forma giuridica o qualifica inventati (vedi §5) |
+| Richieste senza incarico | **90 giorni dalla chiusura della richiesta** | Privacy §8; la «chiusura» è definita nel testo (risposta definitiva e nessun incarico avviato) |
+| Manoscritti dopo l'incarico | **180 giorni dalla conclusione dell'incarico** | Privacy §8; distinti da contratti, documenti amministrativi e fiscali (termini di legge) |
+| Cancellazione | manuale, **non automatica** | scritto esplicitamente in Privacy §8; procedura in `PROCEDURA_CONSERVAZIONE_DATI.md` |
+| Collaboratori | nessuno accede ai manoscritti per il lavoro editoriale | Privacy §6: dichiarazione sulle persone, con l'accesso tecnico dei fornitori (modulo, posta, hosting) precisato a parte |
+| Intelligenza artificiale | non usata dalla titolare sui manoscritti | Privacy §3 e Termini §6: riferita alla titolare; i sistemi dei fornitori (es. filtri antispam/antivirus della posta) non sono coperti dalla dichiarazione |
+| Google Analytics | durata non nota | Cookie Policy §3: i 180 giorni sono la scelta sul dispositivo; i dati Google sono conservati «per il periodo stabilito dalle impostazioni dell'account». Nessun valore inventato |
+| Foro competente / recesso / penali | non decisi | Termini §14 ora dice solo «legge italiana» e «restano ferme le norme inderogabili a tutela dei consumatori»; §9 esclude compensi, penali e recesso inventati |
 
-- **Cookie in produzione**: nessuna intestazione `Set-Cookie` su home, privacy e grazie. Il sito usa solo `dlp_cookie_consent` (archiviazione locale, 180 giorni) e `promo_seen_<mese>` (archiviazione di sessione); nessun altro uso di `localStorage`/`sessionStorage`/`document.cookie` nel codice.
-- **Google Analytics**: `G-Z8PEVWKQVB` caricato da `Analytics.tsx` solo con consenso «granted»; con «denied» o nessuna scelta viene impostato `ga-disable` e i cookie `_ga*` rimossi. Coerente con la Cookie Policy.
-- **Banner**: «Accetta» e «Rifiuta» con identico stile; pulsante «Preferenze cookie» fisso in basso a sinistra quando il banner è chiuso.
-- **Servizi esterni realmente usati**: FormSubmit (azione del modulo), Brevo (`/api/newsletter`), Google Analytics, Vercel (hosting). Nessun altro script, pixel, iframe, font esterno (i font sono serviti dal sito). Sanity non è contattato dal browser.
-- **Link Amazon**: tutti i 9 link `amzn.to` rimandano ad Amazon con il tag di affiliazione Associates; la dichiarazione è già nella pagina Pubblicazioni. Ora è anche nei Termini e nella Cookie Policy. I 6 link `amazon.it` diretti non hanno tag.
-- **Google**: dichiara l'adesione al Data Privacy Framework (documentazione Google); **Brevo e FormSubmit**: informazioni pubbliche su sede e garanzie non verificabili — i testi lo dicono senza inventare nulla.
+Già confermati in precedenza: anteprima facoltativa di 5–10 cartelle editoriali (circa 1.800 battute, spazi inclusi); manoscritto completo richiedibile dopo; «Rispondo entro 3–5 giorni lavorativi»; testo di proprietà dell'autore; sistema di contatto attuale = FormSubmit (l'SMTP della PR #7 non è descritto come attivo); inoltro verso Gmail personale.
 
-## 3. Newsletter (Brevo): il messaggio non corrisponde al codice
+## 3. Come inserire privatamente l'indirizzo
 
-**Verificato nel codice (nessuna modifica fatta):**
-- `NewsletterMini.tsx` (nel footer della home) invia solo l'email a `/api/newsletter`, che chiama `POST /v3/contacts` con `listIds` e `updateEnabled: true`.
-- **Non esiste double opt-in** (nessuna chiamata a `/v3/contacts/doubleOptinConfirmation`, nessun modello DOI) e **nessuna casella di consenso**.
-- Dopo l'iscrizione il sito mostra «Grazie per esserti iscritto. **Controlla la tua email per confermare.**» e l'API risponde «Iscrizione completata. Controlla la tua email.». Se in Brevo non c'è un'automazione che invia comunque un'email, **nessuna conferma arriverà**: il messaggio è fuorviante. Questo si vede solo dall'account Brevo (non accessibile; nessuna email di prova inviata).
-- `NewsletterBox.tsx` (con testo «…conferma l'iscrizione alla newsletter») non è usato da nessuna pagina.
-- Il consenso non è documentato: non si registrano data, testo accettato né origine oltre a quanto Brevo salva sul contatto (art. 7, par. 1 GDPR: il titolare deve poter dimostrare il consenso). La nota sotto il modulo rimanda alla Privacy Policy ma non chiede un'azione esplicita.
-- `updateEnabled: true` aggiorna un contatto già presente invece di segnalarlo: nessun effetto sulla privacy, ma va saputo.
+1. Sul proprio computer, nella copia del repository sul branch `fix/privacy-cookie-consent-2026`, aprire `src/content/legal.ts`.
+2. Trovare il blocco «DA INSERIRE PRIVATAMENTE» e sostituire `indirizzo: null as Confirmable,` con, ad esempio, `indirizzo: "via Esempio 1, 00100 Città (XX)" as Confirmable,` (via, numero civico, CAP, città, provincia).
+3. Eseguire `node scripts/check-legal-placeholders.mjs`: senza l'indirizzo e senza il dato di Google Analytics elenca solo questi due punti.
+4. Salvare e inviare la modifica (commit e push) sullo stesso branch: la PR si aggiorna da sola. **Non scriverlo in chat né in documenti del repository**: l'unico posto è `legal.ts`.
+5. **Attenzione:** una volta pubblicato, l'indirizzo compare **in chiaro** nella Privacy Policy (punto 1) e nei Termini (punto 1). Se è un domicilio privato e non si vuole mostrarlo, la scelta di quale recapito indicare (sede, studio, altro indirizzo valido) va fatta con il consulente prima di inserirlo.
 
-**Testi corretti proposti (da applicare in una modifica separata della newsletter):**
-- *Se non si introduce il double opt-in* — conferma: «Grazie, l'iscrizione è registrata. Puoi annullarla in qualsiasi momento scrivendo a contatti@dentroleparole.com.» (aggiungere «o dal link in fondo a ogni email» solo dopo aver verificato che le email di Brevo lo contengano); nota sotto il modulo: «Iscrivendoti acconsenti a ricevere la newsletter di Dentro le Parole. Informazioni sul trattamento dei dati nella Privacy Policy.»
-- *Se si introduce il double opt-in (consigliato)* — si può mantenere il messaggio attuale, dopo aver creato il modello DOI in Brevo e usato l'endpoint di conferma; così il consenso risulta documentato.
+Finché il campo è `null` il sito non mostra alcun indirizzo né segnaposto: la frase «con domicilio o sede professionale in…» semplicemente non compare. Per questo il dato resta **un blocco al merge**: serve all'informativa (art. 13 GDPR) e tra le informazioni da rendere accessibili sul sito (art. 7 D.Lgs. 70/2003).
 
-La Privacy Policy è già scritta in modo valido per entrambi i casi (consenso, revoca scrivendo alla titolare).
+## 4. Google Analytics: dove verificare la conservazione
 
-## 4. Cosa serve dalla titolare (solo l'indispensabile)
+Il valore **non è nel codice** (`Analytics.tsx` carica solo `gtag("config", "G-Z8PEVWKQVB")`, senza parametri di conservazione): dipende dalle impostazioni dell'account. Nessuna impostazione è stata toccata.
 
-Sono 7 dati, raggruppati in 4 domande. Finché mancano, le pagine mostrano il riquadro giallo «DA CONFERMARE» e lo script di controllo fallisce (blocca il merge).
+Percorso (da una persona con accesso all'account, in sola lettura):
+1. Aprire analytics.google.com e scegliere l'account e la proprietà GA4 del sito (la proprietà con flusso dati `G-Z8PEVWKQVB`; il codice si controlla in Amministrazione → Flussi di dati).
+2. In basso a sinistra: **Amministrazione** (icona ingranaggio).
+3. Nella colonna **Proprietà**: **Raccolta e modifica dei dati** → **Conservazione dei dati** (in inglese: *Admin → Property → Data collection and modification → Data retention*; in alcune interfacce la voce è sotto *Data settings*).
+4. Leggere **Conservazione dei dati evento**: sono ammessi **2 mesi** o **14 mesi**. Per le nuove proprietà il valore predefinito indicato dalla documentazione Google è 2 mesi, ma va letto sulla proprietà reale.
+5. Annotare il valore (e l'impostazione «Reimposta i dati degli utenti a ogni nuova attività», se presente) e inserirlo in `legal.ts` → `analytics.conservazione`, ad esempio `"14 mesi"`. La Cookie Policy diventa «…conservati da Google nell'account del sito per 14 mesi».
 
-1. **Identità professionale.** (a) Indirizzo di domicilio o sede professionale; (b) ha partita IVA? Se sì, quale. *(serve per l'informativa e per le informazioni obbligatorie del sito, art. 7 D.Lgs. 70/2003)*
-2. **Conservazione.** Per quanto tempo tiene (a) richieste e anteprime quando non nasce un incarico, (b) manoscritti e materiali dopo la fine di un incarico? *(contenuto obbligatorio dell'informativa; non è deciso da me. Esempi che può scegliere: «12 mesi dall'ultimo contatto»; «24 mesi dalla consegna». Se preferisce non fissare un numero, l'alternativa ammessa è indicare il criterio: «per il tempo necessario a gestire la richiesta e l'eventuale incarico, e poi per il tempo richiesto da obblighi di legge o per tutelare un diritto»)*
-3. **Chi accede ai testi.** (a) Collaboratori o fornitori (voci per audiolibri, altri editor, ecc.) hanno accesso ai manoscritti: sì o no? (b) Usa strumenti di intelligenza artificiale sul contenuto dei manoscritti: sì o no, e quali?
-4. **Google Analytics.** Nel pannello (Admin → Impostazioni dati → Conservazione dei dati) la conservazione è impostata a 2 o a 14 mesi?
+Nota: secondo le guide consultate la conservazione riguarda soprattutto le analisi personalizzate («Esplorazioni»), non i report standard aggregati. Le fonti non concordano sull'effetto retroattivo del cambio: non modificare senza una decisione informata. Fonte principale: pagina di assistenza Google «Conservazione dei dati» (support.google.com/analytics/answer/7667196). I nomi esatti delle voci possono variare con l'interfaccia.
 
-**Non bloccanti (consigliati, non necessari alla pubblicazione):** la newsletter ha un link per disiscriversi in ogni email? Con che frequenza si scrive? Si vuole attivare il double opt-in (§3)? Come vengono comunicate le informazioni precontrattuali e il recesso ai clienti privati (nel preventivo)? Il telefono/WhatsApp viene usato per contattare i clienti? Cosa si intende per «giorni lavorativi» in periodi di chiusura?
+## 5. Situazione fiscale: cosa è stato fatto e cosa va chiarito
 
-## 5. Cosa cambia nei testi quando si attiverà il modulo SMTP (PR #7)
+La titolare ha dichiarato di non avere la partita IVA. Nelle pagine non compare alcun numero, forma giuridica, iscrizione o affermazione sulla regolarità fiscale; nel resto del sito non ci sono riferimenti a partita IVA, ditta o qualifiche (verificato con ricerca nel codice). Non ho cercato dati pubblici sulla titolare.
 
-Il testo di ora descrive **solo FormSubmit**. All'attivazione (`NEXT_PUBLIC_CONTACT_BACKEND=api`) vanno aggiornati, nello stesso rilascio:
-- **Privacy §3 (ultimo paragrafo) e §6**: eliminare FormSubmit; indicare che richiesta e anteprima sono ricevute dal server del sito (Vercel, regione fra1), elaborate solo in memoria e inviate per email a Register.it, senza copie sul sito. Il testo proposto è in `docs/contact-form/README.md` §9 della PR #7.
-- **Privacy §6 (Vercel)**: oggi «non riceve i dati del modulo» → diventerebbe falso.
-- **Privacy §7 e §8**: eliminare le righe su FormSubmit (trasferimenti, 30 giorni).
-- **Cookie Policy §5**: eliminare il primo paragrafo su FormSubmit.
-- Il limite dell'allegato cambia da 8 a 4,4 MB (le pagine legali non riportano più la misura, per non doverla aggiornare).
+**Non è stata fatta alcuna valutazione fiscale.** Da chiarire con un consulente fiscale, perché influiscono sui testi:
+- se l'attività, così come descritta sul sito (servizi editoriali a pagamento, ripetuti nel tempo), richieda l'apertura della partita IVA o possa essere svolta in altra forma consentita, e con quali documenti si fattura o si rilascia ricevuta; i Termini non indicano nulla in merito;
+- il Codice del consumo si applica a chi agisce nell'ambito della propria attività professionale **anche senza partita IVA**: i Termini mantengono quindi la clausola neutra sulle tutele dei consumatori;
+- la partita IVA, se in futuro attivata, andrà inserita in `legal.ts` → `titolare.partitaIva` (si mostra in Privacy §1 e Termini §1).
 
-Rimane vero in entrambi i casi l'inoltro verso il Gmail personale (scelta consapevole della titolare, già dichiarata).
+## 6. Dove si trovano le copie dei dati (verifica)
 
-## 6. Prima del merge
+Dettaglio e limiti in `PROCEDURA_CONSERVAZIONE_DATI.md` (§2). In sintesi: **FormSubmit** conserva gli invii 30 giorni (documentazione del fornitore, non verificabile; gli allegati non vengono conservati) → scade prima dei 90 giorni; **Register.it** e **Gmail** sono controllabili dalla titolare (il cestino di Gmail trattiene 30 giorni); **non è noto** se Register conserva una copia dopo l'inoltro, né dove la titolare salva gli allegati sul computer o su servizi cloud/backup. Copie di sicurezza dei fornitori non controllabili possono superare i termini: è dichiarato nella Privacy Policy.
 
-1. Risolvere i 7 dati del §4 (`node scripts/check-legal-placeholders.mjs` deve finire con «nessun segnaposto residuo»).
-2. Far leggere i testi a un professionista (basi giuridiche, ruoli dei fornitori, trasferimenti, clausole verso i consumatori).
-3. Decidere l'ordine con la PR #7: la nota «Inviando la richiesta…» sotto il pulsante è stata posizionata in modo che le due PR si fondano senza conflitti (verificato con una simulazione di merge). Le pagine legali parlano di «anteprima»: il modulo di `main` dice ancora «estratto» finché non entra la PR #7.
-4. Aggiornare la data «Ultimo aggiornamento» in `legal.ts` al giorno della pubblicazione.
-5. Fuori da questa PR: link a Privacy e Cookie nel piè di pagina di tutte le pagine (oggi il footer è solo in home; il pulsante «Preferenze cookie» e il banner rimandano comunque alle policy).
+## 7. Procedure manuali per i 90 e 180 giorni
+
+Vedi `PROCEDURA_CONSERVAZIONE_DATI.md`: registro, controllo mensile, cancellazione delle copie, svuotamento dei cestini, gestione delle richieste di cancellazione anticipata. Esito della verifica: **i termini sono rispettabili solo se il registro viene tenuto e il controllo viene fatto**; non esiste automatismo e la Privacy Policy non lo promette.
+
+## 8. Ancora da decidere (non bloccanti)
+
+- **Regola di «chiusura»** di una richiesta quando la persona non risponde più dopo il preventivo (dopo quanto tempo si considera chiusa).
+- Dove salva la titolare allegati e copie di lavoro (computer, Drive, Dropbox, iCloud, backup) e se la casella Register conserva una copia dopo l'inoltro.
+- Newsletter: link di disiscrizione nelle email? Frequenza? Double opt-in? (vedi §9).
+- Come comunica le informazioni precontrattuali e il recesso ai clienti privati; uso di telefono/WhatsApp; cosa si intende per «giorni lavorativi» nei periodi di chiusura.
+- Indirizzo da mostrare (vedi §3, punto 5).
+
+## 9. Newsletter (Brevo): il messaggio non corrisponde al codice
+
+**Verificato nel codice (nessuna modifica):**
+- `NewsletterMini.tsx` (footer della home) invia solo l'email a `/api/newsletter`, che chiama `POST /v3/contacts` con `listIds` e `updateEnabled: true`.
+- **Nessun double opt-in** (nessuna chiamata a `/v3/contacts/doubleOptinConfirmation`, nessun modello DOI) e **nessuna casella di consenso**.
+- Dopo l'iscrizione il sito mostra «…Controlla la tua email per confermare.» Se in Brevo non c'è un'automazione, **nessuna conferma arriverà**: il messaggio è fuorviante (verificabile solo dall'account Brevo; nessuna email di prova inviata). `NewsletterBox.tsx` non è usato.
+- Il consenso non è documentato (data, testo accettato, origine): art. 7, par. 1 GDPR.
+
+**Testi corretti proposti (da applicare in una modifica separata):**
+- *Senza double opt-in:* «Grazie, l'iscrizione è registrata. Puoi annullarla in qualsiasi momento scrivendo a contatti@dentroleparole.com.» (aggiungere «o dal link in fondo a ogni email» solo dopo aver verificato che le email lo contengano); sotto il modulo: «Iscrivendoti acconsenti a ricevere la newsletter di Dentro le Parole. Informazioni sul trattamento dei dati nella Privacy Policy.»
+- *Con double opt-in (consigliato):* mantenere il messaggio attuale dopo aver creato il modello DOI in Brevo e usato l'endpoint di conferma.
+
+## 10. Cosa cambia nei testi quando si attiverà il modulo SMTP (PR #7)
+
+Le pagine descrivono **solo FormSubmit**. All'attivazione (`NEXT_PUBLIC_CONTACT_BACKEND=api`) vanno aggiornati nello stesso rilascio: Privacy §3 (ultimo paragrafo), §6 (FormSubmit e Vercel: oggi «non riceve i dati del modulo»), §7 e §8 (righe FormSubmit); Cookie Policy §5 (primo paragrafo). Il testo proposto è in `docs/contact-form/README.md` §9 della PR #7. Nella procedura di conservazione scompare la riga FormSubmit e compare il passaggio in memoria sul server (nessuna copia). Resta vero l'inoltro verso Gmail personale.
+
+## 11. Prima del merge
+1. Inserire l'indirizzo (§3) e il dato di Google Analytics (§4); `check-legal-placeholders` deve finire con «nessun segnaposto residuo».
+2. Far leggere i testi a un professionista (basi giuridiche, ruoli dei fornitori, trasferimenti, situazione fiscale e clausole verso i consumatori).
+3. Impegnarsi a tenere la procedura di conservazione (§7): le promesse della Privacy Policy sono impegni operativi.
+4. Aggiornare la data «Ultimo aggiornamento» in `legal.ts`.
+5. Ordine con la PR #7: la nota «Inviando la richiesta…» è posizionata in modo che le due PR si fondano senza conflitti; le pagine parlano di «anteprima», il modulo di `main` dice ancora «estratto» finché non entra la PR #7.
+6. Fuori da questa PR: link a Privacy e Cookie nel piè di pagina di tutte le pagine (oggi il footer è solo in home).

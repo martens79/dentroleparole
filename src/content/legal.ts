@@ -2,12 +2,14 @@
  * Dati delle pagine legali (Privacy Policy, Cookie Policy, Termini di servizio).
  *
  * Convenzione per i campi che solo la titolare può confermare:
- *   - `null`   = dato ancora da confermare (la pagina mostra un'evidenza "DA CONFERMARE")
- *   - `false`  = non applicabile (la riga viene omessa)
+ *   - `null`   = dato ancora da confermare
+ *   - `false`  = non applicabile / nessuno (la riga viene omessa o riformulata)
  *   - stringa  = valore confermato, mostrato così com'è
  *
  * Prima della pubblicazione definitiva nessun campo deve restare `null`:
- * `node scripts/check-legal-placeholders.mjs` lo verifica.
+ * `node scripts/check-legal-placeholders.mjs` lo verifica e fallisce finché ce n'è uno.
+ * I campi `null` NON mostrano segnaposto sul sito pubblico: la clausola corrispondente viene
+ * omessa o espressa in forma neutra, in attesa del dato.
  */
 
 type Confirmable = string | null | false;
@@ -20,10 +22,24 @@ export const legal = {
     nome: "Donatella Tamburini",
     /** Recapito già pubblicato nel footer e destinatario del modulo di contatto. */
     email: "contatti@dentroleparole.com",
-    /** Domicilio o sede professionale (art. 13 GDPR; art. 7 D.Lgs. 70/2003). */
+
+    /**
+     * ┌─ DA INSERIRE PRIVATAMENTE ─────────────────────────────────────────────────────────┐
+     * │ Domicilio o sede professionale della titolare (art. 13 GDPR; art. 7 D.Lgs. 70/2003). │
+     * │ Sostituire `null` con una stringa, ad esempio "via Esempio 1, 00100 Città (XX)", poi │
+     * │ eseguire `node scripts/check-legal-placeholders.mjs`.                                │
+     * │ Finché è `null` il sito NON mostra alcun indirizzo né segnaposto (la frase viene    │
+     * │ semplicemente omessa) e il controllo pre-pubblicazione resta in errore.             │
+     * └──────────────────────────────────────────────────────────────────────────────────────┘
+     */
     indirizzo: null as Confirmable,
-    /** Partita IVA, se esercita un'attività soggetta a imposta (art. 7 D.Lgs. 70/2003). */
-    partitaIva: null as Confirmable,
+
+    /**
+     * Partita IVA. La titolare ha dichiarato (10 novembre 2026) di non averne attualmente una:
+     * `false` = riga omessa. Non indica una valutazione sulla posizione fiscale dell'attività
+     * (vedi docs/legal/STATO_E_DOMANDE_2026-11-10.md, punto sulla situazione fiscale).
+     */
+    partitaIva: false as Confirmable,
   },
 
   /** Decisioni già confermate dalla titolare sul primo contatto (valgono per tutte le pagine). */
@@ -34,23 +50,42 @@ export const legal = {
     anteprima: "5–10 cartelle editoriali (circa 1.800 battute ciascuna, spazi inclusi)",
   },
 
-  /** Tempi di conservazione (testo libero, es. "12 mesi dall'ultimo contatto"). */
+  /**
+   * Tempi di conservazione confermati dalla titolare il 10 novembre 2026.
+   * Non esiste alcuna cancellazione automatica: la titolare cancella manualmente seguendo
+   * docs/legal/PROCEDURA_CONSERVAZIONE_DATI.md. Le pagine non devono dire il contrario.
+   */
   retention: {
-    /** Richieste, preventivi e anteprime non seguiti da un incarico. */
-    richieste: null as Confirmable,
-    /** Manoscritti, allegati e materiali di un incarico concluso. */
-    materiali: null as Confirmable,
+    /** Richieste di informazioni e anteprime senza incarico. Decorre dalla chiusura della richiesta. */
+    richieste: "90 giorni dalla chiusura della richiesta" as Confirmable,
+    /** Manoscritti, anteprime e copie di lavoro di un incarico. Decorre dalla conclusione dell'incarico. */
+    materiali: "180 giorni dalla conclusione dell’incarico" as Confirmable,
   },
 
   /** Provider della posta in ingresso del dominio (record MX verificato: 10 mail.register.it). */
   emailProvider: "Register.it" as Confirmable,
-  /** Collaboratori o fornitori che possono accedere ai manoscritti. `false` = nessuno. */
-  collaboratori: null as Confirmable,
-  /** Uso di strumenti di intelligenza artificiale sui manoscritti. `false` = nessuno. */
-  strumentiIA: null as Confirmable,
+
+  /**
+   * Collaboratori che accedono ai manoscritti per svolgere il lavoro editoriale.
+   * `false` = nessuno (dichiarazione della titolare, 10 novembre 2026). Riguarda solo le persone:
+   * i fornitori tecnici (hosting, posta, trasmissione del modulo) restano elencati a parte.
+   */
+  collaboratori: false as Confirmable,
+
+  /**
+   * Uso di strumenti di intelligenza artificiale sui manoscritti dei clienti.
+   * `false` = non utilizzati dalla titolare (dichiarazione del 10 novembre 2026). Non è una
+   * garanzia sulle tecnologie dei fornitori esterni.
+   */
+  strumentiIA: false as Confirmable,
 
   analytics: {
-    /** Conservazione dei dati in Google Analytics (impostazione del suo account: 2 o 14 mesi). */
+    /**
+     * Conservazione dei dati nell'account Google Analytics. NON verificabile dal codice
+     * (è un'impostazione dell'account, non presente nel sito): `null` finché la titolare non la
+     * controlla nel pannello (percorso in docs/legal/STATO_E_DOMANDE_2026-11-10.md).
+     * La Cookie Policy usa una formulazione neutra finché il valore non è noto.
+     */
     conservazione: null as Confirmable,
   },
 

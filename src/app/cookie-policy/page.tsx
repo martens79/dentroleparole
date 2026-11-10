@@ -7,7 +7,6 @@ import {
   LegalPage,
   LegalSection,
   RelatedLegalLinks,
-  Val,
   legalLink,
 } from "@/components/legal/LegalLayout";
 
@@ -98,12 +97,22 @@ export default function CookiePolicyPage() {
         <p>
           Secondo la documentazione di Google, per gli utenti dello Spazio
           economico europeo Google Analytics non registra né conserva gli
-          indirizzi IP. I dati di utilizzo conservati nell’account Google
-          Analytics del sito vengono mantenuti per{" "}
-          <Val
-            v={analytics.conservazione}
-            todo="periodo di conservazione impostato nell’account Google Analytics (2 o 14 mesi)"
-          />
+          indirizzi IP.
+        </p>
+        <p>
+          <strong className="text-ivory">Due durate diverse.</strong> I 180
+          giorni indicati al punto 1 riguardano soltanto la tua scelta sui
+          cookie, memorizzata sul tuo dispositivo. I dati statistici raccolti da
+          Google Analytics, se hai accettato, sono invece conservati da Google
+          nell’account Google Analytics del sito{" "}
+          {typeof analytics.conservazione === "string" ? (
+            <>per {analytics.conservazione}</>
+          ) : (
+            <>
+              per il periodo stabilito dalle impostazioni di conservazione dei
+              dati dell’account stesso
+            </>
+          )}
           .
         </p>
         <p>

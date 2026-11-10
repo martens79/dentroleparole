@@ -43,9 +43,21 @@ const legalConfig = read("src/content/legal.ts");
 if (!legalConfig.includes('risposta: "3–5 giorni lavorativi"')) {
   problems.push('legal.ts: il tempo di risposta ufficiale è «3–5 giorni lavorativi»');
 }
+// Conservazione confermata il 10 novembre 2026: 90 giorni (richieste senza incarico) e 180 giorni (manoscritti)
+if (!/richieste:\s*"90 giorni/.test(legalConfig)) {
+  problems.push("legal.ts: la conservazione delle richieste senza incarico confermata è di 90 giorni");
+}
+if (!/materiali:\s*"180 giorni/.test(legalConfig)) {
+  problems.push("legal.ts: la conservazione dei manoscritti dopo l'incarico confermata è di 180 giorni");
+}
 for (const page of pages) {
   const text = read(page).replace(/\s+/g, " ");
   const forbidden = [
+    [
+      /cancellazione automatica|cancellat\w+ automaticamente|eliminat\w+ automaticamente|automaticamente cancellat\w+/i,
+      "la cancellazione non è automatica (procedura manuale della titolare)",
+    ],
+    [/\b2 mesi\b|\b14 mesi\b/, "durata di Google Analytics scritta senza verifica dell'account"],
     [/24\s*[–-]\s*48/, "tempo di risposta non ufficiale (24–48)"],
     [/\b48 ore\b/, "tempo di risposta non ufficiale (48 ore)"],
     [/appena possibile/i, "tempo di risposta generico"],
