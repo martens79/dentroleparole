@@ -10,6 +10,14 @@ export async function POST(req: Request) {
     const body = await req.json();
     const email = String(body?.email || "").trim().toLowerCase();
 
+    // Una richiesta senza consenso esplicito non deve essere iscritta alla lista.
+    if (body?.consent !== true) {
+      return NextResponse.json(
+        { ok: false, message: "Per iscriverti devi acconsentire a ricevere la newsletter." },
+        { status: 400 }
+      );
+    }
+
     if (!email) {
       return NextResponse.json(
         { ok: false, message: "Email mancante." },
@@ -64,7 +72,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       ok: true,
-      message: "Iscrizione completata. Controlla la tua email.",
+      message: "Iscrizione registrata.",
     });
   } catch {
     return NextResponse.json(

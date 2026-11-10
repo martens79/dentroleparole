@@ -310,6 +310,14 @@ export default function ContactForm() {
       >
         Invia richiesta
       </button>
+
+      <p className="text-xs leading-relaxed text-ivory/55">
+        Inviando la richiesta i tuoi dati saranno trattati come descritto nella{" "}
+        <a href="/privacy-policy" className="underline underline-offset-2 hover:text-gold">
+          Privacy Policy
+        </a>
+        .
+      </p>
     </form>
   );
 }
