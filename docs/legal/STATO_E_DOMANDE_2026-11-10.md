@@ -104,3 +104,8 @@ La titolare ha chiarito che **svolge l'attività da casa, non ha una sede profes
 
 
 **Aggiornamento successivo — fase di avvio:** La titolare ha chiarito che Dentro le Parole è un progetto che sta cercando di avviare e che **non ha ancora clienti paganti per servizi editoriali**. È una dichiarazione sullo stato attuale, non una qualificazione fiscale né una garanzia per il futuro. Non descrivere l'attività come impresa già costituita, non inserire partita IVA o sede professionale fittizie. Alla prima attivazione di incarichi remunerati va verificato l'inquadramento applicabile in base all'effettiva modalità e continuità dell'attività. Il recapito fisico e gli altri punti di controllo restano aperti; nessun merge autorizzato.
+
+
+## Newsletter — correzione nel branch PR #5 (10 novembre 2026)
+
+Sono stati aggiornati `src/components/NewsletterMini.tsx` e `src/app/api/newsletter/route.ts`: il messaggio di iscrizione non promette più una email di conferma inesistente; il modulo richiede una casella di consenso inizialmente non selezionata con collegamento alla Privacy Policy; l'endpoint rifiuta richieste senza `consent: true`. **Non è stato implementato il double opt-in né un registro persistente delle prove di consenso**, quindi il backend attuale non fornisce da solo evidenza verificabile a posteriori su data, testo e origine di ogni consenso. Prima dell'utilizzo effettivo della newsletter va deciso se integrare un sistema di prova del consenso (preferibilmente double opt-in di Brevo) e verificare che ogni email di newsletter contenga un sistema funzionante di disiscrizione. Non inviare messaggi promozionali prima di tale verifica. Nessun invio di prova è stato eseguito da queste modifiche.
