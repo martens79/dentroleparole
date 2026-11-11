@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:contact": "tsc -p tsconfig.contact-test.json && node --test \".test-build/tests/contact/*.test.js\"",
+    "collaudo:contact": "tsc -p tsconfig.contact-test.json && node scripts/contact-collaudo.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^6.0.3",
@@ -16,6 +18,7 @@
     "lucide-react": "^0.577.0",
     "next": "^16.1.6",
     "next-sanity": "^11.6.12",
+    "nodemailer": "^10.4.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "sanity": "^4.22.0",

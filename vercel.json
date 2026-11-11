@@ -6,5 +6,12 @@
       "fix/portfolio-titolo-placeholder-20261105": false,
       "fix/portfolio-ordine-editoriale-20261105": false
     }
+  },
+  "functions": {
+    "src/app/api/contatti/route.ts": {
+      "regions": [
+        "fra1"
+      ]
+    }
   }
 }
