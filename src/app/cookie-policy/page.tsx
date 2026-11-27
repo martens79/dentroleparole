@@ -1,171 +1,187 @@
-export const metadata = {
+import Link from "next/link";
+import { pageMetadata } from "@/lib/site";
+import { legal } from "@/content/legal";
+import CookiePreferencesButton from "@/components/CookiePreferencesButton";
+import {
+  LegalList,
+  LegalPage,
+  LegalSection,
+  RelatedLegalLinks,
+  legalLink,
+} from "@/components/legal/LegalLayout";
+
+export const metadata = pageMetadata({
   title: "Cookie Policy | Dentro le Parole",
   description:
     "Informativa cookie del sito Dentro le Parole di Donatella Tamburini.",
-};
+  path: "/cookie-policy",
+});
 
 export default function CookiePolicyPage() {
+  const { titolare, analytics } = legal;
+
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0b0b12] text-ivory">
-      {/* SFONDI */}
-      <div className="bg-fixed-sky" />
-      <div className="bg-fixed-fantasy" />
+    <LegalPage
+      title="Cookie Policy"
+      updated={legal.updated}
+      solidBackground
+    >
+      <p>
+        Questa pagina descrive i cookie e gli strumenti analoghi usati dal sito
+        “Dentro le Parole” (dentroleparole.com) e come puoi gestire le tue
+        scelte. I cookie sono piccoli file di testo che i siti salvano sul
+        dispositivo dell’utente; strumenti analoghi, come l’archiviazione locale
+        del browser, hanno funzioni simili.
+      </p>
 
-      {/* OVERLAY SCURO */}
-      <div className="absolute inset-0 bg-black/45" />
-
-      <div className="relative z-10 mx-auto max-w-4xl px-6 py-32">
-        <div className="rounded-[28px] border border-gold/20 bg-black/55 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-md md:p-10">
-          <p className="text-sm uppercase tracking-[0.18em] text-gold/80">
-            Info legali
-          </p>
-
-          <h1 className="mt-3 text-3xl font-medium tracking-tight text-ivory md:text-5xl">
-            Cookie Policy
-          </h1>
-
-          <p className="mt-4 text-sm text-ivory/70">
-            Ultimo aggiornamento: 8 marzo 2026
-          </p>
-
-          <div className="mt-10 space-y-8 text-ivory/85">
-            <p>
-              La presente Cookie Policy descrive l’uso dei cookie e di strumenti
-              analoghi sul sito “Dentro le Parole”.
-            </p>
-
-            <section>
-              <h2 className="text-xl font-semibold text-ivory">
-                Cosa sono i cookie
-              </h2>
-              <p className="mt-2">
-                I cookie sono piccoli file di testo che i siti web inviano al
-                dispositivo dell’utente durante la navigazione, per essere poi
-                ritrasmessi agli stessi siti alla visita successiva.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold text-ivory">
-                Tipologie di cookie utilizzate
-              </h2>
-              <p className="mt-2">
-                Il sito può utilizzare le seguenti categorie di cookie:
-              </p>
-
-              <div className="mt-4 space-y-5">
-                <div>
-                  <h3 className="text-lg font-semibold text-ivory">
-                    1. Cookie tecnici
-                  </h3>
-                  <p className="mt-2">
-                    Sono necessari al corretto funzionamento del sito e non
-                    richiedono il consenso dell’utente. Comprendono, ad esempio,
-                    cookie di navigazione, sicurezza, gestione sessione o
-                    preferenze tecniche.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-semibold text-ivory">
-                    2. Cookie analitici
-                  </h3>
-                  <p className="mt-2">
-                    Il sito potrebbe utilizzare strumenti analitici per
-                    raccogliere dati aggregati o statistiche sull’utilizzo delle
-                    pagine. Se tali strumenti consentono identificazione o
-                    tracciamento non strettamente tecnico, saranno attivati solo
-                    previo consenso, ove richiesto.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-semibold text-ivory">
-                    3. Cookie di profilazione o marketing
-                  </h3>
-                  <p className="mt-2">
-                    Al momento, il sito{" "}
-                    <strong className="text-ivory">
-                      [indicare se non utilizza / utilizza]
-                    </strong>{" "}
-                    cookie di profilazione o marketing. Qualora venissero
-                    utilizzati in futuro, essi saranno installati solo previa
-                    acquisizione del consenso dell’utente, secondo la normativa
-                    applicabile.
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold text-ivory">
-                Cookie di terze parti
-              </h2>
-              <p className="mt-2">
-                Il sito potrebbe incorporare contenuti o servizi forniti da terze
-                parti, come mappe, video, font, plugin social o strumenti
-                statistici. Tali soggetti potrebbero installare propri cookie
-                secondo le rispettive policy.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold text-ivory">
-                Gestione del consenso
-              </h2>
-              <p className="mt-2">
-                Quando richiesto dalla normativa, il sito raccoglie il consenso
-                dell’utente prima dell’installazione di cookie o strumenti di
-                tracciamento non tecnici.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold text-ivory">
-                Come gestire o disabilitare i cookie
-              </h2>
-              <p className="mt-2">
-                L’utente può gestire le preferenze relative ai cookie tramite il
-                banner presente sul sito, se disponibile, oppure attraverso le
-                impostazioni del proprio browser, che consentono di bloccare o
-                cancellare i cookie già installati.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold text-ivory">
-                Base normativa
-              </h2>
-              <p className="mt-2">
-                L’uso dei cookie avviene nel rispetto della normativa europea e
-                italiana applicabile in materia di protezione dei dati personali e
-                comunicazioni elettroniche.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold text-ivory">Aggiornamenti</h2>
-              <p className="mt-2">
-                La presente Cookie Policy può essere aggiornata in qualsiasi
-                momento, anche in seguito a modifiche tecniche del sito o dei
-                servizi di terze parti utilizzati.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold text-ivory">Contatti</h2>
-              <p className="mt-2">
-                Per informazioni sui cookie e sul trattamento dei dati è possibile
-                contattare:
-                <br />
-                <strong className="text-ivory">
-                  [inserire email di contatto]
-                </strong>
-              </p>
-            </section>
-          </div>
+      <LegalSection title="1. Come funziona il banner">
+        <p>
+          Alla prima visita il sito mostra un banner con due pulsanti di pari
+          evidenza: “Accetta” e “Rifiuta”. Finché non scegli, non viene caricato
+          alcuno strumento di tracciamento non tecnico: scorrere la pagina o
+          continuare a navigare non equivale a un consenso.
+        </p>
+        <p>
+          La tua scelta viene ricordata per 180 giorni, poi il banner viene
+          riproposto. Se cancelli i dati del browser la scelta viene eliminata e
+          il banner ricompare. Puoi modificarla o revocarla in qualsiasi momento
+          con il pulsante “Preferenze cookie”, sempre disponibile in basso a
+          sinistra su ogni pagina, oppure con il pulsante qui sotto.
+        </p>
+        <div>
+          <CookiePreferencesButton className="rounded-xl border border-gold/50 bg-gold/15 px-4 py-2 text-sm font-semibold text-ivory transition hover:bg-gold/25">
+            Modifica preferenze cookie
+          </CookiePreferencesButton>
         </div>
-      </div>
-    </main>
+      </LegalSection>
+
+      <LegalSection title="2. Cookie tecnici e archiviazione locale">
+        <p>
+          Sono necessari al funzionamento del sito e non richiedono consenso.
+          Il sito ne usa solo due, entrambi non contengono dati personali:
+        </p>
+        <LegalList>
+          <li>
+            <strong className="text-ivory">dlp_cookie_consent</strong>{" "}
+            (archiviazione locale del browser, gestita dal sito): memorizza la
+            tua scelta sui cookie e la data. Durata: 180 giorni.
+          </li>
+          <li>
+            <strong className="text-ivory">promo_seen_&lt;mese&gt;</strong>{" "}
+            (archiviazione di sessione, gestita dal sito): evita di mostrare più
+            volte nella stessa visita l’avviso promozionale del mese. Durata: la
+            sessione del browser.
+          </li>
+        </LegalList>
+      </LegalSection>
+
+      <LegalSection title="3. Cookie analitici: Google Analytics 4">
+        <p>
+          Il sito usa Google Analytics 4, un servizio di Google, per ottenere
+          statistiche sull’utilizzo delle pagine. Viene caricato{" "}
+          <strong className="text-ivory">solo dopo il tuo consenso</strong>: se
+          rifiuti o revochi la scelta, lo strumento non viene caricato e i cookie
+          analitici eventualmente presenti vengono rimossi dal sito.
+        </p>
+        <LegalList>
+          <li>
+            <strong className="text-ivory">_ga</strong> — serve a distinguere
+            gli utenti. Durata predefinita indicata da Google: 2 anni.
+          </li>
+          <li>
+            <strong className="text-ivory">_ga_Z8PEVWKQVB</strong> — serve a
+            mantenere lo stato della sessione. Durata predefinita indicata da
+            Google: 2 anni.
+          </li>
+        </LegalList>
+        <p>
+          Secondo la documentazione di Google, per gli utenti dello Spazio
+          economico europeo Google Analytics non registra né conserva gli
+          indirizzi IP.
+        </p>
+        <p>
+          <strong className="text-ivory">Due durate diverse.</strong> I 180
+          giorni indicati al punto 1 riguardano soltanto la tua scelta sui
+          cookie, memorizzata sul tuo dispositivo. I dati raccolti tramite
+          Google Analytics, se hai accettato, sono invece trattati e conservati
+          secondo le impostazioni di conservazione configurate per la proprietà
+          Google Analytics e secondo le politiche applicabili di Google. Per
+          maggiori informazioni è possibile consultare la{" "}
+          <a
+            href={analytics.docsConservazioneUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={legalLink}
+          >
+            documentazione ufficiale di Google Analytics
+          </a>
+          .
+        </p>
+        <p>
+          Per le finalità e le basi giuridiche del trattamento consulta la{" "}
+          <Link href="/privacy-policy" className={legalLink}>
+            Privacy Policy
+          </Link>
+          .
+        </p>
+      </LegalSection>
+
+      <LegalSection title="4. Cookie di profilazione e di marketing">
+        <p>
+          Il sito non utilizza propri cookie di profilazione o di marketing e non
+          incorpora contenuti di terze parti (come mappe, video o plugin dei
+          social network). I font sono serviti direttamente dal sito.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="5. Modulo di contatto, newsletter e collegamenti verso altri siti">
+        <p>
+          Quando invii il modulo di contatto, i dati vengono trasmessi dal tuo
+          browser al servizio FormSubmit (formsubmit.co). Il sito non imposta
+          cookie in questa fase; FormSubmit, sul proprio dominio, può usare
+          propri cookie tecnici secondo la propria informativa. La richiesta di
+          iscrizione alla newsletter, invece, passa dal server del sito e il tuo
+          browser non contatta direttamente il servizio di invio.
+        </p>
+        <p>
+          Il sito contiene collegamenti a siti esterni (ad esempio negozi online,
+          editori e social network). Alcuni link della pagina Pubblicazioni
+          portano ad Amazon con un codice di affiliazione. Se apri questi
+          collegamenti, quei siti possono usare propri cookie secondo le
+          rispettive informative, sulle quali la titolare non ha controllo.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="6. Come gestire i cookie dal browser">
+        <p>
+          Oltre al pulsante “Preferenze cookie”, puoi bloccare o cancellare i
+          cookie dalle impostazioni del tuo browser. Bloccare i cookie tecnici
+          può impedire il corretto funzionamento di alcune parti del sito.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="7. Riferimenti normativi">
+        <p>
+          Il sito si basa sull’art. 122 del Codice in materia di protezione dei
+          dati personali (D.Lgs. 196/2003), sul Regolamento (UE) 2016/679 e sulle
+          “Linee guida cookie e altri strumenti di tracciamento” del Garante per
+          la protezione dei dati personali del 10 giugno 2021.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="8. Aggiornamenti e contatti">
+        <p>
+          Questa Cookie Policy può essere aggiornata in caso di modifiche
+          tecniche del sito o dei servizi usati; la versione in vigore è quella
+          pubblicata qui. Per informazioni puoi scrivere a{" "}
+          <a href={`mailto:${titolare.email}`} className={legalLink}>
+            {titolare.email}
+          </a>
+          .
+        </p>
+      </LegalSection>
+
+      <RelatedLegalLinks current="/cookie-policy" />
+    </LegalPage>
   );
 }

@@ -1,5 +1,6 @@
 
 import NewsletterBox from "@/components/NewsletterMini";
+import CookiePreferencesButton from "@/components/CookiePreferencesButton";
 
 export default function Footer() {
   return (
@@ -95,6 +96,8 @@ export default function Footer() {
                   >
                     Cookie Policy
                   </a>
+
+                  <CookiePreferencesButton />
                 </div>
               </div>
 
@@ -114,7 +117,12 @@ export default function Footer() {
   </div>
 
   <p className="mt-2 text-xs leading-relaxed text-ivory/45">
-    Niente spam. Solo contenuti utili e aggiornamenti occasionali.
+    Niente spam. Solo contenuti utili e aggiornamenti occasionali. Informazioni
+    sul trattamento dei dati nella{" "}
+    <a href="/privacy-policy" className="underline underline-offset-2 hover:text-gold">
+      Privacy Policy
+    </a>
+    .
   </p>
 </div>
             </div>

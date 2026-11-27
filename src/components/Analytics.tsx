@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useConsentState } from "@/lib/consent";
 
-const GA_ID = "G-Z8PEVWKQVB";
+const GA_ID = "G-Z8PEVVKQVB";
 const GA_SCRIPT_ATTR = "data-dlp-ga";
 
 declare global {
