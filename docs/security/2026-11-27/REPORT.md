@@ -2,7 +2,7 @@
 
 ## Ambito e decisione
 
-Branch separato `fix/security-dependencies-20261127`, da main aggiornato `e76d5efb03a085afc0d6c06c6b9ecf97533a172c`. Proposta: **GO alla revisione delle correzioni compatibili**, con i residui documentati sotto. Non è una certificazione di assenza di vulnerabilità. Il sito pubblicato non beneficia delle patch finché il proprietario non autorizza una successiva integrazione/pubblicazione: nessun merge o deploy eseguito in questo intervento.
+Branch separato `fix/security-dependencies-20261127`, da main aggiornato `e76d5efb03a085afc0d6c06c6b9ecf97533a172c`. Aggiornamento: **gate Ubuntu completato, GO tecnico per merge e successiva pubblicazione**, con i residui documentati sotto. Risultati, workflow e provenienza in [LINUX-GATE.md](LINUX-GATE.md). Non è una certificazione di assenza di vulnerabilità. Il sito pubblicato non beneficia delle patch finché il proprietario non autorizza una successiva integrazione/pubblicazione: nessun merge o deploy eseguito in questo intervento.
 
 Commit delle correzioni e dei test: `1337008cc0eaee7f6946f56060513dcc417359f3`. File modificati: `package.json`, `package-lock.json`, `.gitignore`, `eslint.config.mjs`, `vercel.json`; aggiunti `scripts/security-browser.mjs` e `tests/security/regression.test.mjs`. Le evidenze e questo report sono raccolti nel successivo commit di documentazione.
 
@@ -72,11 +72,11 @@ Il test con nome allegato molto lungo rileva **lo stesso sbordo già in produzio
 
 La prova nativa Windows legge realmente sharp 0.35.5, libvips 8.18.7, libheif 1.23.5 e librsvg 2.63.2; evidenza in [native-evidence.json](native-evidence.json). Il lock contiene sharp Linux x64 0.35.5 e libvips package 1.3.4: questo non equivale a una prova di esecuzione su Linux.
 
-### Verifica Linux aggiuntiva: non completata
+### Tentativi Linux locali storici, superati dal gate remoto
 
 Tentata in Docker Desktop locale linux/amd64, Node 22.23.4, immagine `node:22-bookworm-slim` digest `sha256:5ec23b7c622b00547753bc6ffd78085dd868a68aeb41c8e0a1418f033e13d96d`. Sorgenti montati in sola lettura, nessun file `.env` copiato, nessuna porta pubblicata, nessuna credenziale fornita. Il primo `npm ci` si è fermato nei download per un errore di rete. Il secondo, con tarball verificati dal lock in cache isolata, si è fermato con `ENOTCACHED` sui metadati zustand. La successiva preparazione dei metadati pubblici ha incontrato `ENOSPC` sul disco host. Eliminata esclusivamente la cache generata dalla prova, recuperando circa 760 MB; i container di prova sono stati rimossi automaticamente.
 
-**Build/typecheck Linux e lettura dei binari nativi Linux non sono stati eseguiti fino al termine e non sono dichiarati superati.** Prima di raccomandare la pubblicazione occorre ripeterli su un runner Linux con spazio e accesso al registro sufficienti. Le prove Windows e browser restano valide, ma non sostituiscono questa verifica della piattaforma. Non sono state cambiate configurazioni Docker/globali per aggirare il limite.
+In quella fase build/typecheck e lettura dei binari Linux **non erano stati completati e non erano dichiarati superati**. Su richiesta del proprietario non sono stati ripetuti tentativi locali: il successivo [gate GitHub Actions Ubuntu](LINUX-GATE.md) ha completato tutti i controlli con Node 22 e 24, incluso Node 24.x effettivamente configurato in Vercel. È stata inoltre completata la sola metadata opzionale mancante del lock, senza cambiare nessuna versione esistente. Non sono state cambiate configurazioni Docker/globali per aggirare i limiti locali.
 
 ## Riproduzione e limiti operativi
 
@@ -87,12 +87,12 @@ Eseguire `npm run test:security:browser -- --baseline-live` per il confronto pub
 ## Checklist decisionale
 
 - [x] Branch distinto da main aggiornato; PR #7 conservata Draft e invariata.
-- [x] Nessuna critica nell'audit finale; Next aggiornato, sharp verificato su Windows e versioni Linux corrette nel lock.
+- [x] Nessuna critica nell'audit finale; Next aggiornato, Sharp e codec nativi eseguiti con successo su Windows e Linux.
 - [x] Build/typecheck Windows e regressioni Node/browser superati.
 - [x] Residui distinti per runtime, Studio e CLI, senza nasconderli con filtri.
 - [x] Nessun cambiamento a FormSubmit, posta, consenso o GA4; nessun invio reale.
 - [ ] Revisione del proprietario prima di qualsiasi merge/pubblicazione successiva.
-- [ ] Ripetere build/typecheck e verifica binari su Linux, non completati per limiti di rete/cache/spazio dell'ambiente locale.
+- [x] Build predefinita, typecheck, audit, test Node/browser e binari Linux superati su GitHub Actions Ubuntu con Node 22 e 24.
 - [ ] Pianificare separatamente backport/migrazioni dei residui Sanity e debito lint.
 
-**GO alla revisione della PR di sicurezza; NO-GO alla pubblicazione finché non è completata la verifica Linux.** Non dichiarare l'audit azzerato o la produzione già corretta. Un successivo rilascio richiede comunque una decisione distinta del proprietario. La migrazione SMTP resta esclusa.
+**GO tecnico per merge e successiva pubblicazione**, con i residui e i limiti esplicitati in [LINUX-GATE.md](LINUX-GATE.md) e [RUNTIME-RESIDUALS.md](RUNTIME-RESIDUALS.md). Non dichiarare l'audit azzerato o la produzione già corretta. Un successivo rilascio richiede comunque una decisione distinta del proprietario. La migrazione SMTP resta esclusa; entrambe le PR restano Draft.
