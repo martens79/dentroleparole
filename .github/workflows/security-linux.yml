@@ -80,8 +80,9 @@ jobs:
           echo "SECURITY_PLAYWRIGHT=$RUNNER_TEMP/security-playwright/node_modules/playwright" >> "$GITHUB_ENV"
       - name: Browser regressions (no external mutations)
         run: |
-          mkdir -p .security-artifacts/browser
-          cp docs/security/2026-11-27/baseline-geometry.json .security-artifacts/browser/baseline-geometry.json
+          # Compare live and candidate in the SAME Ubuntu browser/font environment.
+          # Every native FormSubmit POST is fulfilled locally by the test harness.
+          npm run test:security:browser -- --baseline-live 2>&1 | tee .security-artifacts/browser-baseline.log
           npm run test:security:browser 2>&1 | tee .security-artifacts/browser.log
       - name: Ensure manifests and production sources were not mutated
         run: git diff --exit-code -- package.json package-lock.json src next.config.js sanity.config.ts tailwind.config.ts vercel.json

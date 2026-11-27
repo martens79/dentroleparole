@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import path from 'node:path';
 import {createRequire} from 'node:module';
 import {createHash} from 'node:crypto';
 const require=createRequire(import.meta.url);
@@ -12,6 +13,7 @@ const sharp=nextRequire('sharp');
 assert(require('semver').gte(sharp.versions.sharp,'0.35.5'));
 require('@next/swc-linux-x64-gnu');
 require('@tailwindcss/oxide');
+assert.equal(require('unrs-resolver').sync(process.cwd(),'./package.json').path,path.resolve('package.json'));
 const transformed=require('esbuild').transformSync('const value: number = 1',{loader:'ts'});
 assert(transformed.code.includes('value'));
 const raw=Buffer.from([255,0,0,255,0,255,0,255,0,0,255,255,255,255,255,255]);
@@ -27,7 +29,7 @@ for(const format of ['png','webp','avif']){
 const svg=Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><rect width="8" height="8" fill="red"/></svg>');
 const {info}=await sharp(svg).resize(4,4).png().toBuffer({resolveWithObject:true});
 assert.equal(info.width,4);assert.equal(info.height,4);
-const evidence={node:process.version,platform:process.platform,arch:process.arch,glibc,sharpPath:nextRequire.resolve('sharp'),versions:sharp.versions,codecs,svgRasterization:true,swc:true,oxide:true,esbuild:true};
+const evidence={node:process.version,platform:process.platform,arch:process.arch,glibc,sharpPath:nextRequire.resolve('sharp'),versions:sharp.versions,codecs,svgRasterization:true,swc:true,oxide:true,unrs:true,esbuild:true};
 fs.mkdirSync('.security-artifacts',{recursive:true});
 fs.writeFileSync('.security-artifacts/native-linux.json',JSON.stringify(evidence,null,2));
 console.log(JSON.stringify(evidence,null,2));

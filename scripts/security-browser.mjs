@@ -32,7 +32,7 @@ async function dismiss(p){
  const close=p.locator('div.fixed.inset-0').filter({has:p.locator('h2')}).getByRole('button',{name:'✕',exact:true});if(await close.isVisible())await close.click();
 }
 async function goto(p,route='/'){
- const r=await p.goto(base+route,{waitUntil:'domcontentloaded',timeout:90000});assert.equal(r.status(),200,route);await hydrated(p);return r;
+ const r=await p.goto(base+route,{waitUntil:'domcontentloaded',timeout:90000});assert.equal(r.status(),200,route);await hydrated(p);await p.evaluate(()=>document.fonts.ready);return r;
 }
 async function start(){
  if(baseline)return;
