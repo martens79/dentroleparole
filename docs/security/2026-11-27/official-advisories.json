@@ -1,0 +1,3579 @@
+[
+  {
+    "id": "GHSA-4x5r-pxfx-6jf8",
+    "severity": "LOW",
+    "summary": "@babel/core: Arbitrary File Read via sourceMappingURL Comment",
+    "url": "https://github.com/advisories/GHSA-4x5r-pxfx-6jf8",
+    "cve": [
+      "CVE-2026-49356"
+    ],
+    "publishedAt": "2026-06-15T17:14:14Z",
+    "updatedAt": "2026-07-15T22:05:27Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "@babel/core",
+        "range": "<= 7.29.0",
+        "firstPatchedVersion": "7.29.6"
+      },
+      {
+        "package": "@babel/core",
+        "range": ">= 8.0.0-alpha.0, < 8.0.0-rc.5",
+        "firstPatchedVersion": "8.0.0-rc.6"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-fv7c-fp4j-7gwp",
+    "severity": "HIGH",
+    "summary": "@babel/plugin-transform-modules-systemjs generates arbitrary code when compiling malicious input",
+    "url": "https://github.com/advisories/GHSA-fv7c-fp4j-7gwp",
+    "cve": [
+      "CVE-2026-44728"
+    ],
+    "publishedAt": "2026-05-08T20:34:07Z",
+    "updatedAt": "2026-06-08T23:28:10Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "@babel/plugin-transform-modules-systemjs",
+        "range": ">= 8.0.0-alpha.0, <= 8.0.0-alpha.12",
+        "firstPatchedVersion": "8.0.0-alpha.13"
+      },
+      {
+        "package": "@babel/plugin-transform-modules-systemjs",
+        "range": ">= 7.12.0, <= 7.29.3",
+        "firstPatchedVersion": "7.29.4"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-p498-v437-472g",
+    "severity": "MODERATE",
+    "summary": "humanfs: Recursive copy follows symlinked files and copies data from outside the source tree",
+    "url": "https://github.com/advisories/GHSA-p498-v437-472g",
+    "cve": [],
+    "publishedAt": "2026-09-02T14:27:16Z",
+    "updatedAt": "2026-09-02T14:27:17Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "@humanfs/node",
+        "range": "< 0.16.8",
+        "firstPatchedVersion": "0.16.8"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-xcpc-8h2w-3j85",
+    "severity": "HIGH",
+    "summary": "adm-zip: Crafted ZIP file triggers 4GB memory allocation",
+    "url": "https://github.com/advisories/GHSA-xcpc-8h2w-3j85",
+    "cve": [
+      "CVE-2026-39244"
+    ],
+    "publishedAt": "2026-07-10T18:32:19Z",
+    "updatedAt": "2026-07-17T21:50:10Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "adm-zip",
+        "range": "< 0.6.0",
+        "firstPatchedVersion": "0.6.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-vwc7-r8mq-g2x9",
+    "severity": "MODERATE",
+    "summary": "adm-zip extraction follows destination symlinks, allowing arbitrary file overwrite",
+    "url": "https://github.com/advisories/GHSA-vwc7-r8mq-g2x9",
+    "cve": [
+      "CVE-2026-76845"
+    ],
+    "publishedAt": "2026-08-24T15:31:51Z",
+    "updatedAt": "2026-09-08T21:20:42Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "adm-zip",
+        "range": ">= 0.5.9, <= 0.6.0",
+        "firstPatchedVersion": null
+      }
+    ]
+  },
+  {
+    "id": "GHSA-7q85-xj36-vmfc",
+    "severity": "HIGH",
+    "summary": "adm-zip: Uncontrolled memory allocation via the declared uncompressed size (DoS)",
+    "url": "https://github.com/advisories/GHSA-7q85-xj36-vmfc",
+    "cve": [
+      "CVE-2026-77301"
+    ],
+    "publishedAt": "2026-09-18T17:18:01Z",
+    "updatedAt": "2026-09-18T17:18:03Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "adm-zip",
+        "range": "< 0.6.1",
+        "firstPatchedVersion": "0.6.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-rcw4-f5rp-g42v",
+    "severity": "HIGH",
+    "summary": "adm-zip: Decompression-bomb protection (fix for CVE-2026-39244) can be bypassed by declaring uncompressed size as 0",
+    "url": "https://github.com/advisories/GHSA-rcw4-f5rp-g42v",
+    "cve": [],
+    "publishedAt": "2026-09-29T18:25:20Z",
+    "updatedAt": "2026-09-29T18:25:21Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "adm-zip",
+        "range": "<= 0.6.0",
+        "firstPatchedVersion": "0.6.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-j5f4-cc29-5x44",
+    "severity": "HIGH",
+    "summary": "adm-zip extraction preserves SUID/SGID bits from untrusted ZIPs -> local privilege escalation",
+    "url": "https://github.com/advisories/GHSA-j5f4-cc29-5x44",
+    "cve": [
+      "CVE-2026-102282"
+    ],
+    "publishedAt": "2026-09-29T18:24:57Z",
+    "updatedAt": "2026-09-29T18:25:04Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "adm-zip",
+        "range": "<= 0.6.0",
+        "firstPatchedVersion": "0.6.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-p634-w6r4-rjp2",
+    "severity": "MODERATE",
+    "summary": "adm-zip: Duplicate ZIP entry names: getEntry() and extractAllTo() resolve to different content",
+    "url": "https://github.com/advisories/GHSA-p634-w6r4-rjp2",
+    "cve": [],
+    "publishedAt": "2026-09-29T23:11:01Z",
+    "updatedAt": "2026-09-29T23:11:04Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "adm-zip",
+        "range": "<= 0.6.0",
+        "firstPatchedVersion": "0.6.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-c6fg-446q-cg94",
+    "severity": "MODERATE",
+    "summary": "adm-zip: getDataAsync() bypasses the maxOutputLength size guard enforced by the synchronous getData() path",
+    "url": "https://github.com/advisories/GHSA-c6fg-446q-cg94",
+    "cve": [],
+    "publishedAt": "2026-09-29T23:10:32Z",
+    "updatedAt": "2026-09-29T23:10:35Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "adm-zip",
+        "range": "<= 0.6.0",
+        "firstPatchedVersion": "0.6.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-8238-w5pm-2374",
+    "severity": "HIGH",
+    "summary": "adm-zip: Unhandled error event in async DEFLATE decompression crashes Node.js process (DoS)",
+    "url": "https://github.com/advisories/GHSA-8238-w5pm-2374",
+    "cve": [],
+    "publishedAt": "2026-09-29T23:10:09Z",
+    "updatedAt": "2026-09-29T23:10:11Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "adm-zip",
+        "range": "<= 0.6.0",
+        "firstPatchedVersion": "0.6.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-w5vr-8v7q-w6rv",
+    "severity": "MODERATE",
+    "summary": "baseline-browser-mapping process termination on invalid input causes denial of service",
+    "url": "https://github.com/advisories/GHSA-w5vr-8v7q-w6rv",
+    "cve": [
+      "CVE-2026-45819"
+    ],
+    "publishedAt": "2026-08-13T12:31:09Z",
+    "updatedAt": "2026-09-08T20:41:23Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "baseline-browser-mapping",
+        "range": ">= 2.0.0, < 2.11.0",
+        "firstPatchedVersion": "2.11.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-f886-m6hf-6m8v",
+    "severity": "MODERATE",
+    "summary": "brace-expansion: Zero-step sequence causes process hang and memory exhaustion",
+    "url": "https://github.com/advisories/GHSA-f886-m6hf-6m8v",
+    "cve": [
+      "CVE-2026-33750"
+    ],
+    "publishedAt": "2026-03-26T18:29:42Z",
+    "updatedAt": "2026-03-27T21:38:55Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "brace-expansion",
+        "range": "< 1.1.13",
+        "firstPatchedVersion": "1.1.13"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 2.0.0, < 2.0.3",
+        "firstPatchedVersion": "2.0.3"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 3.0.0, < 3.0.2",
+        "firstPatchedVersion": "3.0.2"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 4.0.0, < 5.0.5",
+        "firstPatchedVersion": "5.0.5"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-jxxr-4gwj-5jf2",
+    "severity": "MODERATE",
+    "summary": "brace-expansion: Large numeric range defeats documented `max` DoS protection",
+    "url": "https://github.com/advisories/GHSA-jxxr-4gwj-5jf2",
+    "cve": [
+      "CVE-2026-45149"
+    ],
+    "publishedAt": "2026-05-18T16:22:01Z",
+    "updatedAt": "2026-06-09T10:32:29Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "brace-expansion",
+        "range": ">= 5.0.0, < 5.0.6",
+        "firstPatchedVersion": "5.0.6"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-3jxr-9vmj-r5cp",
+    "severity": "HIGH",
+    "summary": "brace-expansion: DoS via exponential-time expansion of consecutive non-expanding {} groups",
+    "url": "https://github.com/advisories/GHSA-3jxr-9vmj-r5cp",
+    "cve": [
+      "CVE-2026-13149"
+    ],
+    "publishedAt": "2026-07-20T20:51:09Z",
+    "updatedAt": "2026-07-20T20:51:11Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "brace-expansion",
+        "range": ">= 2.0.0, < 2.1.2",
+        "firstPatchedVersion": "2.1.2"
+      },
+      {
+        "package": "brace-expansion",
+        "range": "< 1.1.16",
+        "firstPatchedVersion": "1.1.16"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 3.0.0, < 5.0.7",
+        "firstPatchedVersion": "5.0.7"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-mh99-v99m-4gvg",
+    "severity": "HIGH",
+    "summary": "brace-expansion: DoS via unbounded expansion length causing an out-of-memory process crash",
+    "url": "https://github.com/advisories/GHSA-mh99-v99m-4gvg",
+    "cve": [
+      "CVE-2026-14257"
+    ],
+    "publishedAt": "2026-07-24T21:53:14Z",
+    "updatedAt": "2026-07-31T19:37:57Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "brace-expansion",
+        "range": "< 1.1.17",
+        "firstPatchedVersion": "1.1.17"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 2.0.0, < 2.1.3",
+        "firstPatchedVersion": "2.1.3"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 3.0.0, < 3.0.3",
+        "firstPatchedVersion": "3.0.3"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 4.0.0, < 5.0.8",
+        "firstPatchedVersion": "5.0.8"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-rgw5-rvv9-x895",
+    "severity": "HIGH",
+    "summary": "brace-expansion: DoS via unbounded intermediate arrays, bypassing the CVE-2026-14257 mitigation",
+    "url": "https://github.com/advisories/GHSA-rgw5-rvv9-x895",
+    "cve": [
+      "CVE-2026-69152"
+    ],
+    "publishedAt": "2026-08-03T16:35:32Z",
+    "updatedAt": "2026-08-03T20:17:20Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "brace-expansion",
+        "range": ">= 4.0.0, < 5.0.9",
+        "firstPatchedVersion": "5.0.9"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 3.0.0, < 3.0.6",
+        "firstPatchedVersion": "3.0.6"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 2.0.0, < 2.1.4",
+        "firstPatchedVersion": "2.1.4"
+      },
+      {
+        "package": "brace-expansion",
+        "range": "< 1.1.18",
+        "firstPatchedVersion": "1.1.18"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-q2hr-2g5m-vwhr",
+    "severity": "MODERATE",
+    "summary": "brace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service",
+    "url": "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr",
+    "cve": [
+      "CVE-2026-102277"
+    ],
+    "publishedAt": "2026-09-29T23:45:39Z",
+    "updatedAt": "2026-09-29T23:45:39Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "brace-expansion",
+        "range": "< 1.1.21",
+        "firstPatchedVersion": "1.1.21"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 2.0.0, < 2.1.7",
+        "firstPatchedVersion": "2.1.7"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 3.0.0, < 3.0.9",
+        "firstPatchedVersion": "3.0.9"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 4.0.0, < 5.0.12",
+        "firstPatchedVersion": "5.0.12"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-qhr7-859c-m2p7",
+    "severity": "HIGH",
+    "summary": "brace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion",
+    "url": "https://github.com/advisories/GHSA-qhr7-859c-m2p7",
+    "cve": [
+      "CVE-2026-102278"
+    ],
+    "publishedAt": "2026-09-29T23:45:17Z",
+    "updatedAt": "2026-09-29T23:45:19Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "brace-expansion",
+        "range": "< 1.1.20",
+        "firstPatchedVersion": "1.1.20"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 2.0.0, < 2.1.6",
+        "firstPatchedVersion": "2.1.6"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 3.0.0, < 3.0.8",
+        "firstPatchedVersion": "3.0.8"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 4.0.0, < 5.0.11",
+        "firstPatchedVersion": "5.0.11"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-6j4f-fj2g-mc7p",
+    "severity": "HIGH",
+    "summary": "brace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion",
+    "url": "https://github.com/advisories/GHSA-6j4f-fj2g-mc7p",
+    "cve": [
+      "CVE-2026-102276"
+    ],
+    "publishedAt": "2026-09-29T23:44:58Z",
+    "updatedAt": "2026-09-29T23:44:59Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "brace-expansion",
+        "range": "< 1.1.19",
+        "firstPatchedVersion": "1.1.19"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 2.0.0, < 2.1.5",
+        "firstPatchedVersion": "2.1.5"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 3.0.0, < 3.0.7",
+        "firstPatchedVersion": "3.0.7"
+      },
+      {
+        "package": "brace-expansion",
+        "range": ">= 4.0.0, < 5.0.10",
+        "firstPatchedVersion": "5.0.10"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-c83g-rgw3-j3cx",
+    "severity": "HIGH",
+    "summary": "Browserslist: Unbounded memory growth (no cache eviction) via distinct query results, leading to eventual OOM",
+    "url": "https://github.com/advisories/GHSA-c83g-rgw3-j3cx",
+    "cve": [
+      "CVE-2026-73089"
+    ],
+    "publishedAt": "2026-09-01T16:42:13Z",
+    "updatedAt": "2026-09-01T16:42:15Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "browserslist",
+        "range": "<= 4.28.6",
+        "firstPatchedVersion": "4.28.7"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-73wf-gq98-2v4g",
+    "severity": "HIGH",
+    "summary": "Browserslist: Uncaught crash / prototype write via untrusted browserslist-stats.json custom stats (normalizeStats)",
+    "url": "https://github.com/advisories/GHSA-73wf-gq98-2v4g",
+    "cve": [
+      "CVE-2026-73088"
+    ],
+    "publishedAt": "2026-09-01T16:41:54Z",
+    "updatedAt": "2026-09-01T16:41:55Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "browserslist",
+        "range": "<= 4.28.6",
+        "firstPatchedVersion": "4.28.7"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-h7mw-gpvr-xq4m",
+    "severity": "MODERATE",
+    "summary": "DOMPurify: FORBID_TAGS bypassed by function-based ADD_TAGS predicate (asymmetry with FORBID_ATTR fix)",
+    "url": "https://github.com/advisories/GHSA-h7mw-gpvr-xq4m",
+    "cve": [
+      "CVE-2026-41240"
+    ],
+    "publishedAt": "2026-04-22T17:34:17Z",
+    "updatedAt": "2026-04-27T16:32:34Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "< 3.4.0",
+        "firstPatchedVersion": "3.4.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-crv5-9vww-q3g8",
+    "severity": "MODERATE",
+    "summary": "DOMPurify has a SAFE_FOR_TEMPLATES bypass in RETURN_DOM mode",
+    "url": "https://github.com/advisories/GHSA-crv5-9vww-q3g8",
+    "cve": [
+      "CVE-2026-41239"
+    ],
+    "publishedAt": "2026-04-22T17:32:54Z",
+    "updatedAt": "2026-04-27T16:32:13Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": ">= 1.0.10, < 3.4.0",
+        "firstPatchedVersion": "3.4.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-v9jr-rg53-9pgp",
+    "severity": "MODERATE",
+    "summary": "DOMPurify: Prototype Pollution to XSS Bypass via CUSTOM_ELEMENT_HANDLING Fallback",
+    "url": "https://github.com/advisories/GHSA-v9jr-rg53-9pgp",
+    "cve": [
+      "CVE-2026-41238"
+    ],
+    "publishedAt": "2026-04-22T17:31:32Z",
+    "updatedAt": "2026-04-27T16:32:04Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": ">= 3.0.1, < 3.4.0",
+        "firstPatchedVersion": "3.4.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-hpcv-96wg-7vj8",
+    "severity": "MODERATE",
+    "summary": "DOMPurify: Cross-realm IN_PLACE sanitization leaves executable markup intact via realm-bound `instanceof` checks",
+    "url": "https://github.com/advisories/GHSA-hpcv-96wg-7vj8",
+    "cve": [
+      "CVE-2026-49458"
+    ],
+    "publishedAt": "2026-06-15T19:56:35Z",
+    "updatedAt": "2026-06-15T19:56:37Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "<= 3.4.5",
+        "firstPatchedVersion": "3.4.6"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-r47g-fvhr-h676",
+    "severity": "MODERATE",
+    "summary": "DOMPurify: IN_PLACE mode preserves attributes of a clobbered root element, allowing XSS via attacker-controlled root DOM",
+    "url": "https://github.com/advisories/GHSA-r47g-fvhr-h676",
+    "cve": [
+      "CVE-2026-49459"
+    ],
+    "publishedAt": "2026-06-15T19:53:05Z",
+    "updatedAt": "2026-06-15T19:53:05Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "<= 3.4.5",
+        "firstPatchedVersion": "3.4.6"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-rp9w-3fw7-7cwq",
+    "severity": "MODERATE",
+    "summary": "DOMPurify IN_PLACE Sanitization Bypass via Attached Shadow Root Inside <template>.content",
+    "url": "https://github.com/advisories/GHSA-rp9w-3fw7-7cwq",
+    "cve": [
+      "CVE-2026-49978"
+    ],
+    "publishedAt": "2026-06-15T20:01:45Z",
+    "updatedAt": "2026-06-15T20:01:45Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "<= 3.4.6",
+        "firstPatchedVersion": "3.4.7"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-cmwh-pvxp-8882",
+    "severity": "MODERATE",
+    "summary": "DOMPurify: Permanent `ALLOWED_ATTR` pollution via `setConfig()` bypassing the hook clone-guard (incomplete fix of the 3.4.7 hook-pollution patch)",
+    "url": "https://github.com/advisories/GHSA-cmwh-pvxp-8882",
+    "cve": [
+      "CVE-2026-65898"
+    ],
+    "publishedAt": "2026-06-18T14:27:37Z",
+    "updatedAt": "2026-07-23T13:58:35Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "<= 3.4.10",
+        "firstPatchedVersion": "3.4.11"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-vxr8-fq34-vvx9",
+    "severity": "LOW",
+    "summary": "DOMPurify: Trusted Types policy survives `clearConfig()` and can poison later `RETURN_TRUSTED_TYPE` output",
+    "url": "https://github.com/advisories/GHSA-vxr8-fq34-vvx9",
+    "cve": [
+      "CVE-2026-65899"
+    ],
+    "publishedAt": "2026-06-15T20:12:53Z",
+    "updatedAt": "2026-07-23T13:59:24Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "< 3.4.9",
+        "firstPatchedVersion": "3.4.9"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-gvmj-g25r-r7wr",
+    "severity": "LOW",
+    "summary": "DOMPurify: SAFE_FOR_TEMPLATES bypass - template expressions survive sanitization inside <template> content when using DOM output modes",
+    "url": "https://github.com/advisories/GHSA-gvmj-g25r-r7wr",
+    "cve": [
+      "CVE-2026-65900"
+    ],
+    "publishedAt": "2026-06-15T20:02:40Z",
+    "updatedAt": "2026-07-23T14:00:09Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": ">= 3.0.0, <= 3.4.7",
+        "firstPatchedVersion": "3.4.8"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-x4vx-rjvf-j5p4",
+    "severity": "LOW",
+    "summary": "DOMPurify: `IN_PLACE` mode trusts attacker-controlled `nodeName` on live non-form nodes, allowing script retention and XSS via attacker-supplied DOM objects",
+    "url": "https://github.com/advisories/GHSA-x4vx-rjvf-j5p4",
+    "cve": [
+      "CVE-2026-65901"
+    ],
+    "publishedAt": "2026-06-15T20:00:02Z",
+    "updatedAt": "2026-07-23T14:00:50Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "<= 3.4.6",
+        "firstPatchedVersion": null
+      }
+    ]
+  },
+  {
+    "id": "GHSA-76mc-f452-cxcm",
+    "severity": "MODERATE",
+    "summary": "DOMPurify: Hook mutation of `data.allowedTags` / `data.allowedAttributes` permanently pollutes `DEFAULT_ALLOWED_TAGS` / `DEFAULT_ALLOWED_ATTR`",
+    "url": "https://github.com/advisories/GHSA-76mc-f452-cxcm",
+    "cve": [
+      "CVE-2026-65902"
+    ],
+    "publishedAt": "2026-06-15T19:59:09Z",
+    "updatedAt": "2026-07-23T14:01:18Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "< 3.4.7",
+        "firstPatchedVersion": "3.4.7"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-39q2-94rc-95cp",
+    "severity": "MODERATE",
+    "summary": "DOMPurify's ADD_TAGS function form bypasses FORBID_TAGS due to short-circuit evaluation",
+    "url": "https://github.com/advisories/GHSA-39q2-94rc-95cp",
+    "cve": [
+      "CVE-2026-65903"
+    ],
+    "publishedAt": "2026-04-16T00:46:35Z",
+    "updatedAt": "2026-07-23T14:01:46Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "<= 3.3.3",
+        "firstPatchedVersion": "3.4.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-55q2-fjhq-7xh7",
+    "severity": "MODERATE",
+    "summary": "DOMPurify: IN_PLACE hook removal leaves a detached subtree executable, causing XSS",
+    "url": "https://github.com/advisories/GHSA-55q2-fjhq-7xh7",
+    "cve": [],
+    "publishedAt": "2026-08-07T15:30:47Z",
+    "updatedAt": "2026-08-07T15:30:48Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "<= 3.4.12",
+        "firstPatchedVersion": "3.4.13"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-c2j3-45gr-mqc4",
+    "severity": "LOW",
+    "summary": "DOMPurify: `CUSTOM_ELEMENT_HANDLING` bypasses `afterSanitizeElements` for allowed custom elements.",
+    "url": "https://github.com/advisories/GHSA-c2j3-45gr-mqc4",
+    "cve": [
+      "CVE-2026-66010"
+    ],
+    "publishedAt": "2026-07-21T19:41:07Z",
+    "updatedAt": "2026-10-02T22:43:23Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "<= 3.4.11",
+        "firstPatchedVersion": "3.4.12"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-6688-9rhm-gjv2",
+    "severity": "LOW",
+    "summary": "DOMPurify: IN_PLACE returns a force-removed rawtext root whose text carries attacker markup — pure HTML reparse executes",
+    "url": "https://github.com/advisories/GHSA-6688-9rhm-gjv2",
+    "cve": [],
+    "publishedAt": "2026-10-05T23:43:53Z",
+    "updatedAt": "2026-10-05T23:43:54Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "<= 3.4.15",
+        "firstPatchedVersion": "3.4.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-c6gr-qvv4-5v3f",
+    "severity": "LOW",
+    "summary": "DOMPurify: SMIL attributeName=href guard is skipped when PARSER_MEDIA_TYPE is application/xhtml+xml",
+    "url": "https://github.com/advisories/GHSA-c6gr-qvv4-5v3f",
+    "cve": [],
+    "publishedAt": "2026-10-22T16:24:23Z",
+    "updatedAt": "2026-10-22T16:24:24Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "<= 3.4.16",
+        "firstPatchedVersion": "3.4.17"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-mrv2-3pqr-j5jr",
+    "severity": "LOW",
+    "summary": "DOMPurify IN_PLACE: hook that removes a parent or sibling leaves the detached subtree's event handlers armed (incomplete fix for GHSA-p98j-92pf-mc4p)",
+    "url": "https://github.com/advisories/GHSA-mrv2-3pqr-j5jr",
+    "cve": [],
+    "publishedAt": "2026-10-22T16:24:52Z",
+    "updatedAt": "2026-11-19T00:06:58Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "dompurify",
+        "range": "<= 3.4.16",
+        "firstPatchedVersion": "3.4.17"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-rf6f-7fwh-wjgh",
+    "severity": "HIGH",
+    "summary": "Prototype Pollution via parse() in NodeJS flatted",
+    "url": "https://github.com/advisories/GHSA-rf6f-7fwh-wjgh",
+    "cve": [
+      "CVE-2026-33228"
+    ],
+    "publishedAt": "2026-03-19T17:43:54Z",
+    "updatedAt": "2026-10-05T15:48:47Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "flatted",
+        "range": "<= 3.4.1",
+        "firstPatchedVersion": "3.4.2"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-r4q5-vmmm-2653",
+    "severity": "MODERATE",
+    "summary": "follow-redirects leaks Custom Authentication Headers to Cross-Domain Redirect Targets",
+    "url": "https://github.com/advisories/GHSA-r4q5-vmmm-2653",
+    "cve": [
+      "CVE-2026-40895"
+    ],
+    "publishedAt": "2026-04-14T01:11:11Z",
+    "updatedAt": "2026-11-02T23:19:21Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "follow-redirects",
+        "range": "<= 1.15.11",
+        "firstPatchedVersion": "1.16.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-hmw2-7cc7-3qxx",
+    "severity": "HIGH",
+    "summary": "form-data: CRLF injection in form-data via unescaped multipart field names and filenames",
+    "url": "https://github.com/advisories/GHSA-hmw2-7cc7-3qxx",
+    "cve": [
+      "CVE-2026-12143"
+    ],
+    "publishedAt": "2026-06-15T17:26:26Z",
+    "updatedAt": "2026-06-15T17:26:27Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "form-data",
+        "range": ">= 4.0.0, < 4.0.6",
+        "firstPatchedVersion": "4.0.6"
+      },
+      {
+        "package": "form-data",
+        "range": ">= 3.0.0, < 3.0.5",
+        "firstPatchedVersion": "3.0.5"
+      },
+      {
+        "package": "form-data",
+        "range": "< 2.5.6",
+        "firstPatchedVersion": "2.5.6"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-3g3m-2fjr-6pw4",
+    "severity": "MODERATE",
+    "summary": "Glob: AbortSignal cancellation bypass allows post-timeout filesystem traversal",
+    "url": "https://github.com/advisories/GHSA-3g3m-2fjr-6pw4",
+    "cve": [
+      "CVE-2026-118773"
+    ],
+    "publishedAt": "2026-10-30T23:09:11Z",
+    "updatedAt": "2026-10-30T23:09:15Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "glob",
+        "range": ">= 9.0.0, <= 14.0.1",
+        "firstPatchedVersion": "14.0.2"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-6jcc-5g8w-32mx",
+    "severity": "MODERATE",
+    "summary": "i18next deepExtend recurses into inherited built-ins, allowing corruption of shared built-in objects (DoS)",
+    "url": "https://github.com/advisories/GHSA-6jcc-5g8w-32mx",
+    "cve": [
+      "CVE-2026-63402"
+    ],
+    "publishedAt": "2026-11-23T20:53:00Z",
+    "updatedAt": "2026-11-23T20:53:01Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "i18next",
+        "range": "< 26.3.4",
+        "firstPatchedVersion": "26.3.4"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-h67p-54hq-rp68",
+    "severity": "MODERATE",
+    "summary": "JS-YAML: Quadratic-complexity DoS in merge key handling via repeated aliases",
+    "url": "https://github.com/advisories/GHSA-h67p-54hq-rp68",
+    "cve": [
+      "CVE-2026-53550"
+    ],
+    "publishedAt": "2026-06-15T17:15:07Z",
+    "updatedAt": "2026-06-29T15:06:00Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "js-yaml",
+        "range": "< 3.15.0",
+        "firstPatchedVersion": "3.15.0"
+      },
+      {
+        "package": "js-yaml",
+        "range": ">= 4.0.0, <= 4.1.1",
+        "firstPatchedVersion": "4.2.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-52cp-r559-cp3m",
+    "severity": "HIGH",
+    "summary": "js-yaml: YAML merge-key chains can force quadratic CPU consumption",
+    "url": "https://github.com/advisories/GHSA-52cp-r559-cp3m",
+    "cve": [
+      "CVE-2026-59869"
+    ],
+    "publishedAt": "2026-07-20T21:19:09Z",
+    "updatedAt": "2026-07-20T21:19:10Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "js-yaml",
+        "range": ">= 4.0.0, < 4.3.0",
+        "firstPatchedVersion": "4.3.0"
+      },
+      {
+        "package": "js-yaml",
+        "range": ">= 3.0.0, < 3.15.0",
+        "firstPatchedVersion": "3.15.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-5p4m-2wfm-xmqj",
+    "severity": "HIGH",
+    "summary": "JS-YAML: Quadratic CPU consumption in !!omap resolution (3.x and 4.x) — CVE-2026-59870 fix not backported",
+    "url": "https://github.com/advisories/GHSA-5p4m-2wfm-xmqj",
+    "cve": [],
+    "publishedAt": "2026-08-06T20:27:32Z",
+    "updatedAt": "2026-08-06T20:27:32Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "js-yaml",
+        "range": ">= 3.0.0, < 3.15.1",
+        "firstPatchedVersion": "3.15.1"
+      },
+      {
+        "package": "js-yaml",
+        "range": ">= 4.0.0, < 4.3.1",
+        "firstPatchedVersion": "4.3.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-2883-xcg3-v3hh",
+    "severity": "HIGH",
+    "summary": "js-yaml: maxTotalMergeKeys does not limit CPU use for empty merge sources",
+    "url": "https://github.com/advisories/GHSA-2883-xcg3-v3hh",
+    "cve": [
+      "CVE-2026-84375"
+    ],
+    "publishedAt": "2026-09-08T21:24:51Z",
+    "updatedAt": "2026-09-08T21:24:52Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "js-yaml",
+        "range": ">= 3.0.0, < 3.15.2",
+        "firstPatchedVersion": "3.15.2"
+      },
+      {
+        "package": "js-yaml",
+        "range": ">= 4.0.0, < 4.3.2",
+        "firstPatchedVersion": "4.3.2"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-g27c-q7cp-mhx6",
+    "severity": "MODERATE",
+    "summary": "json-2-csv vulnerable to CSV Injection via the preventCsvInjection optio",
+    "url": "https://github.com/advisories/GHSA-g27c-q7cp-mhx6",
+    "cve": [
+      "CVE-2026-9673"
+    ],
+    "publishedAt": "2026-05-28T06:31:09Z",
+    "updatedAt": "2026-07-01T21:25:26Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "json-2-csv",
+        "range": ">= 3.15.0, < 5.5.11",
+        "firstPatchedVersion": "5.5.11"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-22p9-wv53-3rq4",
+    "severity": "HIGH",
+    "summary": "LinkifyIt#match scan loop has quadratic algorithmic complexity",
+    "url": "https://github.com/advisories/GHSA-22p9-wv53-3rq4",
+    "cve": [
+      "CVE-2026-48801"
+    ],
+    "publishedAt": "2026-06-26T20:47:58Z",
+    "updatedAt": "2026-06-26T20:47:59Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "linkify-it",
+        "range": "<= 5.0.0",
+        "firstPatchedVersion": "5.0.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-v245-v573-v5vm",
+    "severity": "HIGH",
+    "summary": "linkify-it: Quadratic-complexity DoS via the `mailto:` validator scan-loop on attacker text",
+    "url": "https://github.com/advisories/GHSA-v245-v573-v5vm",
+    "cve": [
+      "CVE-2026-59887"
+    ],
+    "publishedAt": "2026-07-21T19:06:09Z",
+    "updatedAt": "2026-07-21T19:06:10Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "linkify-it",
+        "range": "<= 5.0.1",
+        "firstPatchedVersion": "5.0.2"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-r5fr-rjxr-66jc",
+    "severity": "HIGH",
+    "summary": "lodash vulnerable to Code Injection via `_.template` imports key names",
+    "url": "https://github.com/advisories/GHSA-r5fr-rjxr-66jc",
+    "cve": [
+      "CVE-2026-4800"
+    ],
+    "publishedAt": "2026-04-01T23:51:12Z",
+    "updatedAt": "2026-04-01T23:51:13Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "lodash.template",
+        "range": ">= 4.0.0, < 4.18.0",
+        "firstPatchedVersion": "4.18.0"
+      },
+      {
+        "package": "lodash-amd",
+        "range": ">= 4.0.0, <= 4.17.23",
+        "firstPatchedVersion": "4.18.0"
+      },
+      {
+        "package": "lodash-es",
+        "range": ">= 4.0.0, <= 4.17.23",
+        "firstPatchedVersion": "4.18.0"
+      },
+      {
+        "package": "lodash",
+        "range": ">= 4.0.0, <= 4.17.23",
+        "firstPatchedVersion": "4.18.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-f23m-r3pf-42rh",
+    "severity": "MODERATE",
+    "summary": "lodash vulnerable to prototype pollution via array-path bypass in `_.unset`, `_.omit`, and `_.pullAt",
+    "url": "https://github.com/advisories/GHSA-f23m-r3pf-42rh",
+    "cve": [
+      "CVE-2026-2950"
+    ],
+    "publishedAt": "2026-04-01T23:50:27Z",
+    "updatedAt": "2026-11-03T15:37:13Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "lodash.omit",
+        "range": "< 4.18.0",
+        "firstPatchedVersion": "4.18.0"
+      },
+      {
+        "package": "lodash.unset",
+        "range": "< 4.18.0",
+        "firstPatchedVersion": "4.18.0"
+      },
+      {
+        "package": "lodash-amd",
+        "range": "= 4.17.23",
+        "firstPatchedVersion": "4.18.1"
+      },
+      {
+        "package": "lodash-es",
+        "range": "= 4.17.23",
+        "firstPatchedVersion": "4.18.1"
+      },
+      {
+        "package": "lodash",
+        "range": "= 4.17.23",
+        "firstPatchedVersion": "4.18.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-6v5v-wf23-fmfq",
+    "severity": "MODERATE",
+    "summary": "markdown-it: Quadratic complexity DoS in smartquotes rule via replaceAt string operations",
+    "url": "https://github.com/advisories/GHSA-6v5v-wf23-fmfq",
+    "cve": [
+      "CVE-2026-48988"
+    ],
+    "publishedAt": "2026-06-15T20:41:06Z",
+    "updatedAt": "2026-06-15T20:41:07Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "markdown-it",
+        "range": "<= 14.1.1",
+        "firstPatchedVersion": "14.2.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-r7fv-28h4-cvq7",
+    "severity": "HIGH",
+    "summary": "markdown-it: Quadratic complexity in smartquotes with unmatched closing quotes",
+    "url": "https://github.com/advisories/GHSA-r7fv-28h4-cvq7",
+    "cve": [
+      "CVE-2026-111759"
+    ],
+    "publishedAt": "2026-10-20T14:34:50Z",
+    "updatedAt": "2026-10-20T14:34:52Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "markdown-it",
+        "range": "< 14.3.2",
+        "firstPatchedVersion": "14.3.2"
+      },
+      {
+        "package": "markdown-it",
+        "range": ">= 15.0.0, < 15.0.2",
+        "firstPatchedVersion": "15.0.2"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-vfgh-jcmw-g37q",
+    "severity": "LOW",
+    "summary": "markdown-it: Quadratic-time denial of service in inline HTML parsing with html enabled",
+    "url": "https://github.com/advisories/GHSA-vfgh-jcmw-g37q",
+    "cve": [
+      "CVE-2026-111766"
+    ],
+    "publishedAt": "2026-10-20T20:08:19Z",
+    "updatedAt": "2026-10-20T20:08:20Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "markdown-it",
+        "range": ">= 15.0.0, < 15.0.3",
+        "firstPatchedVersion": "15.0.3"
+      },
+      {
+        "package": "markdown-it",
+        "range": "< 14.3.3",
+        "firstPatchedVersion": "14.3.3"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-gfr2-rv44-r23c",
+    "severity": "HIGH",
+    "summary": "markdown-it: Quadratic-time rendering of a single multi-line link reference definition with default options (regression since 14.0)",
+    "url": "https://github.com/advisories/GHSA-gfr2-rv44-r23c",
+    "cve": [
+      "CVE-2026-111758"
+    ],
+    "publishedAt": "2026-10-20T20:28:44Z",
+    "updatedAt": "2026-10-20T20:28:46Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "markdown-it",
+        "range": ">= 15.0.0, < 15.0.3",
+        "firstPatchedVersion": "15.0.3"
+      },
+      {
+        "package": "markdown-it",
+        "range": ">= 14.1.0, < 14.3.3",
+        "firstPatchedVersion": "14.3.3"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-253c-mchw-3w2r",
+    "severity": "MODERATE",
+    "summary": "markdown-it linkify: true has two quadratic paths, so a few hundred KB of markdown blocks the event loop for tens of seconds",
+    "url": "https://github.com/advisories/GHSA-253c-mchw-3w2r",
+    "cve": [],
+    "publishedAt": "2026-09-29T17:57:56Z",
+    "updatedAt": "2026-11-02T18:55:26Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "markdown-it",
+        "range": "< 14.3.1",
+        "firstPatchedVersion": "14.3.1"
+      },
+      {
+        "package": "markdown-it",
+        "range": "= 15.0.0",
+        "firstPatchedVersion": "15.0.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-g3hv-75wg-m249",
+    "severity": "MODERATE",
+    "summary": "minimatch has potential denial of service via globparts amplification",
+    "url": "https://github.com/advisories/GHSA-g3hv-75wg-m249",
+    "cve": [
+      "CVE-2026-118764"
+    ],
+    "publishedAt": "2026-10-30T23:09:55Z",
+    "updatedAt": "2026-11-04T16:50:04Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "minimatch",
+        "range": ">= 7.0.0, < 11.0.1",
+        "firstPatchedVersion": "11.0.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-28wg-ghj8-5hjv",
+    "severity": "HIGH",
+    "summary": "nanoid: non-secure generators can loop indefinitely with negative size",
+    "url": "https://github.com/advisories/GHSA-28wg-ghj8-5hjv",
+    "cve": [
+      "CVE-2026-67214"
+    ],
+    "publishedAt": "2026-07-29T15:31:12Z",
+    "updatedAt": "2026-08-07T20:53:01Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "nanoid",
+        "range": ">= 4.0.0, < 5.1.16",
+        "firstPatchedVersion": "5.1.16"
+      },
+      {
+        "package": "nanoid",
+        "range": "< 3.3.16",
+        "firstPatchedVersion": "3.3.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-2v37-7h3g-55p8",
+    "severity": "HIGH",
+    "summary": "nanoid: custom generators can loop indefinitely when size is zero",
+    "url": "https://github.com/advisories/GHSA-2v37-7h3g-55p8",
+    "cve": [
+      "CVE-2026-67213"
+    ],
+    "publishedAt": "2026-07-29T15:31:12Z",
+    "updatedAt": "2026-08-13T15:43:02Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "nanoid",
+        "range": "< 3.3.18",
+        "firstPatchedVersion": "3.3.18"
+      },
+      {
+        "package": "nanoid",
+        "range": ">= 4.0.0, < 5.1.6",
+        "firstPatchedVersion": "5.1.6"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-xwg4-73v4-xw9w",
+    "severity": "HIGH",
+    "summary": "nanoid: Integer Overflow or Wraparound",
+    "url": "https://github.com/advisories/GHSA-xwg4-73v4-xw9w",
+    "cve": [
+      "CVE-2026-73086"
+    ],
+    "publishedAt": "2026-09-01T19:23:45Z",
+    "updatedAt": "2026-09-01T19:23:46Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "nanoid",
+        "range": ">= 4.0.0, < 5.1.11",
+        "firstPatchedVersion": "5.1.11"
+      },
+      {
+        "package": "nanoid",
+        "range": "< 3.3.12",
+        "firstPatchedVersion": "3.3.12"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-ggv3-7p47-pfv8",
+    "severity": "MODERATE",
+    "summary": "Next.js: HTTP request smuggling in rewrites",
+    "url": "https://github.com/advisories/GHSA-ggv3-7p47-pfv8",
+    "cve": [
+      "CVE-2026-29057"
+    ],
+    "publishedAt": "2026-03-17T16:17:15Z",
+    "updatedAt": "2026-03-18T21:53:30Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 9.5.0, < 15.5.13",
+        "firstPatchedVersion": "15.5.13"
+      },
+      {
+        "package": "next",
+        "range": ">= 16.0.0-beta.0, < 16.1.7",
+        "firstPatchedVersion": "16.1.7"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-3x4c-7xq6-9pq8",
+    "severity": "MODERATE",
+    "summary": "Next.js: Unbounded next/image disk cache growth can exhaust storage",
+    "url": "https://github.com/advisories/GHSA-3x4c-7xq6-9pq8",
+    "cve": [
+      "CVE-2026-27980"
+    ],
+    "publishedAt": "2026-03-17T16:17:06Z",
+    "updatedAt": "2026-03-19T18:33:25Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 10.0.0, < 15.5.14",
+        "firstPatchedVersion": "15.5.14"
+      },
+      {
+        "package": "next",
+        "range": ">= 16.0.0-beta.0, < 16.1.7",
+        "firstPatchedVersion": "16.1.7"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-h27x-g6w4-24gq",
+    "severity": "MODERATE",
+    "summary": "Next.js: Unbounded postponed resume buffering can lead to DoS",
+    "url": "https://github.com/advisories/GHSA-h27x-g6w4-24gq",
+    "cve": [
+      "CVE-2026-27979"
+    ],
+    "publishedAt": "2026-03-17T16:16:49Z",
+    "updatedAt": "2026-03-19T18:31:03Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.1, < 16.1.7",
+        "firstPatchedVersion": "16.1.7"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-mq59-m269-xvcx",
+    "severity": "MODERATE",
+    "summary": "Next.js: null origin can bypass Server Actions CSRF checks",
+    "url": "https://github.com/advisories/GHSA-mq59-m269-xvcx",
+    "cve": [
+      "CVE-2026-27978"
+    ],
+    "publishedAt": "2026-03-17T15:30:14Z",
+    "updatedAt": "2026-03-19T18:28:51Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.1, < 16.1.7",
+        "firstPatchedVersion": "16.1.7"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-jcc7-9wpm-mj36",
+    "severity": "LOW",
+    "summary": "Next.js: null origin can bypass dev HMR websocket CSRF checks",
+    "url": "https://github.com/advisories/GHSA-jcc7-9wpm-mj36",
+    "cve": [
+      "CVE-2026-27977"
+    ],
+    "publishedAt": "2026-03-17T15:29:48Z",
+    "updatedAt": "2026-03-25T18:51:20Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.1, < 16.1.7",
+        "firstPatchedVersion": "16.1.7"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-q4gf-8mx6-v5v3",
+    "severity": "HIGH",
+    "summary": "Next.js has a Denial of Service with Server Components",
+    "url": "https://github.com/advisories/GHSA-q4gf-8mx6-v5v3",
+    "cve": [],
+    "publishedAt": "2026-04-10T15:35:47Z",
+    "updatedAt": "2026-04-10T15:35:49Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0-beta.0, < 16.2.3",
+        "firstPatchedVersion": "16.2.3"
+      },
+      {
+        "package": "next",
+        "range": ">= 13.0.0, < 15.5.15",
+        "firstPatchedVersion": "15.5.15"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-8h8q-6873-q5fj",
+    "severity": "HIGH",
+    "summary": "Next.js Vulnerable to Denial of Service with Server Components",
+    "url": "https://github.com/advisories/GHSA-8h8q-6873-q5fj",
+    "cve": [],
+    "publishedAt": "2026-05-11T14:50:27Z",
+    "updatedAt": "2026-05-11T14:50:28Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.5",
+        "firstPatchedVersion": "16.2.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 13.0.0, < 15.5.16",
+        "firstPatchedVersion": "15.5.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-3g8h-86w9-wvmq",
+    "severity": "LOW",
+    "summary": "Next.js's Middleware / Proxy redirects can be cache-poisoned",
+    "url": "https://github.com/advisories/GHSA-3g8h-86w9-wvmq",
+    "cve": [
+      "CVE-2026-44572"
+    ],
+    "publishedAt": "2026-05-11T16:12:07Z",
+    "updatedAt": "2026-05-14T20:35:59Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.5",
+        "firstPatchedVersion": "16.2.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 12.2.0, < 15.5.16",
+        "firstPatchedVersion": "15.5.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-ffhc-5mcf-pf4q",
+    "severity": "MODERATE",
+    "summary": "Next.js vulnerable to cross-site scripting in App Router applications using CSP nonces",
+    "url": "https://github.com/advisories/GHSA-ffhc-5mcf-pf4q",
+    "cve": [
+      "CVE-2026-44581"
+    ],
+    "publishedAt": "2026-05-11T15:57:12Z",
+    "updatedAt": "2026-05-14T20:38:59Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.5",
+        "firstPatchedVersion": "16.2.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 13.4.0, < 15.5.16",
+        "firstPatchedVersion": "15.5.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-vfv6-92ff-j949",
+    "severity": "LOW",
+    "summary": "Next.js vulnerable to cache poisoning via collisions in React Server Component cache-busting",
+    "url": "https://github.com/advisories/GHSA-vfv6-92ff-j949",
+    "cve": [
+      "CVE-2026-44582"
+    ],
+    "publishedAt": "2026-05-11T15:56:48Z",
+    "updatedAt": "2026-05-14T20:38:34Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.5",
+        "firstPatchedVersion": "16.2.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 13.4.6, < 15.5.16",
+        "firstPatchedVersion": "15.5.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-gx5p-jg67-6x7h",
+    "severity": "MODERATE",
+    "summary": "Next.js has cross-site scripting in beforeInteractive scripts with untrusted input",
+    "url": "https://github.com/advisories/GHSA-gx5p-jg67-6x7h",
+    "cve": [
+      "CVE-2026-44580"
+    ],
+    "publishedAt": "2026-05-11T15:56:38Z",
+    "updatedAt": "2026-05-14T20:38:30Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.5",
+        "firstPatchedVersion": "16.2.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 13.0.0, < 15.5.16",
+        "firstPatchedVersion": "15.5.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-mg66-mrh9-m8jx",
+    "severity": "HIGH",
+    "summary": "Next.js vulnerable to Denial of Service via connection exhaustion in applications using Cache Components",
+    "url": "https://github.com/advisories/GHSA-mg66-mrh9-m8jx",
+    "cve": [
+      "CVE-2026-44579"
+    ],
+    "publishedAt": "2026-05-11T15:56:24Z",
+    "updatedAt": "2026-05-14T20:38:24Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.5",
+        "firstPatchedVersion": "16.2.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 15.0.0, < 15.5.16",
+        "firstPatchedVersion": "15.5.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-h64f-5h5j-jqjh",
+    "severity": "MODERATE",
+    "summary": "Next.js has a Denial of Service in the Image Optimization API",
+    "url": "https://github.com/advisories/GHSA-h64f-5h5j-jqjh",
+    "cve": [
+      "CVE-2026-44577"
+    ],
+    "publishedAt": "2026-05-11T15:56:05Z",
+    "updatedAt": "2026-05-14T20:38:19Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.5",
+        "firstPatchedVersion": "16.2.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 10.0.0, < 15.5.16",
+        "firstPatchedVersion": "15.5.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-c4j6-fc7j-m34r",
+    "severity": "HIGH",
+    "summary": "Next.js vulnerable to server-side request forgery in applications using WebSocket upgrades",
+    "url": "https://github.com/advisories/GHSA-c4j6-fc7j-m34r",
+    "cve": [
+      "CVE-2026-44578"
+    ],
+    "publishedAt": "2026-05-11T15:55:15Z",
+    "updatedAt": "2026-05-14T20:38:24Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.5",
+        "firstPatchedVersion": "16.2.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 13.4.13, < 15.5.16",
+        "firstPatchedVersion": "15.5.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-492v-c6pp-mqqv",
+    "severity": "HIGH",
+    "summary": "Next.js has a Middleware / Proxy bypass through dynamic route parameter injection",
+    "url": "https://github.com/advisories/GHSA-492v-c6pp-mqqv",
+    "cve": [
+      "CVE-2026-44574"
+    ],
+    "publishedAt": "2026-05-11T15:54:08Z",
+    "updatedAt": "2026-05-14T20:38:04Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.5",
+        "firstPatchedVersion": "16.2.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 15.4.0, < 15.5.16",
+        "firstPatchedVersion": "15.5.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-wfc6-r584-vfw7",
+    "severity": "MODERATE",
+    "summary": "Next.js vulnerable to cache poisoning in React Server Component responses",
+    "url": "https://github.com/advisories/GHSA-wfc6-r584-vfw7",
+    "cve": [
+      "CVE-2026-44576"
+    ],
+    "publishedAt": "2026-05-11T15:54:46Z",
+    "updatedAt": "2026-05-14T20:38:14Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.5",
+        "firstPatchedVersion": "16.2.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 14.2.0, < 15.5.16",
+        "firstPatchedVersion": "15.5.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-267c-6grr-h53f",
+    "severity": "HIGH",
+    "summary": "Next.js has a Middleware / Proxy bypass in App Router applications via segment-prefetch routes",
+    "url": "https://github.com/advisories/GHSA-267c-6grr-h53f",
+    "cve": [
+      "CVE-2026-44575"
+    ],
+    "publishedAt": "2026-05-11T15:54:24Z",
+    "updatedAt": "2026-05-14T20:38:09Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.5",
+        "firstPatchedVersion": "16.2.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 15.2.0, < 15.5.16",
+        "firstPatchedVersion": "15.5.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-36qx-fr4f-26g5",
+    "severity": "HIGH",
+    "summary": "Next.js has a Middleware / Proxy bypass in Pages Router applications using i18n",
+    "url": "https://github.com/advisories/GHSA-36qx-fr4f-26g5",
+    "cve": [
+      "CVE-2026-44573"
+    ],
+    "publishedAt": "2026-05-11T15:53:51Z",
+    "updatedAt": "2026-05-14T20:38:00Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.5",
+        "firstPatchedVersion": "16.2.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 12.2.0, < 15.5.16",
+        "firstPatchedVersion": "15.5.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-6gpp-xcg3-4w24",
+    "severity": "HIGH",
+    "summary": "Next.js: Middleware / Proxy bypass in App Router applications using Turbopack and single locale",
+    "url": "https://github.com/advisories/GHSA-6gpp-xcg3-4w24",
+    "cve": [
+      "CVE-2026-64642"
+    ],
+    "publishedAt": "2026-07-22T22:59:38Z",
+    "updatedAt": "2026-07-22T22:59:39Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.11",
+        "firstPatchedVersion": "16.2.11"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-m99w-x7hq-7vfj",
+    "severity": "HIGH",
+    "summary": "Next.js: Denial of Service in App Router using Server Actions",
+    "url": "https://github.com/advisories/GHSA-m99w-x7hq-7vfj",
+    "cve": [
+      "CVE-2026-64641"
+    ],
+    "publishedAt": "2026-07-22T22:59:01Z",
+    "updatedAt": "2026-07-22T22:59:03Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.11",
+        "firstPatchedVersion": "16.2.11"
+      },
+      {
+        "package": "next",
+        "range": ">= 13.0.0, < 15.5.21",
+        "firstPatchedVersion": "15.5.21"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-89xv-2m56-2m9x",
+    "severity": "HIGH",
+    "summary": "Next.js: Server-Side Request Forgery in Server Actions on custom servers",
+    "url": "https://github.com/advisories/GHSA-89xv-2m56-2m9x",
+    "cve": [
+      "CVE-2026-64649"
+    ],
+    "publishedAt": "2026-07-22T23:09:48Z",
+    "updatedAt": "2026-07-22T23:09:50Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.11",
+        "firstPatchedVersion": "16.2.11"
+      },
+      {
+        "package": "next",
+        "range": ">= 14.1.1, < 15.5.21",
+        "firstPatchedVersion": "15.5.21"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-68g3-v927-f742",
+    "severity": "MODERATE",
+    "summary": "Next.js: Cache confusion of response bodies for requests with bodies",
+    "url": "https://github.com/advisories/GHSA-68g3-v927-f742",
+    "cve": [
+      "CVE-2026-64648"
+    ],
+    "publishedAt": "2026-07-22T23:08:17Z",
+    "updatedAt": "2026-07-22T23:08:20Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.11",
+        "firstPatchedVersion": "16.2.11"
+      },
+      {
+        "package": "next",
+        "range": ">= 13.0.0, < 15.5.21",
+        "firstPatchedVersion": "15.5.21"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-4633-3j49-mh5q",
+    "severity": "MODERATE",
+    "summary": "Next.js: Cache confusion of response bodies for requests with bodies containing invalid UTF-8 byte sequences",
+    "url": "https://github.com/advisories/GHSA-4633-3j49-mh5q",
+    "cve": [
+      "CVE-2026-64647"
+    ],
+    "publishedAt": "2026-07-22T23:06:12Z",
+    "updatedAt": "2026-07-22T23:06:14Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.11",
+        "firstPatchedVersion": "16.2.11"
+      },
+      {
+        "package": "next",
+        "range": ">= 13.0.0, < 15.5.21",
+        "firstPatchedVersion": "15.5.21"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-4c39-4ccg-62r3",
+    "severity": "MODERATE",
+    "summary": "Next.js: Unbounded Server Action payload in Edge runtime",
+    "url": "https://github.com/advisories/GHSA-4c39-4ccg-62r3",
+    "cve": [
+      "CVE-2026-64646"
+    ],
+    "publishedAt": "2026-07-22T23:02:43Z",
+    "updatedAt": "2026-07-22T23:02:45Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.11",
+        "firstPatchedVersion": "16.2.11"
+      },
+      {
+        "package": "next",
+        "range": ">= 13.0.0, < 15.5.21",
+        "firstPatchedVersion": "15.5.21"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-p9j2-gv94-2wf4",
+    "severity": "HIGH",
+    "summary": "Next.js: Server-Side Request Forgery in rewrites via attacker-controlled destination hostname",
+    "url": "https://github.com/advisories/GHSA-p9j2-gv94-2wf4",
+    "cve": [
+      "CVE-2026-64645"
+    ],
+    "publishedAt": "2026-07-22T23:02:23Z",
+    "updatedAt": "2026-07-22T23:02:25Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.11",
+        "firstPatchedVersion": "16.2.11"
+      },
+      {
+        "package": "next",
+        "range": ">= 12.0.0, < 15.5.21",
+        "firstPatchedVersion": "15.5.21"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-q8wf-6r8g-63ch",
+    "severity": "MODERATE",
+    "summary": "Next.js: Denial of Service in the Image Optimization API using SVGs",
+    "url": "https://github.com/advisories/GHSA-q8wf-6r8g-63ch",
+    "cve": [
+      "CVE-2026-64644"
+    ],
+    "publishedAt": "2026-07-22T23:02:05Z",
+    "updatedAt": "2026-07-22T23:02:06Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.11",
+        "firstPatchedVersion": "16.2.11"
+      },
+      {
+        "package": "next",
+        "range": ">= 15.5.0, < 15.5.21",
+        "firstPatchedVersion": "15.5.21"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-955p-x3mx-jcvp",
+    "severity": "MODERATE",
+    "summary": "Next.js: Unauthenticated disclosure of internal Server Function endpoints",
+    "url": "https://github.com/advisories/GHSA-955p-x3mx-jcvp",
+    "cve": [
+      "CVE-2026-64643"
+    ],
+    "publishedAt": "2026-07-22T23:00:34Z",
+    "updatedAt": "2026-07-22T23:00:35Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.11",
+        "firstPatchedVersion": "16.2.11"
+      },
+      {
+        "package": "next",
+        "range": ">= 13.0.0, < 15.5.21",
+        "firstPatchedVersion": "15.5.21"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-p293-qw3h-jr36",
+    "severity": "CRITICAL",
+    "summary": "Next.js: Unauthenticated Remote Code Execution on windows-hosted servers",
+    "url": "https://github.com/advisories/GHSA-p293-qw3h-jr36",
+    "cve": [
+      "CVE-2026-75604"
+    ],
+    "publishedAt": "2026-09-08T20:51:40Z",
+    "updatedAt": "2026-09-08T20:51:43Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.3.3",
+        "firstPatchedVersion": "16.3.3"
+      },
+      {
+        "package": "next",
+        "range": ">= 13.4.0, < 15.5.24",
+        "firstPatchedVersion": "15.5.24"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-2xp9-vwfh-vxw4",
+    "severity": "CRITICAL",
+    "summary": "Next.js: Unauthenticated Remote Code Execution in Image Optimization API when AVIF files are used",
+    "url": "https://github.com/advisories/GHSA-2xp9-vwfh-vxw4",
+    "cve": [],
+    "publishedAt": "2026-09-08T21:21:12Z",
+    "updatedAt": "2026-09-08T21:21:13Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.3.3",
+        "firstPatchedVersion": "16.3.3"
+      },
+      {
+        "package": "next",
+        "range": ">= 10.0.0, < 15.5.24",
+        "firstPatchedVersion": "15.5.24"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-4jqv-mc3x-m676",
+    "severity": "MODERATE",
+    "summary": "Next.js has cache poisoning of SSG and ISR pages in self-hosted applications",
+    "url": "https://github.com/advisories/GHSA-4jqv-mc3x-m676",
+    "cve": [
+      "CVE-2026-94543"
+    ],
+    "publishedAt": "2026-10-07T20:32:06Z",
+    "updatedAt": "2026-10-07T20:32:07Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.3.8",
+        "firstPatchedVersion": "16.3.8"
+      },
+      {
+        "package": "next",
+        "range": ">= 15.0.0, < 15.5.27",
+        "firstPatchedVersion": "15.5.27"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-39w2-rjm5-chcv",
+    "severity": "LOW",
+    "summary": "Next.js has information disclosure in development server's Model Context Protocol endpoint",
+    "url": "https://github.com/advisories/GHSA-39w2-rjm5-chcv",
+    "cve": [
+      "CVE-2026-94486"
+    ],
+    "publishedAt": "2026-10-07T20:31:51Z",
+    "updatedAt": "2026-10-07T20:31:52Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.3.8",
+        "firstPatchedVersion": "16.3.8"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-f87g-xv8r-7p7x",
+    "severity": "MODERATE",
+    "summary": "Next.js has information disclosure in App Router metadata image routes via dynamicParams bypass",
+    "url": "https://github.com/advisories/GHSA-f87g-xv8r-7p7x",
+    "cve": [
+      "CVE-2026-94485"
+    ],
+    "publishedAt": "2026-10-07T20:31:33Z",
+    "updatedAt": "2026-10-07T20:31:35Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.3.8",
+        "firstPatchedVersion": "16.3.8"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-mcj8-r9mp-w47p",
+    "severity": "MODERATE",
+    "summary": "Next.js has cache poisoning in SSG/ISR rendering that leads to cross-user content substitution and persistent denial of service",
+    "url": "https://github.com/advisories/GHSA-mcj8-r9mp-w47p",
+    "cve": [
+      "CVE-2026-94484"
+    ],
+    "publishedAt": "2026-10-07T20:31:13Z",
+    "updatedAt": "2026-10-07T20:31:15Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 15.0.0, < 15.5.27",
+        "firstPatchedVersion": "15.5.27"
+      },
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.3.8",
+        "firstPatchedVersion": "16.3.8"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-cjq9-62q9-8jv4",
+    "severity": "HIGH",
+    "summary": "Next.js has Server-Side Request Forgery in Image Optimization",
+    "url": "https://github.com/advisories/GHSA-cjq9-62q9-8jv4",
+    "cve": [
+      "CVE-2026-94483"
+    ],
+    "publishedAt": "2026-10-07T20:30:55Z",
+    "updatedAt": "2026-10-07T20:30:56Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.3.8",
+        "firstPatchedVersion": "16.3.8"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-2464-fhr4-w9xw",
+    "severity": "CRITICAL",
+    "summary": "Next.js: Unauthenticated Remote Code Execution in Image Optimization API when SVG files are used",
+    "url": "https://github.com/advisories/GHSA-2464-fhr4-w9xw",
+    "cve": [],
+    "publishedAt": "2026-10-22T15:52:53Z",
+    "updatedAt": "2026-10-22T15:52:56Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, <= 16.4.0",
+        "firstPatchedVersion": "16.4.1"
+      },
+      {
+        "package": "next",
+        "range": ">= 10.0.0, <= 15.5.27",
+        "firstPatchedVersion": "15.5.28"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-p3m5-59mp-jv5r",
+    "severity": "HIGH",
+    "summary": "Next.js: Denial of Service in App Router using Server Actions",
+    "url": "https://github.com/advisories/GHSA-p3m5-59mp-jv5r",
+    "cve": [
+      "CVE-2026-94482"
+    ],
+    "publishedAt": "2026-10-22T15:50:34Z",
+    "updatedAt": "2026-10-22T15:50:35Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, <= 16.4.0",
+        "firstPatchedVersion": "16.4.1"
+      },
+      {
+        "package": "next",
+        "range": ">= 13.0.0, <= 15.5.27",
+        "firstPatchedVersion": "15.5.28"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-673q-mjm6-r5xr",
+    "severity": "CRITICAL",
+    "summary": "Next.js: Unauthenticated Remote Code Execution in `use cache` functions returning typed arrays",
+    "url": "https://github.com/advisories/GHSA-673q-mjm6-r5xr",
+    "cve": [],
+    "publishedAt": "2026-10-22T16:42:31Z",
+    "updatedAt": "2026-10-22T16:42:32Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, <= 16.4.0",
+        "firstPatchedVersion": "16.4.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-26hh-7cqf-hhc6",
+    "severity": "HIGH",
+    "summary": "Next.js has a Middleware / Proxy bypass in App Router applications via segment-prefetch routes - Incomplete Fix Follow-Up",
+    "url": "https://github.com/advisories/GHSA-26hh-7cqf-hhc6",
+    "cve": [
+      "CVE-2026-45109"
+    ],
+    "publishedAt": "2026-05-11T16:21:19Z",
+    "updatedAt": "2026-11-04T03:30:52Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, < 16.2.6",
+        "firstPatchedVersion": "16.2.6"
+      },
+      {
+        "package": "next",
+        "range": ">= 15.2.0, < 15.5.18",
+        "firstPatchedVersion": "15.5.18"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-7qx7-33qx-rqx2",
+    "severity": "MODERATE",
+    "summary": "Next.js: SVG rejection bypass in the image optimization",
+    "url": "https://github.com/advisories/GHSA-7qx7-33qx-rqx2",
+    "cve": [
+      "CVE-2026-119347"
+    ],
+    "publishedAt": "2026-11-19T22:23:06Z",
+    "updatedAt": "2026-11-19T22:23:37Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, <= 16.4.4",
+        "firstPatchedVersion": "16.4.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 15.0.0, <= 15.5.28",
+        "firstPatchedVersion": "15.5.29"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-f3mh-rxg3-f5g2",
+    "severity": "MODERATE",
+    "summary": "Next.js: HttpOnly cookie exposure through internal response header on Next.js Edge runtime routes",
+    "url": "https://github.com/advisories/GHSA-f3mh-rxg3-f5g2",
+    "cve": [
+      "CVE-2026-119346"
+    ],
+    "publishedAt": "2026-11-19T22:23:21Z",
+    "updatedAt": "2026-11-19T22:23:37Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, <= 16.4.4",
+        "firstPatchedVersion": "16.4.5"
+      },
+      {
+        "package": "next",
+        "range": ">= 15.0.0, <= 15.5.28",
+        "firstPatchedVersion": "15.5.29"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-pc58-hwjq-p385",
+    "severity": "MODERATE",
+    "summary": "Next.js: Cross-client response injection and disclosure in self-hosted Next.js applications forwarding fetched responses",
+    "url": "https://github.com/advisories/GHSA-pc58-hwjq-p385",
+    "cve": [
+      "CVE-2026-119348"
+    ],
+    "publishedAt": "2026-11-19T22:20:34Z",
+    "updatedAt": "2026-11-19T22:20:35Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": "<= 15.5.28",
+        "firstPatchedVersion": "15.5.29"
+      },
+      {
+        "package": "next",
+        "range": ">= 16.0.0, <= 16.4.4",
+        "firstPatchedVersion": "16.4.5"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-rhh4-g77r-r9qj",
+    "severity": "MODERATE",
+    "summary": "Next.js: Cross-user cache disclosure and poisoning in Next.js use cache with binary arguments",
+    "url": "https://github.com/advisories/GHSA-rhh4-g77r-r9qj",
+    "cve": [
+      "CVE-2026-119349"
+    ],
+    "publishedAt": "2026-11-19T22:20:11Z",
+    "updatedAt": "2026-11-19T22:20:14Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "next",
+        "range": ">= 16.0.0, <= 16.4.4",
+        "firstPatchedVersion": "16.4.5"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-3v7f-55p6-f55p",
+    "severity": "MODERATE",
+    "summary": "Picomatch: Method Injection in POSIX Character Classes causes incorrect Glob Matching",
+    "url": "https://github.com/advisories/GHSA-3v7f-55p6-f55p",
+    "cve": [
+      "CVE-2026-33672"
+    ],
+    "publishedAt": "2026-03-25T21:13:39Z",
+    "updatedAt": "2026-03-27T21:36:25Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "picomatch",
+        "range": "< 2.3.2",
+        "firstPatchedVersion": "2.3.2"
+      },
+      {
+        "package": "picomatch",
+        "range": ">= 3.0.0, < 3.0.2",
+        "firstPatchedVersion": "3.0.2"
+      },
+      {
+        "package": "picomatch",
+        "range": ">= 4.0.0, < 4.0.4",
+        "firstPatchedVersion": "4.0.4"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-c2c7-rcm5-vvqj",
+    "severity": "HIGH",
+    "summary": "Picomatch has a ReDoS vulnerability via extglob quantifiers",
+    "url": "https://github.com/advisories/GHSA-c2c7-rcm5-vvqj",
+    "cve": [
+      "CVE-2026-33671"
+    ],
+    "publishedAt": "2026-03-25T21:12:07Z",
+    "updatedAt": "2026-03-27T21:36:14Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "picomatch",
+        "range": "< 2.3.2",
+        "firstPatchedVersion": "2.3.2"
+      },
+      {
+        "package": "picomatch",
+        "range": ">= 3.0.0, < 3.0.2",
+        "firstPatchedVersion": "3.0.2"
+      },
+      {
+        "package": "picomatch",
+        "range": ">= 4.0.0, < 4.0.4",
+        "firstPatchedVersion": "4.0.4"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-qx2v-qp2m-jg93",
+    "severity": "MODERATE",
+    "summary": "PostCSS has XSS via Unescaped </style> in its CSS Stringify Output",
+    "url": "https://github.com/advisories/GHSA-qx2v-qp2m-jg93",
+    "cve": [
+      "CVE-2026-41305"
+    ],
+    "publishedAt": "2026-04-24T15:31:42Z",
+    "updatedAt": "2026-04-24T15:31:44Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "postcss",
+        "range": "< 8.5.10",
+        "firstPatchedVersion": "8.5.10"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-6g55-p6wh-862q",
+    "severity": "HIGH",
+    "summary": "PostCSS: Arbitrary file read and information disclosure via attacker-controlled sourceMappingURL in CSS comments",
+    "url": "https://github.com/advisories/GHSA-6g55-p6wh-862q",
+    "cve": [
+      "CVE-2026-45623"
+    ],
+    "publishedAt": "2026-07-23T15:06:16Z",
+    "updatedAt": "2026-07-23T15:06:17Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "postcss",
+        "range": "<= 8.5.11",
+        "firstPatchedVersion": "8.5.12"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-fxqj-rqcc-2cmp",
+    "severity": "MODERATE",
+    "summary": "PostCSS: incomplete fix of GHSA-6g55-p6wh-862q — attacker-controlled sourceMappingURL reads arbitrary .map files when `from` is unset",
+    "url": "https://github.com/advisories/GHSA-fxqj-rqcc-2cmp",
+    "cve": [
+      "CVE-2026-69153"
+    ],
+    "publishedAt": "2026-08-03T17:11:39Z",
+    "updatedAt": "2026-08-03T17:11:40Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "postcss",
+        "range": "<= 8.5.22",
+        "firstPatchedVersion": "8.5.23"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-r28c-9q8g-f849",
+    "severity": "HIGH",
+    "summary": "PostCSS: Path Traversal in Previous Source Map Auto-Loading (sourceMappingURL) leads to Arbitrary .map File Disclosure",
+    "url": "https://github.com/advisories/GHSA-r28c-9q8g-f849",
+    "cve": [
+      "CVE-2026-73646"
+    ],
+    "publishedAt": "2026-07-24T16:24:55Z",
+    "updatedAt": "2026-08-13T17:55:56Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "postcss",
+        "range": "<= 8.5.17",
+        "firstPatchedVersion": "8.5.18"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-f88m-g3jw-g9cj",
+    "severity": "HIGH",
+    "summary": "sharp inherited vulnerabilities in libvips: CVE-2026-33327, CVE-2026-33328, CVE-2026-35590, CVE-2026-35591",
+    "url": "https://github.com/advisories/GHSA-f88m-g3jw-g9cj",
+    "cve": [],
+    "publishedAt": "2026-07-21T22:07:17Z",
+    "updatedAt": "2026-07-21T22:07:18Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "sharp",
+        "range": "< 0.35.0",
+        "firstPatchedVersion": "0.35.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-rgj7-g3m4-5g8c",
+    "severity": "HIGH",
+    "summary": "sharp: Vulnerabilities in libheif: GHSA-g89c-p67h-r497 and GHSA-2jg2-4ch7-h545",
+    "url": "https://github.com/advisories/GHSA-rgj7-g3m4-5g8c",
+    "cve": [],
+    "publishedAt": "2026-09-08T21:25:11Z",
+    "updatedAt": "2026-09-08T21:25:12Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "sharp",
+        "range": "< 0.35.4",
+        "firstPatchedVersion": "0.35.4"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-wq5f-xc86-pv6w",
+    "severity": "HIGH",
+    "summary": "sharp : Vulnerability in librsvg dependency CVE-2026-96889",
+    "url": "https://github.com/advisories/GHSA-wq5f-xc86-pv6w",
+    "cve": [],
+    "publishedAt": "2026-10-06T13:43:57Z",
+    "updatedAt": "2026-10-06T13:43:58Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "sharp",
+        "range": "< 0.35.5",
+        "firstPatchedVersion": "0.35.5"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-68fv-2mgg-jv7q",
+    "severity": "HIGH",
+    "summary": "source-map-js allows event-loop denial of service through indexed source-map section offsets",
+    "url": "https://github.com/advisories/GHSA-68fv-2mgg-jv7q",
+    "cve": [
+      "CVE-2026-93749"
+    ],
+    "publishedAt": "2026-09-18T18:31:44Z",
+    "updatedAt": "2026-10-05T23:31:22Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "source-map-js",
+        "range": ">= 1.0.0, < 1.2.2",
+        "firstPatchedVersion": "1.2.2"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-vmf3-w455-68vh",
+    "severity": "MODERATE",
+    "summary": "node-tar applies PAX size override to intermediary GNU long-name/long-link headers, causing tar parser interpretation differential (file smuggling)",
+    "url": "https://github.com/advisories/GHSA-vmf3-w455-68vh",
+    "cve": [
+      "CVE-2026-53655"
+    ],
+    "publishedAt": "2026-06-15T17:19:42Z",
+    "updatedAt": "2026-06-15T17:19:44Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "tar",
+        "range": "<= 7.5.15",
+        "firstPatchedVersion": "7.5.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-w8wr-v893-vjvp",
+    "severity": "MODERATE",
+    "summary": "node-tar: Process crash via PAX numeric path type confusion",
+    "url": "https://github.com/advisories/GHSA-w8wr-v893-vjvp",
+    "cve": [
+      "CVE-2026-59871"
+    ],
+    "publishedAt": "2026-07-20T21:53:14Z",
+    "updatedAt": "2026-07-20T21:53:15Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "tar",
+        "range": "<= 7.5.17",
+        "firstPatchedVersion": "7.5.18"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-23hp-3jrh-7fpw",
+    "severity": "CRITICAL",
+    "summary": "node-tar: Decompression/parse DoS via unlimited input",
+    "url": "https://github.com/advisories/GHSA-23hp-3jrh-7fpw",
+    "cve": [
+      "CVE-2026-59873"
+    ],
+    "publishedAt": "2026-07-20T21:52:03Z",
+    "updatedAt": "2026-07-20T21:52:04Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "tar",
+        "range": "<= 7.5.18",
+        "firstPatchedVersion": "7.5.19"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-8x88-c5mf-7j5w",
+    "severity": "HIGH",
+    "summary": "node-tar: Negative tar entry size causes infinite loop in archive replace",
+    "url": "https://github.com/advisories/GHSA-8x88-c5mf-7j5w",
+    "cve": [
+      "CVE-2026-59874"
+    ],
+    "publishedAt": "2026-07-20T21:51:39Z",
+    "updatedAt": "2026-07-20T21:51:39Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "tar",
+        "range": "<= 7.5.17",
+        "firstPatchedVersion": "7.5.18"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-gvwx-54wh-qm9j",
+    "severity": "MODERATE",
+    "summary": "node-tar: Uncaught Exception DoS via NUL byte in PAX path/linkpath records",
+    "url": "https://github.com/advisories/GHSA-gvwx-54wh-qm9j",
+    "cve": [
+      "CVE-2026-59875"
+    ],
+    "publishedAt": "2026-07-20T21:51:12Z",
+    "updatedAt": "2026-07-20T21:51:12Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "tar",
+        "range": "<= 7.5.16",
+        "firstPatchedVersion": "7.5.17"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-r292-9mhp-454m",
+    "severity": "HIGH",
+    "summary": "node-tar: Uncontrolled recursion in mapHas/filesFilter allows uncatchable stack-overflow DoS via crafted long-path tar with member selection",
+    "url": "https://github.com/advisories/GHSA-r292-9mhp-454m",
+    "cve": [
+      "CVE-2026-73566"
+    ],
+    "publishedAt": "2026-07-24T16:26:16Z",
+    "updatedAt": "2026-08-21T19:08:23Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "tar",
+        "range": "<= 7.5.20",
+        "firstPatchedVersion": "7.5.21"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-p88m-4jfj-68fv",
+    "severity": "MODERATE",
+    "summary": "undici vulnerable to HTTP header injection via Set-Cookie percent-decoding",
+    "url": "https://github.com/advisories/GHSA-p88m-4jfj-68fv",
+    "cve": [
+      "CVE-2026-9679"
+    ],
+    "publishedAt": "2026-06-19T14:21:30Z",
+    "updatedAt": "2026-06-19T14:23:30Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.5.0",
+        "firstPatchedVersion": "8.5.0"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.0.0, < 7.28.0",
+        "firstPatchedVersion": "7.28.0"
+      },
+      {
+        "package": "undici",
+        "range": "< 6.27.0",
+        "firstPatchedVersion": "6.27.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-g8m3-5g58-fq7m",
+    "severity": "LOW",
+    "summary": "undici vulnerable to Set-Cookie SameSite attribute downgrade via permissive substring matching",
+    "url": "https://github.com/advisories/GHSA-g8m3-5g58-fq7m",
+    "cve": [
+      "CVE-2026-11525"
+    ],
+    "publishedAt": "2026-06-19T14:34:46Z",
+    "updatedAt": "2026-06-19T14:34:46Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.5.0",
+        "firstPatchedVersion": "8.5.0"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.0.0, < 7.28.0",
+        "firstPatchedVersion": "7.28.0"
+      },
+      {
+        "package": "undici",
+        "range": "< 6.27.0",
+        "firstPatchedVersion": "6.27.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-8xcm-r25x-g524",
+    "severity": "MODERATE",
+    "summary": "undici vulnerable to downstream response desynchronization via retry interceptor",
+    "url": "https://github.com/advisories/GHSA-8xcm-r25x-g524",
+    "cve": [
+      "CVE-2026-16728"
+    ],
+    "publishedAt": "2026-08-03T19:24:33Z",
+    "updatedAt": "2026-08-03T19:24:35Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.9.0",
+        "firstPatchedVersion": "8.9.0"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.0.0, < 7.29.0",
+        "firstPatchedVersion": "7.29.0"
+      },
+      {
+        "package": "undici",
+        "range": "< 6.28.0",
+        "firstPatchedVersion": "6.28.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-m8rv-5g2x-5cg5",
+    "severity": "MODERATE",
+    "summary": "undici vulnerable to CRLF Injection via blob-like body 'type' property",
+    "url": "https://github.com/advisories/GHSA-m8rv-5g2x-5cg5",
+    "cve": [
+      "CVE-2026-15157"
+    ],
+    "publishedAt": "2026-08-03T19:33:53Z",
+    "updatedAt": "2026-08-03T19:33:56Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.9.0",
+        "firstPatchedVersion": "8.9.0"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.0.0, < 7.29.0",
+        "firstPatchedVersion": "7.29.0"
+      },
+      {
+        "package": "undici",
+        "range": "< 6.28.0",
+        "firstPatchedVersion": "6.28.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-v3r7-h72x-cjcm",
+    "severity": "MODERATE",
+    "summary": "undici vulnerable to cookie attribute injection via unsanitized domain and unparsed setCookie fields",
+    "url": "https://github.com/advisories/GHSA-v3r7-h72x-cjcm",
+    "cve": [
+      "CVE-2026-16729"
+    ],
+    "publishedAt": "2026-08-03T19:30:52Z",
+    "updatedAt": "2026-08-03T19:30:53Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.9.0",
+        "firstPatchedVersion": "8.9.0"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.0.0, < 7.29.0",
+        "firstPatchedVersion": "7.29.0"
+      },
+      {
+        "package": "undici",
+        "range": "< 6.28.0",
+        "firstPatchedVersion": "6.28.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-35p6-xmwp-9g52",
+    "severity": "LOW",
+    "summary": "undici vulnerable to HTTP response queue poisoning via keep-alive socket reuse",
+    "url": "https://github.com/advisories/GHSA-35p6-xmwp-9g52",
+    "cve": [
+      "CVE-2026-6733"
+    ],
+    "publishedAt": "2026-06-19T14:19:13Z",
+    "updatedAt": "2026-08-05T21:48:39Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.5.0",
+        "firstPatchedVersion": "8.5.0"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.0.0, < 7.28.0",
+        "firstPatchedVersion": "7.28.0"
+      },
+      {
+        "package": "undici",
+        "range": "< 6.27.0",
+        "firstPatchedVersion": "6.27.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-r53p-7pc4-xj5r",
+    "severity": "LOW",
+    "summary": "undici vulnerable to downstream response splitting via retry interceptor",
+    "url": "https://github.com/advisories/GHSA-r53p-7pc4-xj5r",
+    "cve": [
+      "CVE-2026-18540"
+    ],
+    "publishedAt": "2026-09-29T18:22:07Z",
+    "updatedAt": "2026-09-29T18:22:08Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.10.2",
+        "firstPatchedVersion": "8.10.2"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.0.0, < 7.29.1",
+        "firstPatchedVersion": "7.29.1"
+      },
+      {
+        "package": "undici",
+        "range": "< 6.28.1",
+        "firstPatchedVersion": "6.28.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-rfgv-xxqx-mfg5",
+    "severity": "HIGH",
+    "summary": "undici vulnerable to Denial of Service via unrequested WebSocket subprotocol",
+    "url": "https://github.com/advisories/GHSA-rfgv-xxqx-mfg5",
+    "cve": [
+      "CVE-2026-19534"
+    ],
+    "publishedAt": "2026-09-29T18:21:33Z",
+    "updatedAt": "2026-09-29T18:21:41Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.10.2",
+        "firstPatchedVersion": "8.10.2"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.0.0, < 7.29.1",
+        "firstPatchedVersion": "7.29.1"
+      },
+      {
+        "package": "undici",
+        "range": ">= 6.7.0, < 6.28.1",
+        "firstPatchedVersion": "6.28.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-4qv8-2p9j-2685",
+    "severity": "MODERATE",
+    "summary": "undici vulnerable to Denial of Service via unbounded memory in the EventSource parser",
+    "url": "https://github.com/advisories/GHSA-4qv8-2p9j-2685",
+    "cve": [
+      "CVE-2026-109924"
+    ],
+    "publishedAt": "2026-10-23T22:13:29Z",
+    "updatedAt": "2026-10-23T22:13:31Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.12.2",
+        "firstPatchedVersion": "8.12.2"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.0.0, < 7.30.1",
+        "firstPatchedVersion": "7.30.1"
+      },
+      {
+        "package": "undici",
+        "range": ">= 6.5.0, < 6.29.1",
+        "firstPatchedVersion": "6.29.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-xjj6-f33q-929c",
+    "severity": "HIGH",
+    "summary": "undici vulnerable to Denial of Service via unhandled error on excessive content-encodings",
+    "url": "https://github.com/advisories/GHSA-xjj6-f33q-929c",
+    "cve": [
+      "CVE-2026-109869"
+    ],
+    "publishedAt": "2026-10-23T22:14:31Z",
+    "updatedAt": "2026-10-23T22:14:32Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.12.2",
+        "firstPatchedVersion": "8.12.2"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.18.0, < 7.30.1",
+        "firstPatchedVersion": "7.30.1"
+      },
+      {
+        "package": "undici",
+        "range": ">= 6.23.0, < 6.29.1",
+        "firstPatchedVersion": "6.29.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-2m5v-pch6-74hx",
+    "severity": "HIGH",
+    "summary": "undici vulnerable to TLS certificate validation bypass via dropped tls options in Agent",
+    "url": "https://github.com/advisories/GHSA-2m5v-pch6-74hx",
+    "cve": [
+      "CVE-2026-109383"
+    ],
+    "publishedAt": "2026-10-27T19:02:26Z",
+    "updatedAt": "2026-10-27T19:02:27Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.12.2",
+        "firstPatchedVersion": "8.12.2"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.0.0, < 7.30.1",
+        "firstPatchedVersion": "7.30.1"
+      },
+      {
+        "package": "undici",
+        "range": ">= 4.0.0, < 6.29.1",
+        "firstPatchedVersion": "6.29.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-qrxm-fqhp-jwvm",
+    "severity": "HIGH",
+    "summary": "undici vulnerable to Denial of Service via TLS 1.2 certificate-changing renegotiation",
+    "url": "https://github.com/advisories/GHSA-qrxm-fqhp-jwvm",
+    "cve": [
+      "CVE-2026-87018"
+    ],
+    "publishedAt": "2026-10-27T19:02:21Z",
+    "updatedAt": "2026-10-27T19:02:22Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.12.2",
+        "firstPatchedVersion": "8.12.2"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.0.0, < 7.30.1",
+        "firstPatchedVersion": "7.30.1"
+      },
+      {
+        "package": "undici",
+        "range": ">= 4.2.1, < 6.29.1",
+        "firstPatchedVersion": "6.29.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-9fm3-97px-rjf6",
+    "severity": "MODERATE",
+    "summary": "undici WebSocket client vulnerable to Denial of Service via unbounded automatic PONG buffering",
+    "url": "https://github.com/advisories/GHSA-9fm3-97px-rjf6",
+    "cve": [
+      "CVE-2026-109932"
+    ],
+    "publishedAt": "2026-10-27T19:02:15Z",
+    "updatedAt": "2026-10-27T19:02:17Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.12.2",
+        "firstPatchedVersion": "8.12.2"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.0.0, < 7.30.1",
+        "firstPatchedVersion": "7.30.1"
+      },
+      {
+        "package": "undici",
+        "range": ">= 5.15.0, < 6.29.1",
+        "firstPatchedVersion": "6.29.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-vxpw-j846-p89q",
+    "severity": "HIGH",
+    "summary": "undici WebSocket client vulnerable to denial of service via fragment count bypass",
+    "url": "https://github.com/advisories/GHSA-vxpw-j846-p89q",
+    "cve": [
+      "CVE-2026-12151"
+    ],
+    "publishedAt": "2026-06-19T14:22:01Z",
+    "updatedAt": "2026-11-04T03:37:10Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "undici",
+        "range": ">= 8.0.0, < 8.5.0",
+        "firstPatchedVersion": "8.5.0"
+      },
+      {
+        "package": "undici",
+        "range": ">= 7.0.0, < 7.28.0",
+        "firstPatchedVersion": "7.28.0"
+      },
+      {
+        "package": "undici",
+        "range": "< 6.27.0",
+        "firstPatchedVersion": "6.27.0"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-w5hq-g745-h8pq",
+    "severity": "MODERATE",
+    "summary": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+    "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+    "cve": [
+      "CVE-2026-41907"
+    ],
+    "publishedAt": "2026-04-22T20:53:24Z",
+    "updatedAt": "2026-05-21T18:25:57Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "uuid",
+        "range": "< 11.1.1",
+        "firstPatchedVersion": "11.1.1"
+      },
+      {
+        "package": "uuid",
+        "range": ">= 13.0.0, < 13.0.1",
+        "firstPatchedVersion": "13.0.1"
+      },
+      {
+        "package": "uuid",
+        "range": ">= 12.0.0, < 12.0.1",
+        "firstPatchedVersion": "12.0.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-5qjj-4xww-7phc",
+    "severity": "MODERATE",
+    "summary": "Valibot: record() issue paths can make flatten() throw for inherited Object property names",
+    "url": "https://github.com/advisories/GHSA-5qjj-4xww-7phc",
+    "cve": [
+      "CVE-2026-59952"
+    ],
+    "publishedAt": "2026-07-24T16:14:31Z",
+    "updatedAt": "2026-07-24T16:14:33Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "valibot",
+        "range": "<= 1.4.1",
+        "firstPatchedVersion": "1.4.2"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-4w7w-66w2-5vf9",
+    "severity": "MODERATE",
+    "summary": "Vite Vulnerable to Path Traversal in Optimized Deps `.map` Handling",
+    "url": "https://github.com/advisories/GHSA-4w7w-66w2-5vf9",
+    "cve": [
+      "CVE-2026-39365"
+    ],
+    "publishedAt": "2026-04-06T18:03:46Z",
+    "updatedAt": "2026-04-07T22:16:29Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "vite",
+        "range": "<= 6.4.1",
+        "firstPatchedVersion": "6.4.2"
+      },
+      {
+        "package": "vite",
+        "range": ">= 7.0.0, <= 7.3.1",
+        "firstPatchedVersion": "7.3.2"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.0.0, <= 8.0.4",
+        "firstPatchedVersion": "8.0.5"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-v2wj-q39q-566r",
+    "severity": "HIGH",
+    "summary": "Vite: `server.fs.deny` bypassed with queries",
+    "url": "https://github.com/advisories/GHSA-v2wj-q39q-566r",
+    "cve": [
+      "CVE-2026-39364"
+    ],
+    "publishedAt": "2026-04-06T18:03:32Z",
+    "updatedAt": "2026-04-07T22:16:19Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "vite",
+        "range": ">= 7.1.0, <= 7.3.1",
+        "firstPatchedVersion": "7.3.2"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.0.0, <= 8.0.4",
+        "firstPatchedVersion": "8.0.5"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-p9ff-h696-f583",
+    "severity": "HIGH",
+    "summary": "Vite Vulnerable to Arbitrary File Read via Vite Dev Server WebSocket",
+    "url": "https://github.com/advisories/GHSA-p9ff-h696-f583",
+    "cve": [
+      "CVE-2026-39363"
+    ],
+    "publishedAt": "2026-04-06T18:03:24Z",
+    "updatedAt": "2026-04-07T22:16:11Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "vite",
+        "range": ">= 6.0.0, <= 6.4.1",
+        "firstPatchedVersion": "6.4.2"
+      },
+      {
+        "package": "vite",
+        "range": ">= 7.0.0, <= 7.3.1",
+        "firstPatchedVersion": "7.3.2"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.0.0, <= 8.0.4",
+        "firstPatchedVersion": "8.0.5"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-v6wh-96g9-6wx3",
+    "severity": "MODERATE",
+    "summary": "launch-editor: NTLMv2 hash disclosure via UNC path handling on Windows",
+    "url": "https://github.com/advisories/GHSA-v6wh-96g9-6wx3",
+    "cve": [
+      "CVE-2026-53632"
+    ],
+    "publishedAt": "2026-06-15T17:18:31Z",
+    "updatedAt": "2026-06-15T17:18:32Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "vite-plus",
+        "range": "<= 0.1.23",
+        "firstPatchedVersion": "0.1.24"
+      },
+      {
+        "package": "vite",
+        "range": "<= 6.4.2",
+        "firstPatchedVersion": "6.4.3"
+      },
+      {
+        "package": "vite",
+        "range": ">= 7.0.0, <= 7.3.4",
+        "firstPatchedVersion": "7.3.5"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.0.0, <= 8.0.15",
+        "firstPatchedVersion": "8.0.16"
+      },
+      {
+        "package": "launch-editor",
+        "range": "<= 2.14.0",
+        "firstPatchedVersion": "2.14.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-698v-4r3x-3vcv",
+    "severity": "MODERATE",
+    "summary": "launch-editor: escapeCmdArgs() omits % escaping on Windows",
+    "url": "https://github.com/advisories/GHSA-698v-4r3x-3vcv",
+    "cve": [
+      "CVE-2026-112943"
+    ],
+    "publishedAt": "2026-10-20T18:30:24Z",
+    "updatedAt": "2026-10-20T18:30:25Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "vite-plus",
+        "range": "<= 1.0.0",
+        "firstPatchedVersion": "1.1.0"
+      },
+      {
+        "package": "vite",
+        "range": "<= 6.4.3",
+        "firstPatchedVersion": "6.4.4"
+      },
+      {
+        "package": "vite",
+        "range": ">= 7.0.0, <= 7.3.6",
+        "firstPatchedVersion": "7.3.7"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.0.0, <= 8.1.5",
+        "firstPatchedVersion": "8.1.6"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.2.0, <= 8.2.3",
+        "firstPatchedVersion": "8.2.4"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.3.0, <= 8.3.2",
+        "firstPatchedVersion": "8.3.3"
+      },
+      {
+        "package": "launch-editor",
+        "range": "<= 2.14.1",
+        "firstPatchedVersion": "2.14.2"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-r825-w8mm-5pxw",
+    "severity": "MODERATE",
+    "summary": "launch-editor: Editor CLI flag misinterpretation causing arbitrary command execution for some editors",
+    "url": "https://github.com/advisories/GHSA-r825-w8mm-5pxw",
+    "cve": [
+      "CVE-2026-112944"
+    ],
+    "publishedAt": "2026-10-20T19:51:52Z",
+    "updatedAt": "2026-10-20T19:51:54Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "vite-plus",
+        "range": "<= 1.0.0",
+        "firstPatchedVersion": "1.1.0"
+      },
+      {
+        "package": "vite",
+        "range": "<= 6.4.3",
+        "firstPatchedVersion": "6.4.4"
+      },
+      {
+        "package": "vite",
+        "range": ">= 7.0.0, <= 7.3.6",
+        "firstPatchedVersion": "7.3.7"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.0.0, <= 8.1.5",
+        "firstPatchedVersion": "8.1.6"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.2.0, <= 8.2.3",
+        "firstPatchedVersion": "8.2.4"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.3.0, <= 8.3.2",
+        "firstPatchedVersion": "8.3.3"
+      },
+      {
+        "package": "launch-editor",
+        "range": "<= 2.14.1",
+        "firstPatchedVersion": "2.14.2"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-587h-7wmj-h5pm",
+    "severity": "HIGH",
+    "summary": "launch-editor: `fs.existsSync()` existence check can be bypassed on Windows",
+    "url": "https://github.com/advisories/GHSA-587h-7wmj-h5pm",
+    "cve": [
+      "CVE-2026-112942"
+    ],
+    "publishedAt": "2026-10-20T19:48:25Z",
+    "updatedAt": "2026-10-20T19:48:26Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "vite-plus",
+        "range": "<= 1.0.0",
+        "firstPatchedVersion": "1.1.0"
+      },
+      {
+        "package": "vite",
+        "range": "<= 6.4.3",
+        "firstPatchedVersion": "6.4.4"
+      },
+      {
+        "package": "vite",
+        "range": ">= 7.0.0, <= 7.3.6",
+        "firstPatchedVersion": "7.3.7"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.0.0, <= 8.1.5",
+        "firstPatchedVersion": "8.1.6"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.2.0, <= 8.2.3",
+        "firstPatchedVersion": "8.2.4"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.3.0, <= 8.3.2",
+        "firstPatchedVersion": "8.3.3"
+      },
+      {
+        "package": "launch-editor",
+        "range": "<= 2.14.1",
+        "firstPatchedVersion": "2.14.2"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-9jrq-w75r-8gcw",
+    "severity": "LOW",
+    "summary": "Vite: Cross origin script execution through Vite custom middleware",
+    "url": "https://github.com/advisories/GHSA-9jrq-w75r-8gcw",
+    "cve": [
+      "CVE-2026-112945"
+    ],
+    "publishedAt": "2026-10-21T16:48:14Z",
+    "updatedAt": "2026-10-21T16:48:15Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "vite-plus",
+        "range": "<= 1.0.0",
+        "firstPatchedVersion": "1.1.0"
+      },
+      {
+        "package": "vite",
+        "range": "<= 6.4.3",
+        "firstPatchedVersion": "6.4.4"
+      },
+      {
+        "package": "vite",
+        "range": ">= 7.0.0, <= 7.3.6",
+        "firstPatchedVersion": "7.3.7"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.0.0, <= 8.1.5",
+        "firstPatchedVersion": "8.1.6"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.2.0, <= 8.2.3",
+        "firstPatchedVersion": "8.2.4"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.3.0, <= 8.3.2",
+        "firstPatchedVersion": "8.3.3"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-rq7h-c2jc-7f22",
+    "severity": "MODERATE",
+    "summary": "Vite: Files outside `server.fs.allow` could be served when project paths match system paths on non-Windows machine",
+    "url": "https://github.com/advisories/GHSA-rq7h-c2jc-7f22",
+    "cve": [
+      "CVE-2026-112946"
+    ],
+    "publishedAt": "2026-10-21T16:47:42Z",
+    "updatedAt": "2026-10-21T16:47:43Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "vite-plus",
+        "range": "<= 1.0.0",
+        "firstPatchedVersion": "1.1.0"
+      },
+      {
+        "package": "vite",
+        "range": "<= 6.4.3",
+        "firstPatchedVersion": "6.4.4"
+      },
+      {
+        "package": "vite",
+        "range": ">= 7.0.0, <= 7.3.6",
+        "firstPatchedVersion": "7.3.7"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.0.0, <= 8.1.5",
+        "firstPatchedVersion": "8.1.6"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.2.0, <= 8.2.3",
+        "firstPatchedVersion": "8.2.4"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.3.0, <= 8.3.2",
+        "firstPatchedVersion": "8.3.3"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-fx2h-pf6j-xcff",
+    "severity": "MODERATE",
+    "summary": "vite: `server.fs.deny` bypass on Windows alternate paths",
+    "url": "https://github.com/advisories/GHSA-fx2h-pf6j-xcff",
+    "cve": [
+      "CVE-2026-53571"
+    ],
+    "publishedAt": "2026-06-15T17:17:45Z",
+    "updatedAt": "2026-10-27T14:58:31Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "vite-plus",
+        "range": "<= 0.1.23",
+        "firstPatchedVersion": "0.1.24"
+      },
+      {
+        "package": "vite",
+        "range": "<= 6.4.2",
+        "firstPatchedVersion": "6.4.3"
+      },
+      {
+        "package": "vite",
+        "range": ">= 7.0.0, <= 7.3.4",
+        "firstPatchedVersion": "7.3.5"
+      },
+      {
+        "package": "vite",
+        "range": ">= 8.0.0, <= 8.0.15",
+        "firstPatchedVersion": "8.0.16"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-58qx-3vcg-4xpx",
+    "severity": "MODERATE",
+    "summary": "ws: Uninitialized memory disclosure",
+    "url": "https://github.com/advisories/GHSA-58qx-3vcg-4xpx",
+    "cve": [
+      "CVE-2026-45736"
+    ],
+    "publishedAt": "2026-05-18T19:02:40Z",
+    "updatedAt": "2026-05-18T19:02:42Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "ws",
+        "range": ">= 8.0.0, < 8.20.1",
+        "firstPatchedVersion": "8.20.1"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-96hv-2xvq-fx4p",
+    "severity": "HIGH",
+    "summary": "ws: Memory exhaustion DoS from tiny fragments and data chunks",
+    "url": "https://github.com/advisories/GHSA-96hv-2xvq-fx4p",
+    "cve": [
+      "CVE-2026-48779"
+    ],
+    "publishedAt": "2026-06-15T16:34:23Z",
+    "updatedAt": "2026-07-13T15:31:39Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "ws",
+        "range": ">= 8.0.0, < 8.21.0",
+        "firstPatchedVersion": "8.21.0"
+      },
+      {
+        "package": "ws",
+        "range": ">= 7.0.0, < 7.5.11",
+        "firstPatchedVersion": "7.5.11"
+      },
+      {
+        "package": "ws",
+        "range": ">= 6.0.0, < 6.2.4",
+        "firstPatchedVersion": "6.2.4"
+      },
+      {
+        "package": "ws",
+        "range": ">= 1.1.0, < 5.2.5",
+        "firstPatchedVersion": "5.2.5"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-48c2-rrv3-qjmp",
+    "severity": "MODERATE",
+    "summary": "yaml is vulnerable to Stack Overflow via deeply nested YAML collections",
+    "url": "https://github.com/advisories/GHSA-48c2-rrv3-qjmp",
+    "cve": [
+      "CVE-2026-33532"
+    ],
+    "publishedAt": "2026-03-25T20:08:24Z",
+    "updatedAt": "2026-03-27T21:34:54Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "yaml",
+        "range": ">= 1.0.0, < 1.10.3",
+        "firstPatchedVersion": "1.10.3"
+      },
+      {
+        "package": "yaml",
+        "range": ">= 2.0.0, < 2.8.3",
+        "firstPatchedVersion": "2.8.3"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-mrhx-c7xc-m3w5",
+    "severity": "HIGH",
+    "summary": "Zod can exhaust memory while validating oversized constrained collections",
+    "url": "https://github.com/advisories/GHSA-mrhx-c7xc-m3w5",
+    "cve": [
+      "CVE-2023-54404"
+    ],
+    "publishedAt": "2026-10-01T18:32:46Z",
+    "updatedAt": "2026-10-23T18:26:52Z",
+    "withdrawnAt": null,
+    "vulnerabilities": [
+      {
+        "package": "zod",
+        "range": "< 4.6.6",
+        "firstPatchedVersion": "4.6.6"
+      }
+    ]
+  }
+]
