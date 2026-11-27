@@ -1,0 +1,164 @@
+[
+  {
+    "name": "FormSubmit 320",
+    "geometry": {
+      "viewport": 320,
+      "scroll": 1030
+    },
+    "nativePostIntercepted": true
+  },
+  {
+    "name": "FormSubmit 375",
+    "geometry": {
+      "viewport": 375,
+      "scroll": 1030
+    },
+    "nativePostIntercepted": true
+  },
+  {
+    "name": "FormSubmit 390",
+    "geometry": {
+      "viewport": 390,
+      "scroll": 1030
+    },
+    "nativePostIntercepted": true
+  },
+  {
+    "name": "FormSubmit 1280",
+    "geometry": {
+      "viewport": 1280,
+      "scroll": 1310
+    },
+    "nativePostIntercepted": true
+  },
+  {
+    "name": "/ 1280"
+  },
+  {
+    "name": "/servizi 1280"
+  },
+  {
+    "name": "/chi-sono 1280"
+  },
+  {
+    "name": "/pubblicazioni 1280"
+  },
+  {
+    "name": "/portfolio 1280"
+  },
+  {
+    "name": "/blog 1280"
+  },
+  {
+    "name": "/news 1280"
+  },
+  {
+    "name": "/testimonianze 1280"
+  },
+  {
+    "name": "/privacy-policy 1280"
+  },
+  {
+    "name": "/cookie-policy 1280"
+  },
+  {
+    "name": "/termini-di-servizio 1280"
+  },
+  {
+    "name": "/grazie 1280"
+  },
+  {
+    "name": "/ 375"
+  },
+  {
+    "name": "/servizi 375"
+  },
+  {
+    "name": "/chi-sono 375"
+  },
+  {
+    "name": "/pubblicazioni 375"
+  },
+  {
+    "name": "/portfolio 375"
+  },
+  {
+    "name": "/blog 375"
+  },
+  {
+    "name": "/news 375"
+  },
+  {
+    "name": "/testimonianze 375"
+  },
+  {
+    "name": "/privacy-policy 375"
+  },
+  {
+    "name": "/cookie-policy 375"
+  },
+  {
+    "name": "/termini-di-servizio 375"
+  },
+  {
+    "name": "/grazie 375"
+  },
+  {
+    "name": "Next Link client navigation"
+  },
+  {
+    "name": "optimized header image HTTP 200"
+  },
+  {
+    "name": "image optimizer rejects source outside existing allowlist"
+  },
+  {
+    "name": "/robots.txt"
+  },
+  {
+    "name": "/sitemap.xml"
+  },
+  {
+    "name": "embedded Sanity Studio HTTP 200 (no login or mutations)"
+  },
+  {
+    "name": "newsletter client: consent required, success mocked, no real subscription"
+  },
+  {
+    "name": "newsletter actual local HTTP: missing consent",
+    "status": 400
+  },
+  {
+    "name": "newsletter actual local HTTP: invalid email",
+    "status": 400
+  },
+  {
+    "name": "newsletter actual local HTTP: missing isolated configuration",
+    "status": 500
+  },
+  {
+    "name": "published blog article HTTP 200"
+  },
+  {
+    "name": "scheduled Sanity articles hidden",
+    "futureCount": 9,
+    "statuses": [
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404,
+      404
+    ],
+    "excludedFromBlogAndSitemap": true
+  },
+  {
+    "name": "consent and GA4: unset, reject, grant, revoke; Google requests intercepted"
+  },
+  {
+    "name": "no uncaught browser JavaScript errors"
+  }
+]

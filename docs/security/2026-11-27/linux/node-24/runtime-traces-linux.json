@@ -1,0 +1,100 @@
+{
+  "limitation": "External NFT files only; combine with source and input-path review.",
+  "routes": [
+    {
+      "routeTrace": ".next/server/app/_global-error/page.js.nft.json",
+      "tracedFiles": 116,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/_not-found/page.js.nft.json",
+      "tracedFiles": 124,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/api/newsletter/route.js.nft.json",
+      "tracedFiles": 110,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/blog/[slug]/page.js.nft.json",
+      "tracedFiles": 131,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/blog/page.js.nft.json",
+      "tracedFiles": 131,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/chi-sono/page.js.nft.json",
+      "tracedFiles": 126,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/cookie-policy/page.js.nft.json",
+      "tracedFiles": 128,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/favicon.ico/route.js.nft.json",
+      "tracedFiles": 109,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/grazie/page.js.nft.json",
+      "tracedFiles": 126,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/news/page.js.nft.json",
+      "tracedFiles": 126,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/page.js.nft.json",
+      "tracedFiles": 129,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/portfolio/page.js.nft.json",
+      "tracedFiles": 126,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/privacy-policy/page.js.nft.json",
+      "tracedFiles": 127,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/pubblicazioni/page.js.nft.json",
+      "tracedFiles": 126,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/robots.txt/route.js.nft.json",
+      "tracedFiles": 111,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/servizi/page.js.nft.json",
+      "tracedFiles": 127,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/sitemap.xml/route.js.nft.json",
+      "tracedFiles": 114,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/termini-di-servizio/page.js.nft.json",
+      "tracedFiles": 127,
+      "sensitiveExternalFiles": []
+    },
+    {
+      "routeTrace": ".next/server/app/testimonianze/page.js.nft.json",
+      "tracedFiles": 126,
+      "sensitiveExternalFiles": []
+    }
+  ]
+}

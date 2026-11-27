@@ -1,0 +1,198 @@
+[
+  {
+    "file": "postcss.config.mjs",
+    "errors": 0,
+    "warnings": 1,
+    "messages": [
+      {
+        "ruleId": "import/no-anonymous-default-export",
+        "severity": 1,
+        "line": 1,
+        "column": 1,
+        "message": "Assign object to a variable before exporting as module default"
+      }
+    ]
+  },
+  {
+    "file": "src\\app\\blog\\[slug]\\page.tsx",
+    "errors": 4,
+    "warnings": 0,
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-explicit-any",
+        "severity": 2,
+        "line": 20,
+        "column": 16,
+        "message": "Unexpected any. Specify a different type."
+      },
+      {
+        "ruleId": "@typescript-eslint/no-explicit-any",
+        "severity": 2,
+        "line": 24,
+        "column": 15,
+        "message": "Unexpected any. Specify a different type."
+      },
+      {
+        "ruleId": "@typescript-eslint/no-explicit-any",
+        "severity": 2,
+        "line": 26,
+        "column": 10,
+        "message": "Unexpected any. Specify a different type."
+      },
+      {
+        "ruleId": "@next/next/no-html-link-for-pages",
+        "severity": 2,
+        "line": 200,
+        "column": 13,
+        "message": "Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages"
+      }
+    ]
+  },
+  {
+    "file": "src\\app\\blog\\page.tsx",
+    "errors": 1,
+    "warnings": 0,
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-explicit-any",
+        "severity": 2,
+        "line": 24,
+        "column": 16,
+        "message": "Unexpected any. Specify a different type."
+      }
+    ]
+  },
+  {
+    "file": "src\\app\\chi-sono\\page.tsx",
+    "errors": 2,
+    "warnings": 1,
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unused-vars",
+        "severity": 1,
+        "line": 2,
+        "column": 8,
+        "message": "'PublicationsSection' is defined but never used."
+      },
+      {
+        "ruleId": "@next/next/no-html-link-for-pages",
+        "severity": 2,
+        "line": 96,
+        "column": 9,
+        "message": "Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages"
+      },
+      {
+        "ruleId": "@next/next/no-html-link-for-pages",
+        "severity": 2,
+        "line": 304,
+        "column": 13,
+        "message": "Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages"
+      }
+    ]
+  },
+  {
+    "file": "src\\app\\page.tsx",
+    "errors": 1,
+    "warnings": 3,
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-unused-vars",
+        "severity": 1,
+        "line": 14,
+        "column": 8,
+        "message": "'PublicationRow' is defined but never used."
+      },
+      {
+        "ruleId": "@typescript-eslint/no-unused-vars",
+        "severity": 1,
+        "line": 163,
+        "column": 7,
+        "message": "'news' is assigned a value but never used."
+      },
+      {
+        "ruleId": "@typescript-eslint/no-unused-vars",
+        "severity": 1,
+        "line": 178,
+        "column": 7,
+        "message": "'publications' is assigned a value but never used."
+      },
+      {
+        "ruleId": "react/no-unescaped-entities",
+        "severity": 2,
+        "line": 252,
+        "column": 64,
+        "message": "`'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`."
+      }
+    ]
+  },
+  {
+    "file": "src\\app\\pubblicazioni\\page.tsx",
+    "errors": 1,
+    "warnings": 0,
+    "messages": [
+      {
+        "ruleId": "@next/next/no-html-link-for-pages",
+        "severity": 2,
+        "line": 201,
+        "column": 13,
+        "message": "Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages"
+      }
+    ]
+  },
+  {
+    "file": "src\\app\\servizi\\page.tsx",
+    "errors": 3,
+    "warnings": 0,
+    "messages": [
+      {
+        "ruleId": "@next/next/no-html-link-for-pages",
+        "severity": 2,
+        "line": 136,
+        "column": 13,
+        "message": "Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages"
+      },
+      {
+        "ruleId": "@next/next/no-html-link-for-pages",
+        "severity": 2,
+        "line": 243,
+        "column": 21,
+        "message": "Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages"
+      },
+      {
+        "ruleId": "@next/next/no-html-link-for-pages",
+        "severity": 2,
+        "line": 314,
+        "column": 13,
+        "message": "Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages"
+      }
+    ]
+  },
+  {
+    "file": "src\\app\\testimonianze\\page.tsx",
+    "errors": 1,
+    "warnings": 0,
+    "messages": [
+      {
+        "ruleId": "@next/next/no-html-link-for-pages",
+        "severity": 2,
+        "line": 132,
+        "column": 13,
+        "message": "Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages"
+      }
+    ]
+  },
+  {
+    "file": "src\\lib\\sanity\\image.ts",
+    "errors": 1,
+    "warnings": 0,
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-explicit-any",
+        "severity": 2,
+        "line": 6,
+        "column": 32,
+        "message": "Unexpected any. Specify a different type."
+      }
+    ]
+  }
+]

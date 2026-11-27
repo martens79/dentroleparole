@@ -6,19 +6,21 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:security": "node --test tests/security/*.test.mjs",
+    "test:security:browser": "node scripts/security-browser.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^6.0.3",
     "@sanity/image-url": "^1.2.0",
-    "@sanity/vision": "^4.22.0",
+    "@sanity/vision": "^4.22.1",
     "framer-motion": "^12.35.0",
     "lucide-react": "^0.577.0",
-    "next": "^16.1.6",
-    "next-sanity": "^11.6.12",
+    "next": "^16.4.6",
+    "next-sanity": "^11.6.13",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "sanity": "^4.22.0",
+    "sanity": "^4.22.1",
     "styled-components": "^6.3.11"
   },
   "devDependencies": {
@@ -27,9 +29,15 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6",
-    "postcss": "^8.5.8",
+    "eslint-config-next": "16.4.6",
+    "postcss": "^8.5.34",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "postcss": "^8.5.34",
+    "react-i18next@15.6.1": {
+      "i18next": "^25.8.18"
+    }
   }
 }

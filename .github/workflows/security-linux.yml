@@ -1,0 +1,97 @@
+name: Security Linux gate
+
+on:
+  push:
+    branches: [fix/security-dependencies-20261127]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: security-linux-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux:
+    name: Ubuntu / Node ${{ matrix.node }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22', '24']
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      NEXT_PUBLIC_SANITY_PROJECT_ID: odfxsvll
+      NEXT_PUBLIC_SANITY_DATASET: production
+      BREVO_API_KEY: ''
+      BREVO_LIST_ID: ''
+      NODE_OPTIONS: --max-old-space-size=4096
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Record platform and lock identity
+        run: |
+          mkdir -p .security-artifacts
+          node --version | tee .security-artifacts/node.txt
+          npm --version | tee .security-artifacts/npm.txt
+          uname -a | tee .security-artifacts/platform.txt
+          sha256sum package.json package-lock.json | tee .security-artifacts/manifest-sha256.txt
+      - name: Clean install (including native optional dependencies)
+        run: npm ci 2>&1 | tee .security-artifacts/install.log
+      - name: Full and production audit with reviewed residual gate
+        run: |
+          for scope in full production; do
+            flags=()
+            if [ "$scope" = production ]; then flags+=(--omit=dev); fi
+            set +e
+            npm audit --json "${flags[@]}" > ".security-artifacts/audit-$scope.json"
+            code=$?
+            set -e
+            if [ "$code" -gt 1 ]; then exit "$code"; fi
+            node scripts/security-audit-gate.mjs ".security-artifacts/audit-$scope.json"
+          done
+      - name: Newsletter, consent and unchanged application tests
+        run: npm run test:security 2>&1 | tee .security-artifacts/unit.log
+      - name: Typecheck
+        run: |
+          npx --no-install next typegen
+          npx --no-install tsc --noEmit 2>&1 | tee .security-artifacts/typecheck.log
+      - name: Linux native bindings and image codecs
+        run: node scripts/security-native.mjs 2>&1 | tee .security-artifacts/native.log
+      - name: Default production build
+        run: npm run build 2>&1 | tee .security-artifacts/build.log
+      - name: Runtime trace review
+        run: node scripts/security-runtime-traces.mjs
+      - name: Install isolated pinned browser tooling
+        run: |
+          npm install --prefix "$RUNNER_TEMP/security-playwright" --no-save --package-lock=false --ignore-scripts --no-audit --no-fund playwright@1.57.0
+          node "$RUNNER_TEMP/security-playwright/node_modules/playwright/cli.js" install --with-deps chromium
+          echo "SECURITY_PLAYWRIGHT=$RUNNER_TEMP/security-playwright/node_modules/playwright" >> "$GITHUB_ENV"
+      - name: Browser regressions (no external mutations)
+        run: |
+          # Compare live and candidate in the SAME Ubuntu browser/font environment.
+          # Every native FormSubmit POST is fulfilled locally by the test harness.
+          npm run test:security:browser -- --baseline-live 2>&1 | tee .security-artifacts/browser-baseline.log
+          npm run test:security:browser 2>&1 | tee .security-artifacts/browser.log
+      - name: Ensure manifests and production sources were not mutated
+        run: git diff --exit-code -- package.json package-lock.json src next.config.js sanity.config.ts tailwind.config.ts vercel.json
+      - name: Upload evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: security-linux-node-${{ matrix.node }}
+          path: .security-artifacts/
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: warn
