@@ -1,5 +1,7 @@
 # Aggiornamento del 27 novembre 2026
 
+[Verbale dei test effettivi e stato finale della PR](REPORT_2026-11-27.md).
+
 Per preparazione Preview, checklist legale aggiornata dopo il merge #5, costi WAF e questioni Gmail usare [ATTIVAZIONE_2026-11-27.md](ATTIVAZIONE_2026-11-27.md). Le misure e gli esiti storici riportati sotto non sostituiscono i nuovi collaudi registrati nel report del 27 novembre.
 
 
