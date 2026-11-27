@@ -8,11 +8,46 @@ on:
 permissions:
   contents: read
 
+defaults:
+  run:
+    shell: bash
+
 concurrency:
   group: security-linux-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  lock-metadata:
+    name: Recover missing optional lock metadata (no version updates)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - run: |
+          cp package-lock.json /tmp/lock-before.json
+          npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const before=JSON.parse(fs.readFileSync('/tmp/lock-before.json'));
+          const after=JSON.parse(fs.readFileSync('package-lock.json'));
+          for(const [key,value] of Object.entries(before.packages)){
+            assert(after.packages[key], 'Removed package: '+key);
+            for(const field of ['version','resolved','integrity'])assert.equal(after.packages[key][field],value[field],key+': changed '+field);
+          }
+          console.log('Existing package versions, tarballs and integrity unchanged.');
+          console.log('Added entries:',Object.keys(after.packages).filter(k=>!before.packages[k]));
+          JS
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: repaired-optional-lock-metadata
+          path: package-lock.json
+          retention-days: 3
   linux:
     name: Ubuntu / Node ${{ matrix.node }}
     runs-on: ubuntu-24.04
