@@ -1,12 +1,52 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { handleGet, handlePost } from "../../src/lib/contact/handler";
-import { MAX_FILE_BYTES } from "../../src/lib/contact/limits";
+import { MAX_FILE_BYTES, MAX_REQUEST_BYTES } from "../../src/lib/contact/limits";
 import { TEST_ENV, baseFields, makeDoc, makeDocx, makeHarness, makePdf, makeRequest } from "./helpers";
 
 async function body(res: Response) {
   return (await res.json()) as { ok: boolean; code?: string; message?: string; fields?: string[]; token?: string };
 }
+
+test("corpo oltre soglia senza Content-Length o con valore falso: 413 prima del parsing", async () => {
+  for (const declared of [undefined, "10"]) {
+    const h = makeHarness();
+    try {
+      const request = makeRequest({ fields: baseFields(h.token(), { extra: "x".repeat(MAX_REQUEST_BYTES) }) });
+      if (declared) request.headers.set("content-length", declared);
+      assert.equal((await handlePost(request, h.deps)).status, 413);
+      assert.equal(h.sent.length, 0);
+    } finally { h.restore(); }
+  }
+});
+
+test("allegati multipli o campo attachment testuale: rifiutati senza invii", async () => {
+  for (const multiple of [false, true]) {
+    const h = makeHarness();
+    try {
+      const form = new FormData();
+      for (const [key, value] of Object.entries(baseFields(h.token()))) form.set(key, value);
+      if (multiple) {
+        form.append("attachment", new File([makePdf() as BlobPart], "uno.pdf"));
+        form.append("attachment", new File([makePdf() as BlobPart], "due.pdf"));
+      } else form.set("attachment", "contenuto inatteso");
+      const request = new Request("https://www.dentroleparole.com/api/contatti", {
+        method: "POST", body: form, headers: { origin: "https://www.dentroleparole.com" },
+      });
+      assert.equal((await handlePost(request, h.deps)).status, 400);
+      assert.equal(h.sent.length, 0);
+    } finally { h.restore(); }
+  }
+});
+
+test("codice di errore SMTP arbitrario non finisce nei log", async () => {
+  const h = makeHarness({ fail: Object.assign(new Error("riservato"), { code: "nome.personale@example.invalid" }) });
+  try {
+    assert.equal((await handlePost(makeRequest({ fields: baseFields(h.token()) }), h.deps)).status, 502);
+    assert.match(h.logs.join(""), /UNKNOWN/);
+    assert.equal(h.logs.join("").includes("nome.personale"), false);
+  } finally { h.restore(); }
+});
 
 test("senza configurazione l'endpoint è indisponibile e non invia nulla (503)", async () => {
   const h = makeHarness({ env: {} });
@@ -258,5 +298,19 @@ test("guasto SMTP: errore generico al visitatore e nessun dato personale nei log
     }
   } finally {
     h.restore();
+  }
+});
+
+
+test("soglia allegato esatta: massimo accettato, un byte in più rifiutato", async () => {
+  for (const extra of [0, 1]) {
+    const h = makeHarness();
+    try {
+      const bytes = makePdf(MAX_FILE_BYTES - makePdf().length + extra);
+      assert.equal(bytes.length, MAX_FILE_BYTES + extra);
+      const response = await handlePost(makeRequest({ fields: baseFields(h.token()), file: { name: "soglia.pdf", type: "application/pdf", bytes } }), h.deps);
+      assert.equal(response.status, extra === 0 ? 200 : 413);
+      assert.equal(h.sent.length, extra === 0 ? 1 : 0);
+    } finally { h.restore(); }
   }
 });

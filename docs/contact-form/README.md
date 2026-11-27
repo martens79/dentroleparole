@@ -1,3 +1,8 @@
+# Aggiornamento del 27 novembre 2026
+
+Per preparazione Preview, checklist legale aggiornata dopo il merge #5, costi WAF e questioni Gmail usare [ATTIVAZIONE_2026-11-27.md](ATTIVAZIONE_2026-11-27.md). Le misure e gli esiti storici riportati sotto non sostituiscono i nuovi collaudi registrati nel report del 27 novembre.
+
+
 # Modulo contatti: endpoint server-side al posto di FormSubmit
 
 > **Stato: bozza in PR Draft. Non in produzione.** Il modulo continua a usare FormSubmit finché l'interruttore `NEXT_PUBLIC_CONTACT_BACKEND` non viene portato a `api`. Nessuna credenziale reale è stata inserita, nessuna email reale è stata inviata, nessuna impostazione globale di Vercel è stata modificata.

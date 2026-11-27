@@ -1,5 +1,7 @@
 # Modifiche suggerite ai testi legali della PR #5 (anteprima facoltativa)
 
+> DOCUMENTO STORICO SUPERATO: la PR #5 è integrata. Non applicare i vecchi segnaposto e riferimenti di riga sottostanti. La checklist aggiornata è in [ATTIVAZIONE_2026-11-27.md](ATTIVAZIONE_2026-11-27.md), incluse conservazione 90/180 giorni e valutazione Gmail non risolta dalla sola informativa.
+
 > **Solo proposte.** La PR #5 non è stata toccata (resta Draft all'ultimo commit `2ff630b`). Il lavoro è pensato per essere integrato separatamente. I testi vanno rivisti da un professionista qualificato e **non attestano conformità**.
 
 ## Regola di pubblicazione

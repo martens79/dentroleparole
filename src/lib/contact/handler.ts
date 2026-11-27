@@ -154,7 +154,29 @@ export async function handlePost(request: Request, deps: Deps): Promise<Response
 
   let form: FormData;
   try {
-    form = await request.formData();
+    // Non fidarsi di Content-Length: può mancare o essere falso (richieste chunked).
+    // Limite prima del parsing multipart, anche fuori dalla piattaforma Vercel.
+    const reader = request.body?.getReader();
+    if (!reader) return fail("invalid_request");
+    const chunks: Uint8Array[] = [];
+    let size = 0;
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        size += value.byteLength;
+        if (size > MAX_REQUEST_BYTES) {
+          await reader.cancel();
+          return fail("too_large");
+        }
+        chunks.push(value);
+      }
+    } finally {
+      reader.releaseLock();
+    }
+    form = await new Response(Buffer.concat(chunks), {
+      headers: { "Content-Type": contentType },
+    }).formData();
   } catch {
     return fail("invalid_request");
   }
@@ -173,7 +195,10 @@ export async function handlePost(request: Request, deps: Deps): Promise<Response
 
   // Allegato (opzionale). Un browser senza file invia un File vuoto con nome vuoto.
   let attachment: AttachmentInfo | null = null;
-  const file = form.get("attachment");
+  const files = form.getAll("attachment");
+  // Il parser può rappresentare filename="" come stringa vuota: equivale a nessun file.
+  if (files.length > 1 || (files.length === 1 && files[0] !== "" && !(files[0] instanceof File))) return fail("invalid_request");
+  const file = files[0];
   if (file instanceof File && !(file.size === 0 && file.name === "")) {
     if (file.size > MAX_FILE_BYTES) return fail("too_large");
     const bytes = new Uint8Array(await file.arrayBuffer());
@@ -201,7 +226,9 @@ export async function handlePost(request: Request, deps: Deps): Promise<Response
     await deps.transportFor(config).sendMail(buildMailOptions(config, parsed.fields, attachment));
   } catch (error) {
     // Solo il codice tecnico dell'errore (es. EAUTH, ECONNECTION): il messaggio potrebbe contenere indirizzi.
-    const code = typeof (error as { code?: unknown })?.code === "string" ? (error as { code: string }).code : "UNKNOWN";
+    const rawCode = (error as { code?: unknown })?.code;
+    const safeCodes = new Set(["EAUTH", "ESOCKET", "ECONNECTION", "ETIMEDOUT", "ECONNREFUSED", "ECONNRESET", "EDNS", "EENVELOPE", "EMESSAGE", "ESTREAM", "EPROTOCOL", "ETLS"]);
+    const code = typeof rawCode === "string" && safeCodes.has(rawCode) ? rawCode : "UNKNOWN";
     console.error(JSON.stringify({ event: "contact_send_failed", code }));
     return fail("send_failed");
   }

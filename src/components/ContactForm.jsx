@@ -26,11 +26,16 @@ const MAX_FILE_SIZE_BYTES = USE_API ? API_MAX_FILE_BYTES : 8 * 1024 * 1024;
 
 export default function ContactForm() {
   const inputRef = useRef(null);
+  const errorRef = useRef(null);
 
   const [fileName, setFileName] = useState("");
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const [token, setToken] = useState("");
+
+  useEffect(() => {
+    if (error) errorRef.current?.focus();
+  }, [error]);
 
   const [form, setForm] = useState({
     name: "",
@@ -241,13 +246,16 @@ export default function ContactForm() {
       )}
 
       {error ? (
-        <div className="rounded-2xl border border-red-400/40 bg-red-500/10 px-4 py-3 text-sm text-ivory/90">
+        <div ref={errorRef} role="alert" tabIndex={-1} className="rounded-2xl border border-red-400/40 bg-red-500/10 px-4 py-3 text-sm text-ivory/90 focus-visible:outline-2 focus-visible:outline-[#E2C58A]">
           {error}
         </div>
       ) : null}
 
       <input
         name="name"
+        aria-label="Nome e cognome"
+        aria-invalid={!!(touched.name && errors.name)}
+        aria-describedby={touched.name && errors.name ? "contact-name-error" : undefined}
         value={form.name}
         onChange={(e) => setField("name", e.target.value)}
         onBlur={() => touch("name")}
@@ -257,11 +265,14 @@ export default function ContactForm() {
         required
       />
       {touched.name && errors.name ? (
-        <div className="-mt-1 px-1 text-xs text-red-200/90">{errors.name}</div>
+        <div id="contact-name-error" className="-mt-1 px-1 text-xs text-red-200/90">{errors.name}</div>
       ) : null}
 
       <input
         name="email"
+        aria-label="Email"
+        aria-invalid={!!(touched.email && errors.email)}
+        aria-describedby={touched.email && errors.email ? "contact-email-error" : undefined}
         value={form.email}
         onChange={(e) => setField("email", e.target.value)}
         onBlur={() => touch("email")}
@@ -272,11 +283,12 @@ export default function ContactForm() {
         required
       />
       {touched.email && errors.email ? (
-        <div className="-mt-1 px-1 text-xs text-red-200/90">{errors.email}</div>
+        <div id="contact-email-error" className="-mt-1 px-1 text-xs text-red-200/90">{errors.email}</div>
       ) : null}
 
       <input
         name="title"
+        aria-label="Titolo del manoscritto (opzionale)"
         value={form.title}
         onChange={(e) => setField("title", e.target.value)}
         className="w-full rounded-2xl border border-gold/20 bg-night/40 px-4 py-3 text-sm outline-none transition focus:border-gold/45"
@@ -286,6 +298,7 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <select
           name="genre"
+          aria-label="Genere"
           value={form.genre}
           onChange={(e) => setField("genre", e.target.value)}
           className="w-full rounded-2xl border border-gold/20 bg-night/40 px-4 py-3 text-sm outline-none transition focus:border-gold/45"
@@ -303,6 +316,7 @@ export default function ContactForm() {
 
         <input
           name="words"
+          aria-label="Numero parole"
           value={form.words}
           onChange={(e) => setField("words", e.target.value)}
           type="number"
@@ -314,6 +328,7 @@ export default function ContactForm() {
 
       <select
         name="goal"
+        aria-label="Obiettivo del libro"
         value={form.goal}
         onChange={(e) => setField("goal", e.target.value)}
         className="w-full rounded-2xl border border-gold/20 bg-night/40 px-4 py-3 text-sm outline-none transition focus:border-gold/45"
@@ -326,13 +341,14 @@ export default function ContactForm() {
 
       <textarea
         name="message"
+        aria-label="Breve descrizione del progetto o note (opzionale)"
         value={form.message}
         onChange={(e) => setField("message", e.target.value)}
         className="min-h-[140px] w-full rounded-2xl border border-gold/20 bg-night/40 px-4 py-3 text-sm outline-none transition focus:border-gold/45"
         placeholder="Breve descrizione del progetto o note (opzionale)"
       />
 
-      <div className="mt-2 rounded-2xl border border-gold/20 bg-night/25 p-4">
+      <div className="mt-2 min-w-0 rounded-2xl border border-gold/20 bg-night/25 p-4">
         <div id="anteprima-titolo" className="text-sm font-medium text-ivory/85">
           Anteprima del manoscritto (facoltativa)
         </div>
@@ -348,15 +364,15 @@ export default function ContactForm() {
           spazi inclusi.
         </p>
 
-        <div className="mt-3 flex items-start justify-between gap-4">
-          <div className="min-w-0">
+        <div className="mt-3 flex flex-wrap items-start justify-between gap-4">
+          <div className="min-w-0 flex-1 basis-40">
             <div className="text-xs text-ivory/60">
               Max <span className="text-gold/80">{MAX_FILE_SIZE_MB} MB</span>.
             </div>
 
             <div className="mt-3 text-xs">
               {fileName ? (
-                <div className="truncate text-gold/80">
+                <div className="text-gold/80 [overflow-wrap:anywhere]">
                   Selezionato: {fileName}
                 </div>
               ) : (
@@ -393,6 +409,8 @@ export default function ContactForm() {
           ref={inputRef}
           type="file"
           name="attachment"
+          aria-labelledby="anteprima-titolo"
+          aria-describedby="anteprima-aiuto"
           accept=".pdf,.doc,.docx"
           onChange={onFileChange}
           className="hidden"

@@ -1,5 +1,7 @@
 # Guida alla configurazione sicura (Register.it e Vercel)
 
+> Aggiornamento: prima di procedere leggere [ATTIVAZIONE_2026-11-27.md](ATTIVAZIONE_2026-11-27.md), che prevale sulle indicazioni storiche qui sotto. Caselle incluse, stato delle variabili e DNS erano osservazioni del 9 novembre, non verifiche attuali. WAF può comportare costi. L'inoltro Gmail richiede una valutazione sostanziale, oltre all'informativa.
+
 > **Nulla di questa guida è stato eseguito.** Nessuna casella, DNS, credenziale o variabile d'ambiente è stata creata o modificata. Ogni passo lo fa il proprietario del dominio, **direttamente nei pannelli di Register.it e Vercel**.
 >
 > **Regola d'oro: nessuna password o chiave va scritta in chat, in email, in un file del repository o in uno screenshot.** Si generano nel proprio computer (o in un gestore di password), si copiano negli appunti e si incollano direttamente nel campo del pannello. Se un segreto finisce in un posto sbagliato, va considerato compromesso e sostituito (§6).
