@@ -53,13 +53,13 @@ export const site = {
     ],
   },
   method: [
-    { n: "1", title: "Valutazione", desc: "Estratto + obiettivi + preventivo dettagliato." },
+    { n: "1", title: "Valutazione", desc: "Anteprima + obiettivi + preventivo dettagliato." },
     { n: "2", title: "Intervento", desc: "Revisione strutturata con note chiare e proposte." },
     { n: "3", title: "Consegna", desc: "File revisionato + sintesi + prossimo piano d’azione." },
   ],
   faq: [
-    { q: "Quanto costa?", a: "Dipende da lunghezza e tipo di intervento. Dopo l’estratto invio un preventivo preciso." },
-    { q: "Cosa serve per iniziare?", a: "Titolo, genere, numero parole e un estratto (5–10 pagine)." },
+    { q: "Quanto costa?", a: "Dipende da lunghezza e tipo di intervento. Dopo l’anteprima invio un preventivo preciso." },
+    { q: "Cosa serve per iniziare?", a: "Titolo, genere, numero parole e, se vuoi, un’anteprima facoltativa (5–10 cartelle editoriali)." },
     { q: "L’editing cambia la mia voce?", a: "No: l’obiettivo è renderla più chiara e potente, rispettando lo stile originale." },
   ],
   contact: {

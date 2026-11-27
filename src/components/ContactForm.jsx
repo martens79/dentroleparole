@@ -1,6 +1,15 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  MAX_FILE_BYTES as API_MAX_FILE_BYTES,
+  formatMaxFileMb,
+} from "@/lib/contact/limits";
+
+// Interruttore: "formsubmit" (predefinito, flusso attuale) oppure "api" (endpoint /api/contatti).
+// Variabile pubblica letta in fase di build: per tornare a FormSubmit basta rimetterla a
+// "formsubmit" (o rimuoverla) e rifare il deploy, oppure usare Instant Rollback su Vercel.
+const USE_API = process.env.NEXT_PUBLIC_CONTACT_BACKEND === "api";
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
@@ -12,14 +21,21 @@ const ALLOWED_FILE_TYPES = [
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ];
 
-const MAX_FILE_SIZE_MB = 8;
-const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+const MAX_FILE_SIZE_MB = USE_API ? formatMaxFileMb() : 8;
+const MAX_FILE_SIZE_BYTES = USE_API ? API_MAX_FILE_BYTES : 8 * 1024 * 1024;
 
 export default function ContactForm() {
   const inputRef = useRef(null);
+  const errorRef = useRef(null);
 
   const [fileName, setFileName] = useState("");
   const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    if (error) errorRef.current?.focus();
+  }, [error]);
 
   const [form, setForm] = useState({
     name: "",
@@ -79,6 +95,20 @@ export default function ContactForm() {
     if (error) setError("");
   }
 
+  useEffect(() => {
+    if (!USE_API) return undefined;
+    let cancelled = false;
+    fetch("/api/contatti", { method: "GET", cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (!cancelled && d && d.token) setToken(d.token);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const errors = useMemo(() => {
     const e = {};
 
@@ -126,16 +156,72 @@ export default function ContactForm() {
         return;
       }
     }
+
+    if (USE_API) {
+      e.preventDefault();
+      sendToApi(e.currentTarget);
+    }
+  }
+
+  async function sendToApi(formEl) {
+    if (sending) return;
+    setSending(true);
+    setError("");
+    try {
+      const body = new FormData(formEl);
+      body.set("form_token", token);
+      const res = await fetch("/api/contatti", { method: "POST", body });
+
+      if (res.ok) {
+        window.location.assign("/grazie");
+        return;
+      }
+
+      let message = "Non è stato possibile inviare il messaggio. Riprova più tardi.";
+      if (res.status === 413) {
+        message = `Il file è troppo grande. Massimo ${MAX_FILE_SIZE_MB} MB.`;
+      } else {
+        try {
+          const data = await res.json();
+          if (data && typeof data.message === "string") message = data.message;
+        } catch {
+          // risposta non JSON: resta il messaggio generico
+        }
+      }
+      setError(message);
+    } catch {
+      setError("Connessione non riuscita. Controlla la rete e riprova.");
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
     <form
-  action="https://formsubmit.co/contatti@dentroleparole.com"
+  action={
+    USE_API
+      ? "/api/contatti"
+      : "https://formsubmit.co/contatti@dentroleparole.com"
+  }
   method="POST"
   encType="multipart/form-data"
   className="grid gap-3"
   onSubmit={onSubmit}
 >
+      {USE_API ? (
+        <>
+          <input type="hidden" name="form_token" value={token} readOnly />
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="hidden"
+          />
+        </>
+      ) : (
+        <>
       <input
   type="hidden"
   name="_subject"
@@ -156,15 +242,20 @@ export default function ContactForm() {
   autoComplete="off"
   className="hidden"
 />
+        </>
+      )}
 
       {error ? (
-        <div className="rounded-2xl border border-red-400/40 bg-red-500/10 px-4 py-3 text-sm text-ivory/90">
+        <div ref={errorRef} role="alert" tabIndex={-1} className="rounded-2xl border border-red-400/40 bg-red-500/10 px-4 py-3 text-sm text-ivory/90 focus-visible:outline-2 focus-visible:outline-[#E2C58A]">
           {error}
         </div>
       ) : null}
 
       <input
         name="name"
+        aria-label="Nome e cognome"
+        aria-invalid={!!(touched.name && errors.name)}
+        aria-describedby={touched.name && errors.name ? "contact-name-error" : undefined}
         value={form.name}
         onChange={(e) => setField("name", e.target.value)}
         onBlur={() => touch("name")}
@@ -174,11 +265,14 @@ export default function ContactForm() {
         required
       />
       {touched.name && errors.name ? (
-        <div className="-mt-1 px-1 text-xs text-red-200/90">{errors.name}</div>
+        <div id="contact-name-error" className="-mt-1 px-1 text-xs text-red-200/90">{errors.name}</div>
       ) : null}
 
       <input
         name="email"
+        aria-label="Email"
+        aria-invalid={!!(touched.email && errors.email)}
+        aria-describedby={touched.email && errors.email ? "contact-email-error" : undefined}
         value={form.email}
         onChange={(e) => setField("email", e.target.value)}
         onBlur={() => touch("email")}
@@ -189,11 +283,12 @@ export default function ContactForm() {
         required
       />
       {touched.email && errors.email ? (
-        <div className="-mt-1 px-1 text-xs text-red-200/90">{errors.email}</div>
+        <div id="contact-email-error" className="-mt-1 px-1 text-xs text-red-200/90">{errors.email}</div>
       ) : null}
 
       <input
         name="title"
+        aria-label="Titolo del manoscritto (opzionale)"
         value={form.title}
         onChange={(e) => setField("title", e.target.value)}
         className="w-full rounded-2xl border border-gold/20 bg-night/40 px-4 py-3 text-sm outline-none transition focus:border-gold/45"
@@ -203,6 +298,7 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <select
           name="genre"
+          aria-label="Genere"
           value={form.genre}
           onChange={(e) => setField("genre", e.target.value)}
           className="w-full rounded-2xl border border-gold/20 bg-night/40 px-4 py-3 text-sm outline-none transition focus:border-gold/45"
@@ -220,6 +316,7 @@ export default function ContactForm() {
 
         <input
           name="words"
+          aria-label="Numero parole"
           value={form.words}
           onChange={(e) => setField("words", e.target.value)}
           type="number"
@@ -231,6 +328,7 @@ export default function ContactForm() {
 
       <select
         name="goal"
+        aria-label="Obiettivo del libro"
         value={form.goal}
         onChange={(e) => setField("goal", e.target.value)}
         className="w-full rounded-2xl border border-gold/20 bg-night/40 px-4 py-3 text-sm outline-none transition focus:border-gold/45"
@@ -243,26 +341,38 @@ export default function ContactForm() {
 
       <textarea
         name="message"
+        aria-label="Breve descrizione del progetto o note (opzionale)"
         value={form.message}
         onChange={(e) => setField("message", e.target.value)}
         className="min-h-[140px] w-full rounded-2xl border border-gold/20 bg-night/40 px-4 py-3 text-sm outline-none transition focus:border-gold/45"
         placeholder="Breve descrizione del progetto o note (opzionale)"
       />
 
-      <div className="mt-2 rounded-2xl border border-gold/20 bg-night/25 p-4">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <div className="text-sm font-medium text-ivory/85">
-              Estratto (PDF, DOC, DOCX)
-            </div>
+      <div className="mt-2 min-w-0 rounded-2xl border border-gold/20 bg-night/25 p-4">
+        <div id="anteprima-titolo" className="text-sm font-medium text-ivory/85">
+          Anteprima del manoscritto (facoltativa)
+        </div>
 
-            <div className="mt-1 text-xs text-ivory/60">
+        <p id="anteprima-aiuto" className="mt-1 text-xs leading-relaxed text-ivory/60">
+          Allega, se desideri, le prime 5–10 cartelle editoriali del tuo testo in
+          formato PDF, DOC o DOCX. Non è necessario inviare il manoscritto
+          completo: potremo concordarne l’invio successivamente via email.
+        </p>
+
+        <p className="mt-1 text-xs leading-relaxed text-ivory/60">
+          Una cartella editoriale corrisponde indicativamente a 1.800 battute,
+          spazi inclusi.
+        </p>
+
+        <div className="mt-3 flex flex-wrap items-start justify-between gap-4">
+          <div className="min-w-0 flex-1 basis-40">
+            <div className="text-xs text-ivory/60">
               Max <span className="text-gold/80">{MAX_FILE_SIZE_MB} MB</span>.
             </div>
 
             <div className="mt-3 text-xs">
               {fileName ? (
-                <div className="truncate text-gold/80">
+                <div className="text-gold/80 [overflow-wrap:anywhere]">
                   Selezionato: {fileName}
                 </div>
               ) : (
@@ -275,9 +385,10 @@ export default function ContactForm() {
             <button
               type="button"
               onClick={onPickFile}
+              aria-describedby="anteprima-aiuto"
               className="rounded-2xl border border-gold/30 bg-midnight/40 px-4 py-2 text-sm text-ivory/90 transition hover:border-gold/50"
             >
-              Carica estratto
+              Allega anteprima
             </button>
 
             {fileName ? (
@@ -298,17 +409,27 @@ export default function ContactForm() {
           ref={inputRef}
           type="file"
           name="attachment"
+          aria-labelledby="anteprima-titolo"
+          aria-describedby="anteprima-aiuto"
           accept=".pdf,.doc,.docx"
           onChange={onFileChange}
           className="hidden"
         />
       </div>
 
+      {/*
+        Pulsante principale. I colori sono scritti come valori espliciti (#D6B36A oro, #E2C58A oro
+        chiaro, #070A12 notte) perché le utility `bg-gold`, `text-night`, `shadow-glow` NON vengono
+        generate: il progetto usa Tailwind v4, che non legge tailwind.config.ts senza `@config` in
+        globals.css. La correzione è limitata a questo pulsante, senza modificare il tema globale.
+        Contrasto testo/sfondo: circa 9,9:1 (normale) e 11,9:1 (hover).
+      */}
       <button
         type="submit"
-        className="mt-2 rounded-2xl bg-gold px-5 py-3 text-sm font-semibold text-night shadow-glow transition hover:opacity-95"
+        disabled={sending}
+        className="mt-2 rounded-2xl bg-[#D6B36A] px-5 py-3 text-sm font-semibold text-[#070A12] shadow-[0_0_40px_rgba(214,179,106,0.15)] transition hover:bg-[#E2C58A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E2C58A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070A12] disabled:cursor-not-allowed disabled:opacity-60"
       >
-        Invia richiesta
+        {sending ? "Invio in corso..." : "Invia richiesta"}
       </button>
 
       <p className="text-xs leading-relaxed text-ivory/55">

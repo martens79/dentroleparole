@@ -83,7 +83,7 @@ const services = [
     id: "valutazione-manoscritto",
     title: "Valutazione manoscritto",
     icon: Search,
-    intro: "Analisi editoriale dell’estratto o del manoscritto.",
+    intro: "Analisi editoriale dell’anteprima o del manoscritto.",
     text1:
       "Riceverai una scheda di lettura con punti di forza, criticità e suggerimenti di sviluppo su trama, personaggi, stile e struttura narrativa.",
     text2:
